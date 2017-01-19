@@ -1,0 +1,22 @@
+{
+  "name": "switchover",
+  "version": "1.0.0",
+  "description": "switchover tool from swapz to cashier-fu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayrdeaton/Switchover.git"
+  },
+  "author": "Jay Deaton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayrdeaton/Switchover/issues"
+  },
+  "homepage": "https://github.com/jayrdeaton/Switchover#readme",
+  "dependencies": {
+    "mongodb": "^2.2.21"
+  }
+}
