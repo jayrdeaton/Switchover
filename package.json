@@ -12,11 +12,18 @@
   },
   "author": "Jay Deaton",
   "license": "ISC",
+  "bin": {
+    "switchover": "./index.js"
+  },
   "bugs": {
     "url": "https://github.com/jayrdeaton/Switchover/issues"
   },
   "homepage": "https://github.com/jayrdeaton/Switchover#readme",
   "dependencies": {
-    "mongodb": "^2.2.21"
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "commander": "^2.9.0",
+    "mongodb": "^2.2.21",
+    "progress": "^1.1.8"
   }
 }

@@ -1,22 +1,45 @@
-var MongoClient = require('mongodb').MongoClient
-  , assert = require('assert');
+#!/usr/bin/env node
+var program = require('commander');
+var customers = require('./customers');
+var inventories = require('./inventories');
 
-// Connection URL
-var url = 'mongodb://localhost:27017/swapzapp';
-
-// Use connect method to connect to the server
-MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
-    findDocuments(db, function(inventories) {
-      db.close();
-    });
-});
-var findDocuments = function(db) {
-  // Get the documents collection
-  var collection = db.collection('inventories');
-  // Find some documents
-  collection.find({}).toArray(function(err, inventories) {
-    assert.equal(err, null);
-    callback(inventories);
-  });
-}
+program
+  // .arguments('[location]')
+  // .option('-u, --username <username>', 'The user to authenticate as')
+  // .option('-p, --password <password>', 'The user\'s password')
+  .option('-c, --customers', 'Switchover swapzapp customers')
+  .option('-i, --inventories', 'Switchover swapzapp inventories')
+  .option('-s, --save', 'Save to files')
+  .option('-f, --folder <folder>', "Specify folder to save files in")
+ //  .action(function(collections) {
+ //      // console.log(program);
+ //      if (program.inventories) {
+ //        console.log('inventories')
+ //      }
+ //    //  if (collection) {
+ //    //    console.log(collection);
+ //    //  } else {
+ //    //    console.log("no file");
+ //    //  }
+ //    //  if (otherCollections) {
+ //    //    otherCollections.forEach(function (oCol) {
+ //    //      console.log(oCol)
+ //    //     });
+ //    //  }
+ // })
+ .parse(process.argv);
+// if (program.location) {
+//   console.log('true')
+//   console.log(program.location)
+// };
+if (program.customers) {
+  customers.switchover(program.save, program.folder);
+};
+if (program.inventories) {
+  inventories.switchover(program.save, program.folder);
+};
+// if (program.save) {
+//   console.log('save')
+// }
+//  console.log('you ordered a pizza with:');
+// console.log('  - %s save', program.save);
