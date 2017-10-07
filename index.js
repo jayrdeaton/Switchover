@@ -1,45 +1,75 @@
 #!/usr/bin/env node
-var program = require('commander');
-var customers = require('./customers');
-var inventories = require('./inventories');
+var program = require('commander'),
+  customers = require('./customers'),
+  games = require('./games'),
+  products = require('./products'),
+  movies = require('./movies'),
+  fs = require('fs'),
+  chalk = require('chalk');
 
 program
-  // .arguments('[location]')
-  // .option('-u, --username <username>', 'The user to authenticate as')
-  // .option('-p, --password <password>', 'The user\'s password')
   .option('-c, --customers', 'Switchover swapzapp customers')
-  .option('-i, --inventories', 'Switchover swapzapp inventories')
-  .option('-s, --save', 'Save to files')
-  .option('-f, --folder <folder>', "Specify folder to save files in")
- //  .action(function(collections) {
- //      // console.log(program);
- //      if (program.inventories) {
- //        console.log('inventories')
- //      }
- //    //  if (collection) {
- //    //    console.log(collection);
- //    //  } else {
- //    //    console.log("no file");
- //    //  }
- //    //  if (otherCollections) {
- //    //    otherCollections.forEach(function (oCol) {
- //    //      console.log(oCol)
- //    //     });
- //    //  }
- // })
- .parse(process.argv);
-// if (program.location) {
-//   console.log('true')
-//   console.log(program.location)
-// };
+  .option('-g, --games', 'Switchover swapzapp games')
+  .option('-p, --products', 'Extract products from items (excludes games)')
+  .option('-m, --movies <file>', 'Extract movies from mikes big list csv')
+  .option('-s, --save [save]', 'Save to file')
+  .option('-v, --verbose', 'Display more info')
+  .parse(process.argv);
+
+var s = 0;
+var c = 0;
 if (program.customers) {
-  customers.switchover(program.save, program.folder);
+  s++;
+  s++;
+  customers.switchover().then((data) => {
+    updateFile('customers', data.customers);
+    updateFile('adjustments', data.adjustments);
+  });
 };
-if (program.inventories) {
-  inventories.switchover(program.save, program.folder);
+if (program.products) {
+  s++;
+  products.switchover().then((products) => {
+    updateFile('products', products);
+  });
 };
-// if (program.save) {
-//   console.log('save')
-// }
-//  console.log('you ordered a pizza with:');
-// console.log('  - %s save', program.save);
+if (program.games) {
+  s++;
+  games.switchover().then((games) => {
+    updateFile('catalogs', games);
+    // updateFile('products', data.other);
+  });
+};
+if (program.movies) {
+  s++;
+  movies.switchover(program.movies).then((data) => {
+    updateFile('catalogs', data);
+  });
+};
+var contents = {};
+
+var updateFile = (key, content) => {
+  if (contents[key]) {
+    contents[key].concat(content);
+  } else {
+    contents[key] = content;
+  };
+  c++;
+  if (c === s && program.save) saveFile();
+};
+
+var saveFile = () => {
+  var dir;
+  if (program.save && program.save !== true) {
+    dir = program.save;
+  } else {
+    dir = "./switchover";
+  };
+  dir += ".json"
+  var data = JSON.stringify(contents);
+  fs.writeFile(dir, data, function(err) {
+    if(err) {
+        return console.log(err);
+    };
+    console.log(chalk.green(dir + " was saved!"));
+  });
+};
