@@ -15,8 +15,7 @@ module.exports = class Catalog {
     if (data.uuid) {
       this.uuid = data.uuid;
       this.identifier = data.uuid;
-    }
-
+    };
     // if (data.products) this.products = data.products;
     // if (data.catalogs) this.catalogs = data.catalogs;
   };
