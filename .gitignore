@@ -5,6 +5,9 @@ logs
 *.log
 npm-debug.log*
 
+# System Files
+.DS_Store
+
 # Runtime data
 pids
 *.pid
