@@ -9,7 +9,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
   var objects = [];
   var index = 0;
   if (pricesToMake.buyIn) {
-    var price = new Price({name: "Buy In", index, amount: -game['price_cash'], color: colors.blue, product: product.uuid});
+    var price = new Price({name: "Buy In", index, amount: -game['price_cash'] / 100, color: colors.blue, product: product.uuid});
     index++;
     objects.push(price);
     for (let option in pricesToMake.buyIn) {
@@ -18,7 +18,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     };
   };
   if (pricesToMake.discOnly) {
-    var price = new Price({name: "Disc Only", index, amount: game['price'] * .85, color: colors.mutedGreen, product: product.uuid});
+    var price = new Price({name: "Disc Only", index, amount: game['price']/ 100 * .85, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
     for (let option in pricesToMake.discOnly) {
@@ -27,7 +27,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     };
   };
   if (pricesToMake.discPlus) {
-    var price = new Price({name: "Disc Plus", index, amount: game['price'], color: colors.green, product: product.uuid});
+    var price = new Price({name: "Disc Plus", index, amount: game['price'] / 100, color: colors.green, product: product.uuid});
     index++;
     objects.push(price);
     for (let option in pricesToMake.discPlus) {
@@ -54,7 +54,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     };
   };
   if (pricesToMake.cartOnly) {
-    var price = new Price({name: "Cartridge Only", index, amount: game['price'], color: colors.green, product: product.uuid});
+    var price = new Price({name: "Cartridge Only", index, amount: game['price'] / 100, color: colors.green, product: product.uuid});
     index++;
     objects.push(price);
     for (let option in pricesToMake.cartOnly) {

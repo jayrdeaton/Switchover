@@ -54,8 +54,8 @@ var extractGamesFromItemsList = (items, catalog) => {
 };
 var createPriceEntities = (item, product) => {
   return [
-    new Price({name: 'Buy In', amount: -item['price_cash'], index: 0, color: colors.blue, product: product.uuid}),
-    new Price({name: 'Sale', amount: item['price'], index: 1, color: colors.green, product: product.uuid})
+    new Price({name: 'Buy In', amount: -item['price_cash'] / 100, index: 0, color: colors.blue, product: product.uuid}),
+    new Price({name: 'Sale', amount: item['price'] / 100, index: 1, color: colors.green, product: product.uuid})
   ];;
 };
 var findItems = function(db, inventory_id) {
