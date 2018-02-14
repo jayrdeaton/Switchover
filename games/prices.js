@@ -12,7 +12,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     var price = new Price({name: "Buy In", index, amount: -game['price_cash'] / 100, color: colors.blue, product: product.uuid});
     index++;
     objects.push(price);
-    for (let option in pricesToMake.buyIn) {
+    for (let option of pricesToMake.buyIn) {
       let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option].name, price: price.uuid, optionGroup: optionGroups[option].uuid, color: colors.blue});
       objects.push(priceOptionGroup);
     };
@@ -21,7 +21,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     var price = new Price({name: "Disc Only", index, amount: game['price']/ 100 * .85, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
-    for (let option in pricesToMake.discOnly) {
+    for (let option of pricesToMake.discOnly) {
       let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option].name, price: price.uuid, optionGroup: optionGroups[option].uuid, color: colors.blue});
       objects.push(priceOptionGroup);
     };
@@ -30,7 +30,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     var price = new Price({name: "Disc Plus", index, amount: game['price'] / 100, color: colors.green, product: product.uuid});
     index++;
     objects.push(price);
-    for (let option in pricesToMake.discPlus) {
+    for (let option of pricesToMake.discPlus) {
       let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option].name, price: price.uuid, optionGroup: optionGroups[option].uuid, color: colors.blue});
       objects.push(priceOptionGroup);
     };
@@ -39,7 +39,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     var price = new Price({name: "Instruction Manual", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
-    for (let option in pricesToMake.instructionManual) {
+    for (let option of pricesToMake.instructionManual) {
       let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option].name, price: price.uuid, optionGroup: optionGroups[option].uuid, color: colors.blue});
       objects.push(priceOptionGroup);
     };
@@ -48,7 +48,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     var price = new Price({name: "Cover Artwork", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
-    for (let option in pricesToMake.coverArt) {
+    for (let option of pricesToMake.coverArt) {
       let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option].name, price: price.uuid, optionGroup: optionGroups[option].uuid, color: colors.blue});
       objects.push(priceOptionGroup);
     };
@@ -57,7 +57,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     var price = new Price({name: "Cartridge Only", index, amount: game['price'] / 100, color: colors.green, product: product.uuid});
     index++;
     objects.push(price);
-    for (let option in pricesToMake.cartOnly) {
+    for (let option of pricesToMake.cartOnly) {
       let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option].name, price: price.uuid, optionGroup: optionGroups[option].uuid, color: colors.blue});
       objects.push(priceOptionGroup);
     };
@@ -66,7 +66,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     var price = new Price({name: "Cartridge Plus", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
-    for (let option in pricesToMake.cartPlus) {
+    for (let option of pricesToMake.cartPlus) {
       let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option].name, price: price.uuid, optionGroup: optionGroups[option].uuid, color: colors.blue});
       objects.push(priceOptionGroup);
     };
@@ -75,7 +75,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     var price = new Price({name: "Game Box", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
-    for (let option in pricesToMake.gameBox) {
+    for (let option of pricesToMake.gameBox) {
       let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option].name, price: price.uuid, optionGroup: optionGroups[option].uuid, color: colors.blue});
       objects.push(priceOptionGroup);
     };
@@ -84,7 +84,7 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
     var price = new Price({name: "Rear Artwork", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
-    for (let option in pricesToMake.rearArt) {
+    for (let option of pricesToMake.rearArt) {
       let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option].name, price: price.uuid, optionGroup: optionGroups[option].uuid, color: colors.blue});
       objects.push(priceOptionGroup);
     };

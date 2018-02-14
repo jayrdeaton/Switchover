@@ -91,17 +91,21 @@ var extractInventoriesFromGamesList = (games, parentCatalog) => {
       game.createdAt = game['created_at'];
       var product = new Product(game);
       if (!catalogs[catalog]) {
+        let topCatalog = new Catalog({name: catalog, color: colors.grey, index, catalog: parentCatalog.uuid});
         let optionGroups = [];
+        let optionGroupCatalog = new Catalog({name: 'Option Groups', color: colors.grey, index: 0, catalog: topCatalog.uuid});
+        optionGroups.push(optionGroupCatalog);
         for (let [index, name] of consoles[catalog].optionGroups.entries()) {
-          let optionGroup = new OptionGroup({name, index, color: colors.blue});
+          let optionGroup = new OptionGroup({name, index, color: colors.blue, catalog: optionGroupCatalog.uuid});
           optionGroups.push(optionGroup);
         };
+
         let chunk = {
-          topCatalog: new Catalog({name: catalog, color: colors.grey, index, catalog: parentCatalog.uuid}),
+          topCatalog,
           objects: [],
           optionGroups
         };
-        chunk.catalog = new Catalog({name: 'Games', color: colors.grey, index, catalog: chunk.topCatalog.uuid});
+        chunk.catalog = new Catalog({name: 'Games', color: colors.grey, index: 1, catalog: topCatalog.uuid});
         catalogs[catalog] = chunk;
         index++;
       };

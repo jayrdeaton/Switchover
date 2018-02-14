@@ -9,8 +9,11 @@ module.exports = class OptionGroup {
     this.identifier = this.uuid;
     this.name = null;
 
+    this.catalog = null;
+
     if (data.color) this.color = data.color;
     if (data.index) this.index = data.index;
     if (data.name) this.name = data.name;
+    if (data.catalog) this.catalog = data.catalog;
   };
 };
