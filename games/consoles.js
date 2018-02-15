@@ -8,7 +8,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -30,7 +30,7 @@ module.exports = {
       gameOverlay: [10, 11]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -53,7 +53,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -75,7 +75,7 @@ module.exports = {
       gameOverlay: [10, 11]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -98,7 +98,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -120,7 +120,7 @@ module.exports = {
       gameOverlay: [10, 11]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -143,7 +143,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -164,7 +164,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -186,7 +186,7 @@ module.exports = {
       gameOverlay: [10, 11]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -209,7 +209,7 @@ module.exports = {
       coverArt: [6, 7]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -230,7 +230,7 @@ module.exports = {
       coverArt: [6, 7]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -251,7 +251,7 @@ module.exports = {
       coverArt: [6, 7]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -272,7 +272,7 @@ module.exports = {
       rearArt: [8, 9]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -296,7 +296,7 @@ module.exports = {
       gameBox: [13, 14]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -322,7 +322,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -343,7 +343,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Mini Marquee Overall Condition',
       'Mini Marquee Condition Details',
@@ -364,7 +364,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -385,7 +385,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -407,7 +407,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8 ,9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -429,7 +429,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -450,7 +450,7 @@ module.exports = {
       coverArt: [6, 7]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -471,7 +471,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -492,7 +492,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -513,7 +513,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -534,7 +534,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -555,7 +555,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -576,7 +576,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -598,7 +598,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -619,7 +619,7 @@ module.exports = {
       coverArt: [6, 7]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -640,7 +640,7 @@ module.exports = {
       coverArt: [6, 7]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -661,7 +661,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -683,7 +683,7 @@ module.exports = {
       gameBox: [12, 13]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -708,7 +708,7 @@ module.exports = {
       gameBox: [9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -730,7 +730,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -751,7 +751,7 @@ module.exports = {
       rearArt: [9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -773,7 +773,7 @@ module.exports = {
       rearArt: [9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -795,7 +795,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -816,7 +816,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -838,7 +838,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9 ,10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -860,7 +860,7 @@ module.exports = {
       rearArt: [9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -882,7 +882,7 @@ module.exports = {
       coverArt: [6, 7]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -903,7 +903,7 @@ module.exports = {
       coverArt: [6, 7]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -924,7 +924,7 @@ module.exports = {
       coverArt: [6, 7]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -945,7 +945,7 @@ module.exports = {
       rearArt: [9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -967,7 +967,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -989,7 +989,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
@@ -1011,7 +1011,7 @@ module.exports = {
       gameBox: [7, 8]
     },
     optionGroups: [
-      'Contents Included',
+      'Buy In Contents Included',
       'Condition',
       'Instruction Manual Overall Condition',
       'Instruction Manual Condition Details',
