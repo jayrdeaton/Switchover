@@ -89,5 +89,68 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
       objects.push(priceOptionGroup);
     };
   };
+  if (pricesToMake.jewel) {
+    var price = new Price({name: "CD-I Jewel", index, color: colors.mutedGreen, product: product.uuid});
+    index++;
+    objects.push(price);
+    for (let option of pricesToMake.jewel) {
+      let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option + 1].name, price: price.uuid, optionGroup: optionGroups[option + 1].uuid, color: colors.blue});
+      objects.push(priceOptionGroup);
+    };
+  };
+  if (pricesToMake.longbox) {
+    var price = new Price({name: "Longbox", index, color: colors.mutedGreen, product: product.uuid});
+    index++;
+    objects.push(price);
+    for (let option of pricesToMake.longbox) {
+      let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option + 1].name, price: price.uuid, optionGroup: optionGroups[option + 1].uuid, color: colors.blue});
+      objects.push(priceOptionGroup);
+    };
+  };
+  if (pricesToMake.retailBox) {
+    var price = new Price({name: "Retail Box", index, color: colors.mutedGreen, product: product.uuid});
+    index++;
+    objects.push(price);
+    for (let option of pricesToMake.retailBox) {
+      let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option + 1].name, price: price.uuid, optionGroup: optionGroups[option + 1].uuid, color: colors.blue});
+      objects.push(priceOptionGroup);
+    };
+  };
+  if (pricesToMake.huCardOnly) {
+    var price = new Price({name: "HUCard Only", index, amount: game['price'] / 100, color: colors.green, product: product.uuid});
+    index++;
+    objects.push(price);
+    for (let option of pricesToMake.huCardOnly) {
+      let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option + 1].name, price: price.uuid, optionGroup: optionGroups[option + 1].uuid, color: colors.blue});
+      objects.push(priceOptionGroup);
+    };
+  };
+  if (pricesToMake.huCardPlus) {
+    var price = new Price({name: "HUCard Plus", index, color: colors.mutedGreen, product: product.uuid});
+    index++;
+    objects.push(price);
+    for (let option of pricesToMake.huCardPlus) {
+      let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option + 1].name, price: price.uuid, optionGroup: optionGroups[option + 1].uuid, color: colors.blue});
+      objects.push(priceOptionGroup);
+    };
+  };
+  if (pricesToMake.rearInsert) {
+    var price = new Price({name: "Rear Insert", index, color: colors.mutedGreen, product: product.uuid});
+    index++;
+    objects.push(price);
+    for (let option of pricesToMake.rearInsert) {
+      let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option + 1].name, price: price.uuid, optionGroup: optionGroups[option + 1].uuid, color: colors.blue});
+      objects.push(priceOptionGroup);
+    };
+  };
+  if (pricesToMake.gameOverlay) {
+    var price = new Price({name: "Game Overlay", index, color: colors.mutedGreen, product: product.uuid});
+    index++;
+    objects.push(price);
+    for (let option of pricesToMake.gameOverlay) {
+      let priceOptionGroup = new PriceOptionGroup({name: optionGroups[option + 1].name, price: price.uuid, optionGroup: optionGroups[option + 1].uuid, color: colors.blue});
+      objects.push(priceOptionGroup);
+    };
+  };
   return objects;
 };

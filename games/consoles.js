@@ -293,7 +293,7 @@ module.exports = {
       huCardOnly: [4, 5],
       huCardPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
       rearInsert: [8, 9],
-      gameBox: [13, 14]
+      retailBox: [13, 14]
     },
     optionGroups: [
       'Buy In Contents Included',
@@ -361,7 +361,7 @@ module.exports = {
       instructionManual: [2, 3],
       cartOnly: [4, 5, 6],
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
-      gameBox: [7, 8]
+      retailBox: [7, 8]
     },
     optionGroups: [
       'Buy In Contents Included',
@@ -680,7 +680,8 @@ module.exports = {
       instructionManual: [2, 3],
       discOnly: [4, 5],
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-      gameBox: [12, 13]
+      rearArt: [8, 9],
+      longbox: [12, 13]
     },
     optionGroups: [
       'Buy In Contents Included',
@@ -705,7 +706,8 @@ module.exports = {
       instructionManual: [2, 3],
       discOnly: [4, 5, 6],
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10],
-      gameBox: [9, 10]
+      gameBox: [9, 10],
+      jewel: [6, 7]
     },
     optionGroups: [
       'Buy In Contents Included',

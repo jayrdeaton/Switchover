@@ -158,6 +158,8 @@ module.exports.options = (object) => {
   if (object.options.includes('(Blu-ray 3D/DVD Combo)')) object.options = object.options.replace('(Blu-ray 3D/DVD Combo)', '(Blu-ray 3D) (DVD)');
   if (object.options.includes('(DVD & Blu-ray 3D Combo)')) object.options = object.options.replace('(DVD & Blu-ray 3D Combo)', '(DVD) (Blu-ray 3D)');
   if (object.options.includes('(DVD/CD Combo & Pass Code)')) object.options = object.options.replace('(DVD/CD Combo & Pass Code)', '(DVD/CD Combo) (Pass Code)');
+  if (object.options.includes('(Audio-Only DVD)')) object.options = object.options.replace('(Audio-Only DVD)', '(Audio-Only) (DVD)');
+  if (object.options.includes('(Blu-ray Audio Only)')) object.options = object.options.replace('(Blu-ray Audio Only)', '(Blu-ray) (Audio Only)');
 
   if (object.options.includes('() ')) object.options = object.options.replace('() ', '');
   if (object.options.includes(' ()')) object.options = object.options.replace(' ()', '');

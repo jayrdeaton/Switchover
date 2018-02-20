@@ -9,6 +9,8 @@ var fs = require('fs'),
   tagsProcessor = require('./tags'),
   propertiesProcessor = require('./properties'),
   pricesProcessor = require('./prices'),
+  types = require('./types'),
+  optionGroups = require('./optionGroups'),
   i = 0;
 
 var catalogsChildren = {};
@@ -30,6 +32,7 @@ var switchover = function(csvFile) {
         i++;
       })
       .on('end',function() {
+        console.log(Object.keys(catalogsChildre, Object.keys(catalogs)))
         let results = [];
         Object.keys(catalogs).forEach((key) => {
           let result = {
@@ -84,7 +87,21 @@ var makeObjects = (row) => {
   let tags = tagsProcessor.create(object, product);
   let properties = propertiesProcessor.create(object, product);
   let prices = pricesProcessor.create(object, product);
+
+  if (object.type.includes('Blu-ray') || object.type.includes('Blu-ray 3D')) {
+    // console.log('blu-ray option groups');
+  } else if (object.type.includes('UMD')) {
+    // console.log('umd option groups');
+  } else {
+    // console.log('dvd option groups');
+  };
+
+
   getCatalog(object, product);
+  // getOptionGroups();
+  // let newOptionGroups = optionGroups.create(object, catalogs);
+  // console.log(newOptionGroups);
+
   catalogsChildren[product.catalog].push(product);
 
   catalogsChildren[product.catalog].push(...tags);
@@ -104,8 +121,11 @@ let getCatalog = (object, product) => {
     if (!catalog.match(/[a-z]/i)) catalog = 'num';
     product.catalog = catalogs[catalog].uuid;
   };
-  if (!catalogsChildren[product.catalog]) catalogsChildren[product.catalog] = [];
+  if (!catalogsChildren[product.catalog]) {
+    catalogsChildren[product.catalog] = [];
+  };
   product.index = catalogsChildren[product.catalog].length;
+
 };
 var checkObject = (object) => {
   return object;
