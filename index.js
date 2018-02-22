@@ -28,8 +28,8 @@ program
   let getImports = async (updates, req) => {
     let imports = [];
     if (program.customers) imports.push(await customers.switchover());
-    if (program.products) imports.push(await products.v2.switchover());
-    if (program.games) imports.push(...await games.v2.switchover());
+    if (program.products) imports.push(await products.v3.switchover());
+    if (program.games) imports.push(...await games.v3.switchover());
     if (program.movies) imports.push(...await movies.v2.switchover(program.movies));
     return imports;
   };

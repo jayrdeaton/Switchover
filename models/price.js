@@ -2,21 +2,37 @@ let uuid = require('uuid');
 
 module.exports = class Price {
   constructor(data) {
-    this.type = 'Price';
-    this.amount = 0;
+    this.generator = 0;
+
+    this.amount = "0";
+    this.color = {
+      alpha: 0,
+      red: 0,
+      green: 0,
+      blue: 0
+    };
+    this.createdAt = Date.now();
+    this.hidden = false;
+    this.identifier = null;
     this.index = 0;
+    this.info = null;
+    this.name = null;
+    this.reference = null;
+    this.sign = 0;
+    this.taxable = false;
+    this.updatedAt = this.createdAt;
     this.uuid = uuid.v1();
-    this.identifier = this.uuid;
+
     this.product = null;
-    if (data.name) this.name = data.name;
+
+    if (!data) return;
     if (data.amount) this.amount = data.amount;
     if (data.color) this.color = data.color;
     if (data.index) this.index = data.index;
     if (data.info) this.info = data.info;
-    if (data.uuid) {
-      this.uuid = data.uuid;
-      this.identifier = data.uuid;
-    };
+    if (data.name) this.name = data.name;
+    if (data.uuid) this.uuid = data.uuid;
+
     if (data.product) this.product = data.product;
   };
 };

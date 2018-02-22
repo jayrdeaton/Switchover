@@ -2,21 +2,26 @@ let uuid = require('uuid');
 
 module.exports = class Catalog {
   constructor(data) {
-    this.type = 'Catalog';
+    this.generator = 0;
+
+    this.color = null;
+    this.createdAt = Date.now();
+    this.hidden = false;
     this.index = 0;
+    this.info = null;
+    this.name = null;
+    this.reference = null;
+    this.updatedAt = this.createdAt;
     this.uuid = uuid.v1();
     this.identifier = this.uuid;
-    // this.products = [];
-    // this.catalogs = [];
-    if (data.name) this.name = data.name;
-    if (data.index) this.index = data.index;
-    if (data.color) this.color = data.color;
+
+    this.catalog = null;
+    
+    if (!data) return;
     if (data.catalog) this.catalog = data.catalog;
-    if (data.uuid) {
-      this.uuid = data.uuid;
-      this.identifier = data.uuid;
-    };
-    // if (data.products) this.products = data.products;
-    // if (data.catalogs) this.catalogs = data.catalogs;
+    if (data.color) this.color = data.color;
+    if (data.index) this.index = data.index;
+    if (data.name) this.name = data.name;
+    if (data.uuid) this.uuid = data.uuid;
   };
 };

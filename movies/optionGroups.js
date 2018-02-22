@@ -4,7 +4,6 @@ let OptionGroup = require('../models').optionGroup,
 
 module.exports.create = (object, catalogs) => {
   let optionGroups = [];
-  console.log(Object.)
   if (object.type.includes('Blu-ray')) {
     for (let name of types['Blu-Ray'].optionGroups) {
       optionGroups.push(new OptionGroup({name, index: optionGroups.length, color: colors.blue, catalog: catalogs.blurays.uuid }))

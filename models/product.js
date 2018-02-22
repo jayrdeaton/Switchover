@@ -2,26 +2,74 @@ let uuid = require('uuid');
 
 module.exports = class Product {
   constructor(data) {
-    this.type = 'Product';
-    this.createdAt = new Date();
+    this.generator = 0;
+
+    this.color = {
+      alpha: 0,
+      red: 0,
+      green: 0,
+      blue: 0
+    };
+    this.createdAt = Date.now();
+    this.depth = {
+      value : 0,
+      unit : {
+        converter : {
+          constant : 0,
+          coefficient : 0.025399999999999999
+        },
+        symbol : "in"
+      }
+    };
+    this.height = {
+      value : 0,
+      unit : {
+        converter : {
+          constant : 0,
+          coefficient : 0.025399999999999999
+        },
+        symbol : "in"
+      }
+    };
+    this.hidden = false;
+    this.identifier = null;
     this.index = 0;
+    this.info = null;
+    this.name = null;
+    this.reference = null;
+    this.updatedAt = this.createdAt;
     this.uuid = uuid.v1();
-    this.identifier = this.uuid;
-    // this.tags = [];
-    // this.properties = {};
-    // this.prices = [];
-    if (data.catalog) this.catalog = data.catalog;
+    this.weight = {
+      value : 0,
+      unit : {
+        converter : {
+          constant : 0,
+          coefficient : 0.025399999999999999
+        },
+        symbol : "lb"
+      }
+    };
+    this.width = {
+      value : 0,
+      unit : {
+        converter : {
+          constant : 0,
+          coefficient : 0.025399999999999999
+        },
+        symbol : "in"
+      }
+    };
+
+    this.catalog = null;
+
+    if (!data) return;
     if (data.color) this.color = data.color;
-    if (data.createdAt) this.createdAt = data.createdAt;
+    if (data.createdAt) this.createdAt = data.createdAt.getTime();
     if (data.identifier) this.identifier = data.identifier;
     if (data.index) this.index = data.index;
     if (data.name) this.name = data.name;
-    if (data.uuid) {
-      this.uuid = data.uuid;
-      this.identifier = data.uuid;
-    }
-    // if (data.tags) this.tags = data.tags;
-    // if (data.properties) this.properties = data.properties;
-    // if (data.prices) this.prices = data.prices;
+    if (data.uuid) this.uuid = data.uuid;
+
+    if (data.catalog) this.catalog = data.catalog;
   };
 };
