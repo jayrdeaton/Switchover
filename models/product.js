@@ -1,36 +1,14 @@
-let uuid = require('uuid');
+let uuid = require('uuid'),
+  { clear } = require('../colors');
 
 module.exports = class Product {
   constructor(data) {
     this.generator = 0;
 
-    this.color = {
-      alpha: 0,
-      red: 0,
-      green: 0,
-      blue: 0
-    };
+    this.color = clear;
     this.createdAt = Date.now();
-    this.depth = {
-      value : 0,
-      unit : {
-        converter : {
-          constant : 0,
-          coefficient : 0.025399999999999999
-        },
-        symbol : "in"
-      }
-    };
-    this.height = {
-      value : 0,
-      unit : {
-        converter : {
-          constant : 0,
-          coefficient : 0.025399999999999999
-        },
-        symbol : "in"
-      }
-    };
+    this.depth = { value : 0, unit : "in" };
+    this.height = { value : 0, unit : "in" };
     this.hidden = false;
     this.identifier = null;
     this.index = 0;
@@ -39,26 +17,8 @@ module.exports = class Product {
     this.reference = null;
     this.updatedAt = this.createdAt;
     this.uuid = uuid.v1();
-    this.weight = {
-      value : 0,
-      unit : {
-        converter : {
-          constant : 0,
-          coefficient : 0.025399999999999999
-        },
-        symbol : "lb"
-      }
-    };
-    this.width = {
-      value : 0,
-      unit : {
-        converter : {
-          constant : 0,
-          coefficient : 0.025399999999999999
-        },
-        symbol : "in"
-      }
-    };
+    this.weight = { value : 0, unit : "lb" };
+    this.width = { value : 0, unit : "in" };
 
     this.catalog = null;
 

@@ -1,15 +1,11 @@
-let uuid = require('uuid');
+let uuid = require('uuid'),
+  { clear } = require('../colors');
 
 module.exports = class OptionGroup {
   constructor(data) {
     this.generator = 0;
 
-    this.color = {
-      alpha: 0,
-      red: 0,
-      green: 0,
-      blue: 0
-    };
+    this.color = clear;
     this.createdAt = Date.now();
     this.hidden = false;
     this.identifier = null;

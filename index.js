@@ -8,7 +8,8 @@ let program = require('commander'),
   chalk = require('chalk'),
   JSONStream = require('JSONStream'),
   rimraf = require('rimraf'),
-  pad = require('./helpers').pad;
+  pad = require('./helpers').pad,
+  debug = require('./debug');
 
 program
   .option('-c, --customers', 'Switchover swapzapp customers')
@@ -17,12 +18,17 @@ program
   .option('-m, --movies <file>', 'Extract movies from mikes big list csv')
   .option('-s, --save [save]', 'Save to file')
   .option('-v, --verbose', 'Display more info')
+  .option('-d, --debug', 'Debug mode')
   .parse(process.argv);
 
-  let runImport = () => {
-    getImports().then((imports) => {
-      if (program.save) saveFiles(imports);
-    });
+  let runImport = async () => {
+    let imports;
+    try {
+      let imports = await getImports()
+    } catch(err) {
+      console.log(err);
+    };
+    if (imports && program.save) saveFiles(imports);
   };
 
   let getImports = async (updates, req) => {
@@ -31,6 +37,8 @@ program
     if (program.products) imports.push(await products.v3.switchover());
     if (program.games) imports.push(...await games.v3.switchover());
     if (program.movies) imports.push(...await movies.v2.switchover(program.movies));
+    if (program.debug) imports.push(await debug());
+    console.log(imports)
     return imports;
   };
 

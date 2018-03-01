@@ -1,16 +1,12 @@
-let uuid = require('uuid');
+let uuid = require('uuid'),
+  { clear } = require('../colors');
 
 module.exports = class Price {
   constructor(data) {
     this.generator = 0;
 
     this.amount = "0";
-    this.color = {
-      alpha: 0,
-      red: 0,
-      green: 0,
-      blue: 0
-    };
+    this.color = clear;
     this.createdAt = Date.now();
     this.hidden = false;
     this.identifier = null;
@@ -19,11 +15,11 @@ module.exports = class Price {
     this.name = null;
     this.reference = null;
     this.sign = 0;
-    this.taxable = false;
     this.updatedAt = this.createdAt;
     this.uuid = uuid.v1();
 
     this.product = null;
+    this.taxGroup = null;
 
     if (!data) return;
     if (data.amount) this.amount = data.amount;

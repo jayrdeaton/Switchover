@@ -1,4 +1,5 @@
-let grey = require('./grey'),
+let clear = require('./clear'),
+  grey = require('./grey'),
   green = require('./green'),
   mutedGreen = require('./mutedGreen'),
   blue = require('./blue'),
@@ -7,4 +8,4 @@ let grey = require('./grey'),
   purple = require('./purple'),
   white = require('./white');
 
-module.exports = { grey, green, mutedGreen, blue, orange, yellow, purple, white }
+module.exports = { clear, grey, green, mutedGreen, blue, orange, yellow, purple, white }
