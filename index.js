@@ -24,7 +24,7 @@ program
   let runImport = async () => {
     let imports;
     try {
-      let imports = await getImports()
+      imports = await getImports()
     } catch(err) {
       console.log(err);
     };
@@ -38,7 +38,6 @@ program
     if (program.games) imports.push(...await games.v3.switchover());
     if (program.movies) imports.push(...await movies.v2.switchover(program.movies));
     if (program.debug) imports.push(await debug());
-    console.log(imports)
     return imports;
   };
 

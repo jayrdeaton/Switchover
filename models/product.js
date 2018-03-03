@@ -7,18 +7,57 @@ module.exports = class Product {
 
     this.color = clear;
     this.createdAt = Date.now();
-    this.depth = { value : 0, unit : "in" };
-    this.height = { value : 0, unit : "in" };
+    this.depth = {
+      value: 0,
+      unit: {
+        converter: {
+          constant: 0,
+          coefficient: 0.025399999999999999
+        },
+        symbol: "in"
+      }
+    };
+    // this.height = { value : 0, unit : "in" };
+    this.height = {
+      value: 0,
+      unit: {
+        converter: {
+          constant: 0,
+          coefficient: 0.025399999999999999
+        },
+        symbol: "in"
+      }
+    };
     this.hidden = false;
-    this.identifier = null;
     this.index = 0;
     this.info = null;
     this.name = null;
     this.reference = null;
     this.updatedAt = this.createdAt;
     this.uuid = uuid.v1();
-    this.weight = { value : 0, unit : "lb" };
-    this.width = { value : 0, unit : "in" };
+    this.identifier = this.uuid;
+    // this.weight = { value : 0, unit : "lb" };
+    this.weight = {
+      value: 0,
+      unit: {
+        converter: {
+          constant: 0,
+          coefficient: 0.453592
+        },
+        symbol: "lb"
+      }
+    };
+    // this.width = { value : 0, unit : "in" };
+    this.width = {
+      value: 0,
+      unit: {
+        converter: {
+          constant: 0,
+          coefficient: 0.025399999999999999
+        },
+        symbol: "in"
+      }
+    };
 
     this.catalog = null;
 
@@ -29,6 +68,7 @@ module.exports = class Product {
     if (data.index) this.index = data.index;
     if (data.name) this.name = data.name;
     if (data.uuid) this.uuid = data.uuid;
+    if (data.uuid) this.identifier = data.uuid;
 
     if (data.catalog) this.catalog = data.catalog;
   };

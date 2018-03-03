@@ -8,7 +8,6 @@ module.exports = class OptionGroup {
     this.color = clear;
     this.createdAt = Date.now();
     this.hidden = false;
-    this.identifier = null;
     this.index = 0;
     this.info = null;
     this.multitudinal = false;
@@ -16,6 +15,7 @@ module.exports = class OptionGroup {
     this.reference = null;
     this.updatedAt = this.createdAt;
     this.uuid = uuid.v1();
+    this.identifier = this.uuid;
 
     this.catalog = null;
 

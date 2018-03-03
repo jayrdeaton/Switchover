@@ -11,7 +11,8 @@ var MongoClient = require('mongodb').MongoClient,
   Product = models.product,
   Catalog = models.catalog,
   OptionGroup = models.optionGroup,
-  PriceOptionGroup = models.priceOptionGroup;
+  PriceOptionGroup = models.priceOptionGroup,
+  Wrapper = models.wrapper,
   i = 0,
   colors = require('../colors'),
   consoles = require('./consoles');
@@ -35,21 +36,15 @@ let getResponse = async (db) => {
   let games = await extractGamesFromItemsList(items);
   let catalog = new Catalog({name: 'Video Games', color: colors.grey});
   let data = await extractInventoriesFromGamesList(games, catalog);
-  var objects = [{
-    name: 'Video Games',
-    objects: [catalog]
-  }];
+  var objects = [[new Wrapper({type: 'Catalog', object: catalog})]];
   let keys = Object.keys(data);
   keys.sort();
   keys.forEach(inventory => {
-    let chunk = {
-      name: inventory,
-      objects: []
-    };
-    chunk.objects.push(data[inventory].topCatalog);
-    chunk.objects.push(data[inventory].catalog);
-    chunk.objects.push(...data[inventory].optionGroups);
-    chunk.objects.push(...data[inventory].objects);
+    let chunk = [];
+    chunk.push(data[inventory].topCatalog);
+    chunk.push(data[inventory].catalog);
+    chunk.push(...data[inventory].optionGroups);
+    chunk.push(...data[inventory].objects);
     objects.push(chunk);
   });
   return objects;
@@ -91,12 +86,12 @@ var extractInventoriesFromGamesList = (games, parentCatalog) => {
       game.createdAt = game['created_at'];
       var product = new Product(game);
       if (!catalogs[catalog]) {
-        let topCatalog = new Catalog({name: catalog, color: colors.grey, index, catalog: parentCatalog.uuid});
-        let optionGroupCatalog = new Catalog({name: 'Option Groups', color: colors.grey, index: 0, catalog: topCatalog.uuid});
+        let topCatalog = new Wrapper({type: 'Catalog', object: new Catalog({name: catalog, color: colors.grey, index, catalog: parentCatalog.uuid})});
+        let optionGroupCatalog = new Wrapper({type: 'Catalog', object: new Catalog({name: 'Option Groups', color: colors.grey, index: 0, catalog: topCatalog.object.uuid})});
         let optionGroups = [];
         optionGroups.push(optionGroupCatalog);
         for (let [index, name] of consoles[catalog].optionGroups.entries()) {
-          let optionGroup = new OptionGroup({name, index, color: colors.blue, catalog: optionGroupCatalog.uuid});
+          let optionGroup = new Wrapper({type: 'OptionGroup', object: new OptionGroup({name, index, color: colors.blue, catalog: optionGroupCatalog.object.uuid})});
           optionGroups.push(optionGroup);
         };
         let chunk = {
@@ -104,14 +99,14 @@ var extractInventoriesFromGamesList = (games, parentCatalog) => {
           objects: [],
           optionGroups
         };
-        chunk.catalog = new Catalog({name: 'Games', color: colors.grey, index: 1, catalog: topCatalog.uuid});
+        chunk.catalog = new Wrapper({type: 'Catalog', object: new Catalog({name: 'Games', color: colors.grey, index: 1, catalog: topCatalog.object.uuid})});
         catalogs[catalog] = chunk;
         index++;
       };
-      product.catalog = catalogs[catalog].catalog.uuid;
+      product.catalog = catalogs[catalog].catalog.object.uuid;
       product.index = catalogs[catalog].objects.length;
       product.color = colors.purple;
-      catalogs[catalog].objects.push(product);
+      catalogs[catalog].objects.push(new Wrapper({type: 'Product', object: product}));
       let objects = prices.getWith(game, catalog, product, catalogs[catalog].optionGroups);
       catalogs[catalog].objects.push(...objects);
     };

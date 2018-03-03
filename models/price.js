@@ -9,14 +9,15 @@ module.exports = class Price {
     this.color = clear;
     this.createdAt = Date.now();
     this.hidden = false;
-    this.identifier = null;
     this.index = 0;
     this.info = null;
     this.name = null;
+    this.quantity = 0;
     this.reference = null;
     this.sign = 0;
     this.updatedAt = this.createdAt;
     this.uuid = uuid.v1();
+    this.identifier = this.uuid;
 
     this.product = null;
     this.taxGroup = null;
@@ -28,6 +29,7 @@ module.exports = class Price {
     if (data.info) this.info = data.info;
     if (data.name) this.name = data.name;
     if (data.uuid) this.uuid = data.uuid;
+    if (data.uuid) this.identifier = data.uuid;
 
     if (data.product) this.product = data.product;
   };

@@ -8,13 +8,13 @@ module.exports = class Catalog {
     this.color = clear;
     this.createdAt = Date.now();
     this.hidden = false;
-    this.identifier = null;
     this.index = 0;
     this.info = null;
     this.name = null;
     this.reference = null;
     this.updatedAt = this.createdAt;
     this.uuid = uuid.v1();
+    this.identifier = this.uuid;
 
     this.catalog = null;
 
@@ -24,5 +24,6 @@ module.exports = class Catalog {
     if (data.index) this.index = data.index;
     if (data.name) this.name = data.name;
     if (data.uuid) this.uuid = data.uuid;
+    if (data.uuid) this.identifier = data.uuid;
   };
 };

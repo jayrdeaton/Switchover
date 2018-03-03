@@ -51,14 +51,13 @@ var extractGamesFromItemsList = (items, catalog) => {
         };
       };
     });
-    console.log(objects.length)
     resolve(objects);
   });
 };
 var createPriceEntities = (item, product) => {
   return [
-    new Price({name: 'Buy In', amount: -item['price_cash'] / 100, index: 0, color: colors.blue, product: product.uuid}),
-    new Price({name: 'Sale', amount: item['price'] / 100, index: 1, color: colors.green, product: product.uuid})
+    new Price({name: 'Buy In', amount: new String(-item['price_cash'] / 100), index: 0, color: colors.blue, product: product.uuid}),
+    new Price({name: 'Sale', amount: new String(item['price'] / 100), index: 1, color: colors.green, product: product.uuid})
   ];;
 };
 var findItems = function(db, inventory_id) {
