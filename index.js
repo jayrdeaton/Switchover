@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-let program = require('commander'),
+let json = require('big-json'),
+  program = require('commander'),
   customers = require('./customers'),
   games = require('./games'),
   products = require('./products'),
@@ -36,7 +37,7 @@ program
     if (program.customers) imports.push(await customers.switchover());
     if (program.products) imports.push(await products.v3.switchover());
     if (program.games) imports.push(...await games.v3.switchover());
-    if (program.movies) imports.push(...await movies.v2.switchover(program.movies));
+    if (program.movies) imports.push(...await movies.v3.switchover(program.movies));
     if (program.debug) imports.push(await debug());
     return imports;
   };
@@ -49,7 +50,7 @@ program
       let padding = imports.length.toString().length;
       imports.forEach((chunk, index) => {
         let file = dir + '/' + pad(index, padding) + '.json';
-        fs.writeFile(file, JSON.stringify(chunk, null, 2), function(err) {
+        fs.writeFileSync(file, JSON.stringify(chunk, null, 2), (err) => {
           if(err) return console.log(err);
         });
       });

@@ -1,4 +1,6 @@
-let Property = require('../models').property;
+let models = require('../models'),
+  Property = models.property,
+  Wrapper = models.objectWrapper;
 
 module.exports.create = (object, product) => {
   properties = [];
@@ -50,5 +52,10 @@ module.exports.create = (object, product) => {
     properties.push(property);
   };
 
-  return properties;
+  let wrappers = [];
+  for (let property of properties) {
+    wrappers.push(new Wrapper({type: 'Property', object: property}));
+  };
+
+  return wrappers;
 };

@@ -1,4 +1,6 @@
-var Price = require('../models').price,
+var models = require('../models'),
+  Price = models.price,
+  Wrapper = models.objectWrapper,
   colors = require('../colors');
 
 module.exports.create = (object, product) => {
@@ -6,9 +8,9 @@ module.exports.create = (object, product) => {
   var index = 0;
   var price = new Price({name: 'Buy In', index, color: colors.blue, product: product.uuid});
   if (object.type.includes('Blu-ray')) {
-    price.amount = -1.00;
+    price.amount = '-1.00';
   } else {
-    price.amount = -0.25;
+    price.amount = '-0.25';
   };
   prices.push(price);
   index++;
@@ -26,7 +28,13 @@ module.exports.create = (object, product) => {
     price = new Price({name: 'Disc Only', index, color: colors.mutedGreen, product: product.uuid});
     prices.push(price);
     index++;
-    price = new Price({name: 'Buy In Disc Only', index, color: colors.blue, product: product.uuid, amount: -0.10});
+    price = new Price({name: 'Buy In Disc Only', index, color: colors.blue, product: product.uuid, amount: '-0.10'});
   };
-  return prices;
+
+  let wrappers = [];
+  for (let price of prices) {
+    wrappers.push(new Wrapper({type: 'Price', object: price}));
+  };
+
+  return wrappers;
 };

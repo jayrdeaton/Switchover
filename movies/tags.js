@@ -1,4 +1,6 @@
-let Tag = require('../models').tag;
+let models = require('../models'),
+  Tag = models.tag,
+  ObjectWrapper = models.objectWrapper;
 
 module.exports.create = (object, product) => {
   let tagsToCreate = [object.genre, object.rating];
@@ -10,9 +12,10 @@ module.exports.create = (object, product) => {
   if (object.steelbook) tagsToCreate.push("Steelbook");
   if (object.aspect && object.aspect !== "VAR") tagsToCreate.push(object.aspect);
 
-  let tags = [];
+  let wrappers = [];
   for (let i = 0; i < tagsToCreate.length; i++) {
-    let tag = new Tag({name: tagsToCreate[i], index: i, product: product.uuid})
+    let tag = new Tag({name: tagsToCreate[i], index: i, product: product.uuid});
+    wrappers.push(new ObjectWrapper({type: 'Tag', object: tag}));
   };
-  return tags;
+  return wrappers;
 };

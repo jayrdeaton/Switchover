@@ -6,6 +6,7 @@ let price = require('./price'),
   tag = require('./tag'),
   optionGroup = require('./optionGroup'),
   priceOptionGroup = require('./priceOptionGroup'),
-  wrapper = require('./wrapper');
+  importWrapper = require('./importWrapper'),
+  objectWrapper = require('./objectWrapper');
 
-module.exports = { price, product, catalog, entity, property, tag, optionGroup, priceOptionGroup, wrapper }
+module.exports = { price, product, catalog, entity, property, tag, optionGroup, priceOptionGroup, importWrapper, objectWrapper }
