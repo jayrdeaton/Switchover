@@ -6,7 +6,7 @@ var MongoClient = require('mongodb').MongoClient,
   ProgressBar = require('progress'),
   convert = require('../games/convert'),
   { Catalog, Import, Price, Product } = require('@infinitetoken/cashierfu-api-kit').models,
-  { fractureArray, saveFile } = require('../../helpers'),
+  { fractureArray, saveImportFiles } = require('../../helpers'),
   colors = require('../../colors');
 
 let result;
@@ -18,7 +18,7 @@ var switchover = (data) => {
       result = new Import();
       getResponse(db).then(() => {
         db.close();
-        saveFile('products', JSON.stringify(result));
+        saveImportFiles('products', result);
         resolve(result);
       }).catch((err) => {
         reject(err);
@@ -50,7 +50,7 @@ var extractGamesFromItemsList = (items, catalog) => {
 };
 var createPriceEntities = (item, product) => {
   result.prices.push(new Price({name: 'Buy In', amount: new String(-item['price_cash']), index: 0, color: colors.blue, product: product.uuid}));
-  result.prices.push(new Price({name: 'Sale', amount: new String(item['price']), index: 1, color: colors.green, product: product.uuid}));
+  result.prices.push(new Price({name: 'Sale', amount: new String(item['price']), index: 1, color: colors.green, product: product.uuid, rank: 1000}));
 };
 var findItems = function(db, inventory_id) {
   return new Promise(function(resolve, reject) {

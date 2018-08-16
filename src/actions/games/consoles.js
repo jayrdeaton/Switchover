@@ -18,7 +18,24 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 0.75,
+      instructionManual: 0.25
+    },
+    bundles: {
+      cartPlus: [
+        { priceName: 'Cartridge', percentage: 0.0, required: true },
+        { priceName: 'Game Box', percentage: 0.0, required: true },
+        { priceName: 'Instruction Manual', percentage: 0.0, required: true }
+      ],
+      buyIn: [
+        { priceName: 'Cartridge', percentage: 1.10 },
+        { priceName: 'Game Box', percentage: 1.25 },
+        { priceName: 'Instruction Maunal', percentage: 1.25 }
+      ]
+    }
   },
   'Atari 5200': {
     prices: {
@@ -42,7 +59,24 @@ module.exports = {
       'Contents Included',
       'Game Overlay Condition Details',
       'Game Overlay Overall Condition'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 0.5,
+      instructionManual: 0.5
+    },
+    bundles: {
+      cartPlus: [
+        { priceName: 'Cartridge', percentage: 0.0, required: true },
+        { priceName: 'Game Box', percentage: 0.0, required: true },
+        { priceName: 'Instruction Manual', percentage: 0.0, required: true }
+      ],
+      buyIn: [
+        { priceName: 'Cartridge', percentage: 1.25 },
+        { priceName: 'Game Box', percentage: 1.25 },
+        { priceName: 'Instruction Maunal', percentage: 1.1 }
+      ]
+    }
   },
   'Atari 7800': {
     prices: {
@@ -63,7 +97,24 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    },
+    bundles: {
+      cartPlus: [
+        { priceName: 'Cartridge', percentage: 0.0, required: true },
+        { priceName: 'Game Box', percentage: 0.0, required: true },
+        { priceName: 'Instruction Manual', percentage: 0.0, required: true }
+      ],
+      buyIn: [
+        { priceName: 'Cartridge', percentage: 1.10 },
+        { priceName: 'Game Box', percentage: 1.25 },
+        { priceName: 'Instruction Maunal', percentage: 1.25 }
+      ]
+    }
   },
   'Atari Jaguar': {
     prices: {
@@ -87,7 +138,12 @@ module.exports = {
       'Contents Included',
       'Game Overlay Overall Condition',
       'Game Overlay Condition Details'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Atari Lynx': {
     prices: {
@@ -108,7 +164,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Coleco Colecovision': {
     prices: {
@@ -132,7 +193,12 @@ module.exports = {
       'Contents Included',
       'Game Overlay Overall Condition',
       'Game Overlay Condition Details'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Commodore 64': {
     prices: {
@@ -153,7 +219,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Magnavox Odyssey 2': {
     prices: {
@@ -174,7 +245,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Matel Intellivision': {
     prices: {
@@ -198,7 +274,12 @@ module.exports = {
       'Contents Included',
       'Game Overlay Overall Condition',
       'Game Overlay Condition Details'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Microsoft Xbox 360': {
     prices: {
@@ -219,7 +300,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Game Case Condition',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.85,
+      coverArt: 0.25,
+      instructionManual: 0.1
+    }
   },
   'Microsoft Xbox One': {
     prices: {
@@ -240,7 +326,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Game Case Condition',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.85,
+      coverArt: 0.25,
+      instructionManual: 0.1
+    }
   },
   'Microsoft Xbox': {
     prices: {
@@ -261,7 +352,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Game Case Condition',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.75,
+      coverArt: 0.25,
+      instructionManual: 0.25
+    }
   },
   'NEC Turbo Duo': {
     prices: {
@@ -284,7 +380,12 @@ module.exports = {
       'Rear Insert Condition Details',
       'Game Case Condition',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.75,
+      rearArt: 0.5,
+      instructionManual: 0.3
+    }
   },
   'NEC Turbo Grafx 16': {
     prices: {
@@ -311,7 +412,12 @@ module.exports = {
       'HuCard Sleeve Condition',
       'Retail box Overall Condition',
       'Retail Box Condition Details'
-    ]
+    ],
+    priceConversions: {
+      huCardOnly: 1.0,
+      retailBox: 0.5,
+      instructionManual: 0.5
+    }
   },
   'Neo Geo AES': {
     prices: {
@@ -332,7 +438,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included',
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 0.75,
+      gameBox: 0.5,
+      instructionManual: 0.5
+    }
   },
   'Neo Geo MVS': {
     prices: {
@@ -353,7 +464,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Neo Geo Pocket': {
     prices: {
@@ -374,7 +490,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      retailBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo 3DS': {
     prices: {
@@ -396,7 +517,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Contents Included',
       'Game Case Condition'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      coverArt: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo DS': {
     prices: {
@@ -418,7 +544,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Contents Included',
       'Game Case Condition'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      coverArt: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo Gameboy Color': {
     prices: {
@@ -439,7 +570,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo Gamecube': {
     prices: {
@@ -460,7 +596,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Game Case Condition',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.75,
+      coverArt: 0.35,
+      instructionManual: 0.35
+    }
   },
   'Nintendo GBA Gameboy Advance': {
     prices: {
@@ -481,7 +622,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo Gameboy': {
     prices: {
@@ -502,7 +648,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo N64': {
     prices: {
@@ -523,7 +674,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo NES': {
     prices: {
@@ -544,7 +700,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo SNES Super': {
     prices: {
@@ -565,7 +726,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo Switch': {
     prices: {
@@ -587,7 +753,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Contents Included',
       'Game Case Condition'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      coverArt: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo Virtual Boy': {
     prices: {
@@ -608,7 +779,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Nintendo Wii U': {
     prices: {
@@ -629,7 +805,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Game Case Condition',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.85,
+      coverArt: 0.25,
+      instructionManual: 0.25
+    }
   },
   'Nintendo Wii': {
     prices: {
@@ -650,7 +831,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Game Case Condition',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.85,
+      coverArt: 0.25,
+      instructionManual: 0.25
+    }
   },
   'Nokia N Gage': {
     prices: {
@@ -672,7 +858,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Contents Included',
       'Game Case Condition'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      coverArt: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Panasonic 3DO': {
     prices: {
@@ -698,7 +889,13 @@ module.exports = {
       'Contents Included',
       'Longbox Overall Condition',
       'Longbox Condition Details'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.8,
+      longbox: 0.4,
+      instructionManual: 0.25,
+      rearArt: 0.15
+    }
   },
   'Phillips CD-i': {
     prices: {
@@ -721,7 +918,12 @@ module.exports = {
       'Contents Included',
       'Longbox Overall Condition',
       'Longbox Condition Details'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.85,
+      jewel: 0.35,
+      instructionManual: 0.2
+    }
   },
   'Sega 32X': {
     prices: {
@@ -742,7 +944,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Sega CD': {
     prices: {
@@ -764,7 +971,12 @@ module.exports = {
       'Contents Included',
       'Rear Artwork Insert Overall Condition',
       'Rear Artwork Insert Condition Details'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.75,
+      rearArt: 0.35,
+      instructionManual: 0.3
+    }
   },
   'Sega Dreamcast': {
     prices: {
@@ -786,7 +998,12 @@ module.exports = {
       'Contents Included',
       'Rear Artwork Insert Overall Condition',
       'Rear Artwork Insert Condition Details'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.,
+      rearArt: 0.25,
+      instructionManual: 0.25
+    }
   },
   'Sega Game Gear': {
     prices: {
@@ -807,7 +1024,12 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Sega Genesis': {
     prices: {
@@ -829,7 +1051,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Contents Included',
       'Game Case Condition'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      coverArt: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Sega Master System': {
     prices: {
@@ -851,7 +1078,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Contents Included',
       'Game Case Condition'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      coverArt: 1.25,
+      instructionManual: 0.5
+    }
   },
   'Sega Saturn': {
     prices: {
@@ -873,7 +1105,12 @@ module.exports = {
       'Contents Included',
       'Rear Artwork Insert Overall Condition',
       'Rear Artwork Insert Condition Details'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.6,
+      rearArt: 0.3,
+      instructionManual: 0.4
+    }
   },
   'Sony PS4 Playstation 4': {
     prices: {
@@ -894,7 +1131,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Game Case Condition',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.85,
+      coverArt: 0.25,
+      instructionManual: 0.2
+    }
   },
   'Sony PS3 Playstation 3': {
     prices: {
@@ -915,7 +1157,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Game Case Condition',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.85,
+      coverArt: 0.25,
+      instructionManual: 0.2
+    }
   },
   'Sony PS2 Playstation 2': {
     prices: {
@@ -936,7 +1183,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Game Case Condition',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.85,
+      coverArt: 0.25,
+      instructionManual: 0.2
+    }
   },
   'Sony PS1 Playstation 1': {
     prices: {
@@ -958,15 +1210,20 @@ module.exports = {
       'Contents Included',
       'Rear Artwork Insert Overall Condition',
       'Rear Artwork Insert Condition Details'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 0.75,
+      coverArt: 0.3,
+      instructionManual: 0.4
+    }
   },
   'Sony PSP': {
     prices: {
       buyIn: [0, 1],
       instructionManual: [2, 3],
       coverArt: [9, 10],
-      cartOnly: [4, 5],
-      cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
+      discOnly: [4, 5],
+      discPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     optionGroups: [
       'Buy In Contents Included',
@@ -980,7 +1237,12 @@ module.exports = {
       'Contents Included',
       'Artwork Insert Overall Condition',
       'Artwork Insert Condition Details'
-    ]
+    ],
+    priceConversions: {
+      discOnly: 1.0,
+      coverArt: 0.25,
+      instructionManual: 0.2
+    }
   },
   'Sony PSP Vita': {
     prices: {
@@ -1002,7 +1264,12 @@ module.exports = {
       'Artwork Insert Condition Details',
       'Contents Included',
       'Game Case Condition'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      coverArt: 0.25,
+      instructionManual: 0.2
+    }
   },
   'Vectrex': {
     prices: {
@@ -1023,6 +1290,11 @@ module.exports = {
       'Game Box Overall Condition',
       'Game Box Condition Details',
       'Contents Included'
-    ]
+    ],
+    priceConversions: {
+      cartOnly: 1.0,
+      gameBox: 1.25,
+      instructionManual: 0.5
+    }
   }
 }

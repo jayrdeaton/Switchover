@@ -14,8 +14,8 @@ var fs = require('fs'),
   propertiesProcessor = require('./properties'),
   pricesProcessor = require('./prices'),
   types = require('./types'),
-  optionGroupsProcessor = require('./optionGroups'),
-  { pad } = require('../../helpers'),
+  // optionGroupsProcessor = require('./optionGroups'),
+  { pad, saveImportFiles } = require('../../helpers'),
   i;
 
 rimraf = util.promisify(rimraf);
@@ -25,21 +25,26 @@ var catalogs = {};
 var keys = [];
 var dvdsCount = 0;
 
-let fileCounts = {
-  catalogs: 0,
-  option_groups: 0,
-  prices: 0,
-  products: 0,
-  properties: 0,
-  tags: 0
-};
-// let result;
+// let fileCounts = {
+//   catalogs: 0,
+//   option_groups: 0,
+//   prices: 0,
+//   products: 0,
+//   properties: 0,
+//   tags: 0
+// };
 
-var switchover = (data, csvFile) => {
+let result;
+
+var switchover = (options) => {
   return new Promise ((resolve, reject) => {
-    let objects = [];
+    // let objects = [];
+    let { file } = options;
+    result = new Import();
     catalogs = catalogsProcessor.create();
-    fs.createReadStream(csvFile)
+    for (let key of Object.keys(catalogs)) result.catalogs.push(catalogs[key]);
+    // result.catalogs.push(...catalogs);
+    fs.createReadStream(file)
       .pipe(parse({delimiter: ','}))
       .on('data', async (row) => {
         if (i == undefined || row.length !== keys.length) {
@@ -47,7 +52,8 @@ var switchover = (data, csvFile) => {
           i = 0;
         } else {
           let object = makeObject(row, catalogs);
-          objects.push(object);
+          await makeCashierFuObject(object, result);
+          // objects.push(object);
           // result.products.push(...data.products);
           // result.option_groups.push(...data.option_groups);
           // result.tags.push(...data.tags);
@@ -65,58 +71,60 @@ var switchover = (data, csvFile) => {
         // console.log(i);
       })
       .on('end', async () => {
-        let dir = './switchover';
-        await rimraf(dir);
-        fs.mkdirSync(dir);
-        let lengths = {
-          catalogs: 0,
-          option_groups: 0,
-          prices: 0,
-          products: 0,
-          properties: 0,
-          tags: 0
-        };
-        var result = {
-          catalogs: [],
-          products: [],
-          option_groups: [],
-          tags: [],
-          properties: [],
-          prices: []
-        };
-        let i = 0;
-        while(objects.length > 0) {
-          let object = objects.pop();
-          await makeCashierFuObject(object, result);
-          // console.log(objects.length);
-          i++;
-          if (i >= 20000) {
-            lengths.catalogs += result.catalogs.length;
-            lengths.option_groups += result.option_groups.length;
-            lengths.prices += result.prices.length;
-            lengths.products += result.products.length;
-            lengths.properties += result.properties.length;
-            lengths.tags += result.tags.length;
-            // console.log(i);
-            // await timeout(5000);
-
-            // SAVE
-            await saveResult(result);
-
-            result = undefined;
-            result = {
-              catalogs: [],
-              products: [],
-              option_groups: [],
-              tags: [],
-              properties: [],
-              prices: []
-            };
-            i = 0;
-            // console.log(result);
-          };
-          // console.log(objects.length);
-        };
+        await saveImportFiles('movies', result);
+        // for (let key of Object.keys(result)) console.log(key, result[key].length);
+        // let dir = './switchover/movies';
+        // await rimraf(dir);
+        // fs.mkdirSync(dir);
+        // let lengths = {
+        //   catalogs: 0,
+        //   option_groups: 0,
+        //   prices: 0,
+        //   products: 0,
+        //   properties: 0,
+        //   tags: 0
+        // };
+        // var result = {
+        //   catalogs: [],
+        //   products: [],
+        //   option_groups: [],
+        //   tags: [],
+        //   properties: [],
+        //   prices: []
+        // };
+        // let i = 0;
+        // while(objects.length > 0) {
+        //   let object = objects.pop();
+        //   await makeCashierFuObject(object, result);
+        //   // console.log(objects.length);
+        //   i++;
+        //   if (i >= 20000) {
+        //     lengths.catalogs += result.catalogs.length;
+        //     lengths.option_groups += result.option_groups.length;
+        //     lengths.prices += result.prices.length;
+        //     lengths.products += result.products.length;
+        //     lengths.properties += result.properties.length;
+        //     lengths.tags += result.tags.length;
+        //     // console.log(i);
+        //     // await timeout(5000);
+        //
+        //     // SAVE
+        //     await saveResult(result);
+        //
+        //     result = undefined;
+        //     result = {
+        //       catalogs: [],
+        //       products: [],
+        //       option_groups: [],
+        //       tags: [],
+        //       properties: [],
+        //       prices: []
+        //     };
+        //     i = 0;
+        //     // console.log(result);
+        //   };
+        //   // console.log(objects.length);
+        // };
         // let results = [];
         // let total = 0;
         // let head = new ImportWrapper();
@@ -144,15 +152,15 @@ var switchover = (data, csvFile) => {
           // };
           // console.log(chalk.green(`${catalogs[key].name} | ${n}`));
         });
-        lengths.catalogs += result.catalogs.length;
-        lengths.option_groups += result.option_groups.length;
-        lengths.prices += result.prices.length;
-        lengths.products += result.products.length;
-        lengths.properties += result.properties.length;
-        lengths.tags += result.tags.length;
-
-        // SAVE
-        await saveResult(result);
+        // lengths.catalogs += result.catalogs.length;
+        // lengths.option_groups += result.option_groups.length;
+        // lengths.prices += result.prices.length;
+        // lengths.products += result.products.length;
+        // lengths.properties += result.properties.length;
+        // lengths.tags += result.tags.length;
+        //
+        // // SAVE
+        // await saveResult(result);
 
         // results.unshift(head);
         // console.log(`${total} Objects`);
@@ -209,12 +217,11 @@ var makeCashierFuObject = (object, result) => {
 
 
   getCatalog(object, product);
-
-  let optionGroups = optionGroupsProcessor.create(object, catalogs);
+  // let optionGroups = optionGroupsProcessor.create(object, catalogs);
   result.products.push(product);
   // resultProducts.push(product);
   // resultOptionGroups.push(...optionGroups);
-  result.option_groups.push(...optionGroups);
+  // result.option_groups.push(...optionGroups);
   // resultTags.push(...tags);
   result.tags.push(...tags);
   // resultProperties.push(...properties);
@@ -225,6 +232,7 @@ var makeCashierFuObject = (object, result) => {
   return result;
 };
 let getCatalog = (object, product) => {
+  // console.log(catalogs)
   if (object.type.includes('Blu-ray')) {
     product.catalog = catalogs.blurays.uuid;
   } else if (object.type.includes('UMD')) {
@@ -234,11 +242,11 @@ let getCatalog = (object, product) => {
     if (!catalog.match(/[a-z]/i)) catalog = 'num';
     product.catalog = catalogs[catalog].uuid;
   };
-  if (!catalogsChildren[product.catalog]) {
-    catalogsChildren[product.catalog] = [];
-  };
-  product.index = catalogsChildren[product.catalog].length;
 
+  if (!catalogsChildren[product.catalog]) catalogsChildren[product.catalog] = 0;
+
+  product.index = catalogsChildren[product.catalog];
+  catalogsChildren[product.catalog]++;
 };
 var checkObject = (object) => {
   return object;
