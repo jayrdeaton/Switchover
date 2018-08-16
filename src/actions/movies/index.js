@@ -14,172 +14,42 @@ var fs = require('fs'),
   propertiesProcessor = require('./properties'),
   pricesProcessor = require('./prices'),
   types = require('./types'),
-  // optionGroupsProcessor = require('./optionGroups'),
-  { pad, saveImportFiles } = require('../../helpers'),
-  i;
+  { pad, saveImportFiles } = require('../../helpers');
 
 rimraf = util.promisify(rimraf);
 
-var catalogsChildren = {};
-var catalogs = {};
-var keys = [];
-var dvdsCount = 0;
-
-// let fileCounts = {
-//   catalogs: 0,
-//   option_groups: 0,
-//   prices: 0,
-//   products: 0,
-//   properties: 0,
-//   tags: 0
-// };
-
-let result;
+let catalogsChildren = {},
+  catalogs = {},
+  keys = [],
+  i = 0,
+  result;
 
 var switchover = (options) => {
   return new Promise ((resolve, reject) => {
-    // let objects = [];
     let { file } = options;
     result = new Import();
     catalogs = catalogsProcessor.create();
     for (let key of Object.keys(catalogs)) result.catalogs.push(catalogs[key]);
-    // result.catalogs.push(...catalogs);
     fs.createReadStream(file)
       .pipe(parse({delimiter: ','}))
       .on('data', async (row) => {
-        if (i == undefined || row.length !== keys.length) {
-          setKeys(row);
-          i = 0;
+        if (keys.length === 0) {
+          for (let key of row) keys.push(key.toLowerCase());
         } else {
           let object = makeObject(row, catalogs);
           await makeCashierFuObject(object, result);
-          // objects.push(object);
-          // result.products.push(...data.products);
-          // result.option_groups.push(...data.option_groups);
-          // result.tags.push(...data.tags);
-          // result.properties.push(...data.properties);
-          // result.prices.push(...data.prices);
         };
-        // console.log(i)
-        // if (i >= 50000) {
-        //   console.log(i);
-        //   result = null;
-        //   result = new Import();
-        //   i = 0;
-        // };
         i++;
-        // console.log(i);
       })
       .on('end', async () => {
-        await saveImportFiles('movies', result);
-        // for (let key of Object.keys(result)) console.log(key, result[key].length);
-        // let dir = './switchover/movies';
-        // await rimraf(dir);
-        // fs.mkdirSync(dir);
-        // let lengths = {
-        //   catalogs: 0,
-        //   option_groups: 0,
-        //   prices: 0,
-        //   products: 0,
-        //   properties: 0,
-        //   tags: 0
-        // };
-        // var result = {
-        //   catalogs: [],
-        //   products: [],
-        //   option_groups: [],
-        //   tags: [],
-        //   properties: [],
-        //   prices: []
-        // };
-        // let i = 0;
-        // while(objects.length > 0) {
-        //   let object = objects.pop();
-        //   await makeCashierFuObject(object, result);
-        //   // console.log(objects.length);
-        //   i++;
-        //   if (i >= 20000) {
-        //     lengths.catalogs += result.catalogs.length;
-        //     lengths.option_groups += result.option_groups.length;
-        //     lengths.prices += result.prices.length;
-        //     lengths.products += result.products.length;
-        //     lengths.properties += result.properties.length;
-        //     lengths.tags += result.tags.length;
-        //     // console.log(i);
-        //     // await timeout(5000);
-        //
-        //     // SAVE
-        //     await saveResult(result);
-        //
-        //     result = undefined;
-        //     result = {
-        //       catalogs: [],
-        //       products: [],
-        //       option_groups: [],
-        //       tags: [],
-        //       properties: [],
-        //       prices: []
-        //     };
-        //     i = 0;
-        //     // console.log(result);
-        //   };
-        //   // console.log(objects.length);
-        // };
-        // let results = [];
-        // let total = 0;
-        // let head = new ImportWrapper();
-        Object.keys(catalogs).forEach((key) => {
-          result.catalogs.push(catalogs[key]);
-          // let result = [];
-          // head.objects.push(new ObjectWrapper({type: 'Catalog', object: catalogs[key]}));
-          // let n = 0;
-          // if (catalogsChildren[catalogs[key].uuid]) {
-          //   let children = catalogsChildren[catalogs[key].uuid];
-          //   total += children.length;
-          //   let i = 0;
-          //   let result = new ImportWrapper();
-          //   for (let child of children) {
-          //     n++;
-          //     i++;
-          //     if (i >= 10000 && child.type == 'Product') {
-          //       results.push(result);
-          //       result = new ImportWrapper();
-          //       i = 0;
-          //     };
-          //     result.objects.push(child);
-          //   };
-          //   results.push(result);
-          // };
-          // console.log(chalk.green(`${catalogs[key].name} | ${n}`));
-        });
-        // lengths.catalogs += result.catalogs.length;
-        // lengths.option_groups += result.option_groups.length;
-        // lengths.prices += result.prices.length;
-        // lengths.products += result.products.length;
-        // lengths.properties += result.properties.length;
-        // lengths.tags += result.tags.length;
-        //
-        // // SAVE
-        // await saveResult(result);
-
-        // results.unshift(head);
-        // console.log(`${total} Objects`);
-        // console.log(results.length);
+        saveImportFiles('movies', result);
         resolve(result);
       });
   });
 };
-var setKeys = (objectKeys) => {
-  objectKeys.forEach((key) => {
-    keys.push(key.toLowerCase());
-  });
-};
-
 var makeObject = (row) => {
   var object = {};
-  keys.forEach((key, index) => {
-    object[key] = row[index];
-  });
+  for (let [index, key] of keys.entries()) object[key] = row[index];
   return object;
 };
 var makeCashierFuObject = (object, result) => {
@@ -199,40 +69,24 @@ var makeCashierFuObject = (object, result) => {
   } else {
     object.type = ['DVD'];
   };
-  object = checkObject(object);
+
   if (object.discs == 1) object = getDiscsFromType(object);
-  // object = getDiscsFromName(object);
+
   var product = productsProcessor.create(object);
   let tags = tagsProcessor.create(object, product);
   let properties = propertiesProcessor.create(object, product);
   let prices = pricesProcessor.create(object, product);
 
-  if (object.type.includes('Blu-ray') || object.type.includes('Blu-ray 3D')) {
-    // console.log('blu-ray option groups');
-  } else if (object.type.includes('UMD')) {
-    // console.log('umd option groups');
-  } else {
-    // console.log('dvd option groups');
-  };
-
-
   getCatalog(object, product);
-  // let optionGroups = optionGroupsProcessor.create(object, catalogs);
+
   result.products.push(product);
-  // resultProducts.push(product);
-  // resultOptionGroups.push(...optionGroups);
-  // result.option_groups.push(...optionGroups);
-  // resultTags.push(...tags);
   result.tags.push(...tags);
-  // resultProperties.push(...properties);
   result.properties.push(...properties);
-  // resultPrices.push(...prices);
   result.prices.push(...prices);
 
   return result;
 };
 let getCatalog = (object, product) => {
-  // console.log(catalogs)
   if (object.type.includes('Blu-ray')) {
     product.catalog = catalogs.blurays.uuid;
   } else if (object.type.includes('UMD')) {
@@ -247,9 +101,6 @@ let getCatalog = (object, product) => {
 
   product.index = catalogsChildren[product.catalog];
   catalogsChildren[product.catalog]++;
-};
-var checkObject = (object) => {
-  return object;
 };
 var getDiscsFromType = (object) => {
   object.discs = object.type.length;
@@ -268,26 +119,5 @@ var getDiscsFromName = (object) => {
   return object;
 };
 
-let timeout = (time) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve();
-    }, time);
-  });
-};
-
-let saveResult = async (data) => {
-  var dir = './switchover';
-  for (let key of Object.keys(data)) {
-    if (data[key].length === 0) continue;
-    // let arrays = fractureArray(data[key], 10000);
-    // let padding = arrays.length.toString().length;
-    let i = pad(fileCounts[key], 2);
-    fileCounts[key]++;
-    let fileData = {};
-    fileData[key] = data[key];
-    fs.writeFileSync(path.resolve(`${dir}/${key}_${i}.json`), JSON.stringify(fileData, null, 2));
-  };
-};
 
 module.exports = switchover;
