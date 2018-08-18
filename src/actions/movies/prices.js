@@ -5,17 +5,13 @@ module.exports.create = (object, product) => {
   var prices = [];
   var index = 0;
   var price = new Price({name: 'Buy In', index, color: colors.blue, product: product.uuid});
-  if (object.type.includes('Blu-ray')) {
-    price.amount = '-1.00';
-  } else {
-    price.amount = '-0.25';
-  };
+  if (object.type.includes('Blu-ray')) { price.amount = '-100' } else { price.amount = '-25' };
   prices.push(price);
   index++;
   price = new Price({name: 'Cover Artwork', index, color: colors.mutedGreen, product: product.uuid});
   prices.push(price);
   index++;
-  price = new Price({name: 'Disc Plus', index, color: colors.green, product: product.uuid});
+  price = new Price({name: 'Disc Plus', index, color: colors.green, product: product.uuid, rank: 1000 });
   prices.push(price);
   index++;
   if (object.type.includes('Multidisc')) {
@@ -26,7 +22,7 @@ module.exports.create = (object, product) => {
     price = new Price({name: 'Disc Only', index, color: colors.mutedGreen, product: product.uuid});
     prices.push(price);
     index++;
-    price = new Price({name: 'Buy In Disc Only', index, color: colors.blue, product: product.uuid, amount: '-0.10'});
+    price = new Price({name: 'Buy In Disc Only', index, color: colors.blue, product: product.uuid, amount: '-10'});
   };
 
   return prices;

@@ -24,6 +24,8 @@ let catalogsChildren = {},
   i = 0,
   result;
 
+let games = 0;
+
 var switchover = (options) => {
   return new Promise ((resolve, reject) => {
     let { file } = options;
@@ -37,12 +39,19 @@ var switchover = (options) => {
           for (let key of row) keys.push(key.toLowerCase());
         } else {
           let object = makeObject(row, catalogs);
+
+          if (object.genre === 'Games') {
+            games++;
+            return;
+          };
+
           await makeCashierFuObject(object, result);
         };
         i++;
       })
       .on('end', async () => {
-        saveImportFiles('movies', result);
+        console.log(games, 'games skipped')
+        saveImportFiles('movies', result, { products: 250000 });
         resolve(result);
       });
   });
@@ -73,15 +82,17 @@ var makeCashierFuObject = (object, result) => {
   if (object.discs == 1) object = getDiscsFromType(object);
 
   var product = productsProcessor.create(object);
-  let tags = tagsProcessor.create(object, product);
+  // let tags = tagsProcessor.create(object, product);
   let properties = propertiesProcessor.create(object, product);
+  product.info = JSON.stringify(properties, null, 2);
+
   let prices = pricesProcessor.create(object, product);
 
   getCatalog(object, product);
 
   result.products.push(product);
-  result.tags.push(...tags);
-  result.properties.push(...properties);
+  // result.tags.push(...tags);
+  // result.properties.push(...properties);
   result.prices.push(...prices);
 
   return result;
@@ -105,7 +116,9 @@ let getCatalog = (object, product) => {
 var getDiscsFromType = (object) => {
   object.discs = object.type.length;
   if (object.type.includes('Book')) --object.discs;
+  if (object.type.includes('Booklet')) --object.discs;
   if (object.type.includes('Digital Copy')) --object.discs;
+  if (object.type.includes('4k')) --object.discs;
   return object;
 };
 var getDiscsFromName = (object) => {

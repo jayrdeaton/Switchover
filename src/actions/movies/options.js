@@ -1,6 +1,6 @@
 var typos = require('./typos');
 
-module.exports.removeFromName = (object) => {
+let removeFromName = (object) => {
   let start = object.name.lastIndexOf('(');
   let end = object.name.lastIndexOf(')');
   let a = [];
@@ -17,7 +17,7 @@ module.exports.removeFromName = (object) => {
   };
   return object;
 };
-module.exports.separate = (object) => {
+let separate = (object) => {
   object = splitOptions(object);
   object = typos.options(object);
   object = removeType(object);
@@ -30,17 +30,14 @@ module.exports.separate = (object) => {
   object = removeKey(object, 'exclusive');
   object = removeKey(object, 'movie money');
   object = removeKey(object, 'movie cash');
+  object = removeKey(object, 'tin');
 
   object = removeKey(object, 'cut');
-  // if (object.cut && !object.cut.includes('Cut')) console.log(object.cut);
 
-
-
-  object = removeKey(object, "collector's");
   object = removeScreenFormat(object);
   object = removeStudio(object);
   object = removeSteelbook(object);
-  // object = removeMovieMoneyFromOptions(object);
+
   return(object);
 };
 splitOptions = (object) => {
@@ -103,6 +100,14 @@ var removeType = (object) => {
   if (object.options.toLowerCase().includes('(book)')) {
     object.options = removeSubstring(object.options, '(book)');
     object.type.push('Book');
+  };
+  if (object.options.toLowerCase().includes('(4k)')) {
+    object.options = removeSubstring(object.options, '(4k)');
+    object.type.push('4k')
+  };
+  if (object.options.toLowerCase().includes('(booklet)')) {
+    object.options = removeSubstring(object.options, '(booklet)');
+    object.type.push('Booklet')
   };
   return object;
 };
@@ -191,3 +196,5 @@ var removeSubstring = (string, substring) => {
   }
   return string;
 };
+
+module.exports = { separate, removeFromName };

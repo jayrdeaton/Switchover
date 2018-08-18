@@ -22,6 +22,8 @@ module.exports.title = (object) => {
   return object;
 };
 module.exports.options = (object) => {
+  if (object.options.includes(`(${object.year})`)) object.options = object.options.replace(`(${object.year})`, '');
+
   if (object.options.includes('(w) ')) object.options = object.options.replace('(w) ', '');
   if (object.options.includes('(w)')) console.log(object.options);
   if (object.options.includes(' w)')) object.options = object.options.replace(' w)', ')');
@@ -133,6 +135,7 @@ module.exports.options = (object) => {
   if (object.options.includes('(Limited Edition Steelbook)')) object.options = object.options.replace('(Limited Edition Steelbook)', '(Limited Edition) (Steelbook)');
   if (object.options.includes('(DVD & Blu-ray Combo Steelbook)')) object.options = object.options.replace('(DVD & Blu-ray Combo Steelbook)', '(DVD & Blu-ray Combo) (Steelbook)');
   if (object.options.includes('Ultimate Edtion')) object.options = object.options.replace('Ultimate Edtion', 'Ultimate Edition');
+  if (object.options.includes('(DVD & Blu-Ray Combo)')) object.options = object.options.replace('(DVD & Blu-Ray Combo)', '(DVD) (Blu-ray)');
   if (object.options.includes('(Blu-ray & DVD Combo)')) object.options = object.options.replace('(Blu-ray & DVD Combo)', '(DVD) (Blu-ray)');
   if (object.options.includes('(DVVD & Blu-ray Combo)')) object.options = object.options.replace('(DVVD & Blu-ray Combo)', '(DVD) (Blu-ray)');
   if (object.options.includes('(Audio-Only Blu-ray)')) object.options = object.options.replace('(Audio-Only Blu-ray)', '(Audio-Only) (Blu-ray)');
@@ -164,5 +167,6 @@ module.exports.options = (object) => {
   if (object.options.includes('() ')) object.options = object.options.replace('() ', '');
   if (object.options.includes(' ()')) object.options = object.options.replace(' ()', '');
   if (object.options.includes('()')) object.options = object.options.replace('()', '');
+
   return object;
 };
