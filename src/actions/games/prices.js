@@ -43,9 +43,9 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
   };
   if (pricesToMake.instructionManual) {
     let amount = 0;
-    if (priceConversions.instructionManual) amount = Math.round(game['price'] * priceConversions.instructionManual);
+    // if (priceConversions.instructionManual) amount = Math.round(game['price'] * priceConversions.instructionManual);
     amount = new String(amount);
-    var price = new Price({name: "Instruction Manual", index, amount, color: colors.mutedGreen, product: product.uuid});
+    var price = new Price({name: "Instruction Manual", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
     // for (let option of pricesToMake.instructionManual) {
@@ -55,9 +55,9 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
   };
   if (pricesToMake.coverArt) {
     let amount = 0;
-    if (priceConversions.coverArt) amount = Math.round(game['price'] * priceConversions.coverArt);
+    // if (priceConversions.coverArt) amount = Math.round(game['price'] * priceConversions.coverArt);
     amount = new String(amount);
-    var price = new Price({name: "Cover Artwork", index, amount, color: colors.mutedGreen, product: product.uuid});
+    var price = new Price({name: "Cover Artwork", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
     // for (let option of pricesToMake.coverArt) {
@@ -88,9 +88,9 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
   };
   if (pricesToMake.gameBox) {
     let amount = 0;
-    if (priceConversions.gameBox) amount = Math.round(game['price'] * priceConversions.gameBox);
+    // if (priceConversions.gameBox) amount = Math.round(game['price'] * priceConversions.gameBox);
     amount = new String(amount);
-    var price = new Price({name: "Game Box", index, amount, color: colors.mutedGreen, product: product.uuid});
+    var price = new Price({name: "Game Box", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
     // for (let option of pricesToMake.gameBox) {
@@ -100,9 +100,9 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
   };
   if (pricesToMake.rearArt) {
     let amount = 0;
-    if (priceConversions.rearArt) amount = Math.round(game['price'] * priceConversions.rearArt);
+    // if (priceConversions.rearArt) amount = Math.round(game['price'] * priceConversions.rearArt);
     amount = new String(amount);
-    var price = new Price({name: "Rear Artwork", index, amount, color: colors.mutedGreen, product: product.uuid});
+    var price = new Price({name: "Rear Artwork", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
     // for (let option of pricesToMake.rearArt) {
@@ -112,9 +112,9 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
   };
   if (pricesToMake.jewel) {
     let amount = 0;
-    if (priceConversions.jewel) amount = Math.round(game['price'] * priceConversions.jewel);
+    // if (priceConversions.jewel) amount = Math.round(game['price'] * priceConversions.jewel);
     amount = new String(amount);
-    var price = new Price({name: "CD-I Jewel", index, amount, color: colors.mutedGreen, product: product.uuid});
+    var price = new Price({name: "CD-I Jewel", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
     // for (let option of pricesToMake.jewel) {
@@ -124,9 +124,9 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
   };
   if (pricesToMake.longbox) {
     let amount = 0;
-    if (priceConversions.longbox) amount = Math.round(game['price'] * priceConversions.longbox);
+    // if (priceConversions.longbox) amount = Math.round(game['price'] * priceConversions.longbox);
     amount = new String(amount);
-    var price = new Price({name: "Longbox", index, amount, color: colors.mutedGreen, product: product.uuid});
+    var price = new Price({name: "Longbox", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
     // for (let option of pricesToMake.longbox) {
@@ -136,9 +136,9 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
   };
   if (pricesToMake.retailBox) {
     let amount = 0;
-    if (priceConversions.retailBox) amount = Math.round(game['price'] * priceConversions.retailBox);
+    // if (priceConversions.retailBox) amount = Math.round(game['price'] * priceConversions.retailBox);
     amount = new String(amount);
-    var price = new Price({name: "Retail Box", index, amount, color: colors.mutedGreen, product: product.uuid});
+    var price = new Price({name: "Retail Box", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
     // for (let option of pricesToMake.retailBox) {
@@ -169,9 +169,9 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
   };
   if (pricesToMake.rearInsert) {
     let amount = 0;
-    if (priceConversions.rearInsert) amount = Math.round(game['price'] * priceConversions.rearInsert);
+    // if (priceConversions.rearInsert) amount = Math.round(game['price'] * priceConversions.rearInsert);
     amount = new String(amount);
-    var price = new Price({name: "Rear Insert", index, amount, color: colors.mutedGreen, product: product.uuid});
+    var price = new Price({name: "Rear Insert", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
     // for (let option of pricesToMake.rearInsert) {
@@ -181,8 +181,8 @@ module.exports.getWith = (game, catalog, product, optionGroups) => {
   };
   if (pricesToMake.gameOverlay) {
     let amount = 0;
-    if (priceConversions.gameOverlay) amount = Math.round(game['price'] * priceConversions.gameOverlay);
-    var price = new Price({name: "Game Overlay", index, amount, color: colors.mutedGreen, product: product.uuid});
+    // if (priceConversions.gameOverlay) amount = Math.round(game['price'] * priceConversions.gameOverlay);
+    var price = new Price({name: "Game Overlay", index, color: colors.mutedGreen, product: product.uuid});
     index++;
     objects.push(price);
     // for (let option of pricesToMake.gameOverlay) {

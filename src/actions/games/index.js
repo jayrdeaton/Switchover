@@ -6,7 +6,7 @@ var { MongoClient, ObjectId } = require('mongodb'),
   ProgressBar = require('progress'),
   convert = require('./convert'),
   prices = require('./prices'),
-  { Catalog, Import, Option_Group, Product } = require('@infinitetoken/cashierfu-api-kit').models,
+  { Catalog, Import, Option_Group, Product, Tag, Product_Tag } = require('@infinitetoken/cashierfu-api-kit').models,
   i = 0,
   colors = require('../../colors'),
   consoles = require('./consoles'),
@@ -16,7 +16,7 @@ let result;
 
 var switchover = (options) => {
   return new Promise ((resolve, reject) => {
-    MongoClient.connect(url, function(err, db) {
+    MongoClient.connect(url, (err, db) => {
       assert.equal(null, err);
       result = new Import();
       getResponse(db).then(() => {
@@ -36,6 +36,11 @@ let getResponse = async (db) => {
   // let catalog = new Catalog({name: 'Video Games', color: colors.grey});
   // result.catalogs.push(catalog);
   let data = await extractInventoriesFromGamesList(games);
+  result.catalogs.sort((a, b) => {
+    if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+    if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+    return 0;
+  });
   // var objects = [new ImportWrapper({objects: [new ObjectWrapper({type: 'Catalog', object: catalog})], priority: true})];
   // let keys = Object.keys(data);
   // keys.sort();
@@ -63,6 +68,7 @@ var extractGamesFromItemsList = (items) => {
 };
 var extractInventoriesFromGamesList = async (games) => {
   catalogs = {};
+  let tags = {};
   let index = 0;
   for (let game of games) {
     // Get Catalog Name
@@ -108,6 +114,21 @@ var extractInventoriesFromGamesList = async (games) => {
     result.products.push(product);
     let objects = prices.getWith(game, catalog, product, catalogs[catalog].optionGroups);
     result.prices.push(...objects);
+
+    if (!consoles[catalog].tags) console.log("ERR")
+    for (let name of consoles[catalog].tags) {
+      let tag;
+      if (tags[name]) {
+        tag = tags[name];
+      } else {
+        tag = new Tag({ name });
+        tags[name] = tag;
+        result.tags.push(tag);
+      };
+      let product_tag = new Product_Tag({ product: product.uuid, tag: tag.uuid });
+      result.product_tags.push(product_tag);
+    };
+
     // result.price_option_groups.push(...objects.priceOptionGroups);
   };
   return catalogs;

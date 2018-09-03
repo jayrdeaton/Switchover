@@ -7,6 +7,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Atari", "2600"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -46,6 +47,7 @@ module.exports = {
       gameBox: [7, 8],
       gameOverlay: [10, 11]
     },
+    tags: ["Video Game", "Atari", "5200"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -86,6 +88,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Atari", "7800"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -125,6 +128,7 @@ module.exports = {
       gameBox: [7, 8],
       gameOverlay: [10, 11]
     },
+    tags: ["Video Game", "Atari", "Jaguar"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -153,6 +157,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Atari", "Lynx"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -180,6 +185,7 @@ module.exports = {
       gameBox: [7, 8],
       gameOverlay: [10, 11]
     },
+    tags: ["Video Game", "Coleco", "Colecovision"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -208,6 +214,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Commodore 64"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -234,6 +241,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Magnavox", "Odyssey 2"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -261,6 +269,7 @@ module.exports = {
       gameBox: [7, 8],
       gameOverlay: [10, 11]
     },
+    tags: ["Video Game", "Matel", "Intellivision"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -289,6 +298,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       coverArt: [6, 7]
     },
+    tags: ["Video Game", "Microsoft", "Xbox", "Xbox 360"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -315,6 +325,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       coverArt: [6, 7]
     },
+    tags: ["Video Game", "Microsoft", "Xbox", "Xbox One"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -341,6 +352,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       coverArt: [6, 7]
     },
+    tags: ["Video Game", "Microsoft", "Xbox"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -367,6 +379,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
       rearArt: [8, 9]
     },
+    tags: ["Video Game", "NEC", "Turbo Duo"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -396,6 +409,7 @@ module.exports = {
       rearInsert: [8, 9],
       retailBox: [13, 14]
     },
+    tags: ["Video Game", "NEC", "Turbo Grafx 16"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -427,6 +441,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Neo Geo", "AES"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -453,6 +468,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Neo Geo", "MVS"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -479,6 +495,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       retailBox: [7, 8]
     },
+    tags: ["Video Game", "Neo Geo", "Pocket"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -505,6 +522,7 @@ module.exports = {
       cartOnly: [4, 5, 6],
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
+    tags: ["Video Game", "Nintendo", "3DS"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -532,6 +550,7 @@ module.exports = {
       cartOnly: [4, 5, 6],
       cartPlus: [2, 3, 4, 5, 6, 7, 8 ,9, 10]
     },
+    tags: ["Video Game", "Nintendo", "DS"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -559,6 +578,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Nintendo", "Gameboy", "Gameboy Color"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -585,6 +605,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8 ,9],
       coverArt: [6, 7]
     },
+    tags: ["Video Game", "Nintendo", "Gamecube"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -611,6 +632,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Nintendo", "GBA", "Gameboy", "Gameboy Advance"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -637,6 +659,7 @@ module.exports = {
       cartPlus: [4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Nintendo", "Gameboy"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -663,6 +686,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Nintendo", "N64", "Nintendo 64"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -689,6 +713,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Nintendo", "NES"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -715,6 +740,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Nintendo", "SNES", "Super Nintendo"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -741,6 +767,7 @@ module.exports = {
       cartOnly: [4, 5, 6],
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
+    tags: ["Video Game", "Nintendo", "Switch"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -768,6 +795,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Nintendo", "Virtual Boy"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -794,6 +822,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       coverArt: [6, 7]
     },
+    tags: ["Video Game", "Nintendo", "Wii U"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -820,6 +849,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       coverArt: [6, 7]
     },
+    tags: ["Video Game", "Nintendo", "Wii"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -846,6 +876,7 @@ module.exports = {
       cartOnly: [4, 5, 6],
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
+    tags: ["Video Game", "Nokia", "N Gage"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -874,6 +905,7 @@ module.exports = {
       rearArt: [8, 9],
       longbox: [12, 13]
     },
+    tags: ["Video Game", "Panasonic", "3DO"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -906,6 +938,7 @@ module.exports = {
       gameBox: [9, 10],
       jewel: [6, 7]
     },
+    tags: ["Video Game", "Phillips", "CD-i"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -933,6 +966,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Sega", "32X"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -959,6 +993,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10],
       rearArt: [9, 10]
     },
+    tags: ["Video Game", "Sega", "Sega CD"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -986,6 +1021,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10],
       rearArt: [9, 10]
     },
+    tags: ["Video Game", "Sega", "Dreamcast"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1013,6 +1049,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Sega", "Game Gear"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1039,6 +1076,7 @@ module.exports = {
       cartOnly: [4, 5, 6],
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9]
     },
+    tags: ["Video Game", "Sega", "Genesis"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1066,6 +1104,7 @@ module.exports = {
       cartOnly: [4, 5, 6],
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9 ,10]
     },
+    tags: ["Video Game", "Sega", "Master System"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1093,6 +1132,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10],
       rearArt: [9, 10]
     },
+    tags: ["Video Game", "Sega", "Saturn"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1120,6 +1160,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       coverArt: [6, 7]
     },
+    tags: ["Video Game", "Sony", "Playstation", "Playstation 4", "Playstation Four", "PS4"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1146,6 +1187,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       coverArt: [6, 7]
     },
+    tags: ["Video Game", "Sony", "Playstation", "Playstation 3", "Playstation Three", "PS3"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1172,6 +1214,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       coverArt: [6, 7]
     },
+    tags: ["Video Game", "Sony", "Playstation", "Playstation 2", "Playstation Two", "PS2"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1198,6 +1241,7 @@ module.exports = {
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10],
       rearArt: [9, 10]
     },
+    tags: ["Video Game", "Sony", "Playstation", "Playstation 1", "Playstation One", "PS1"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1225,6 +1269,7 @@ module.exports = {
       discOnly: [4, 5],
       discPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
+    tags: ["Video Game", "Sony", "Playstation", "PSP"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1252,6 +1297,7 @@ module.exports = {
       cartOnly: [4, 5, 6],
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
+    tags: ["Video Game", "Sony", "Playstation", "PS Vita", "Vita"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',
@@ -1279,6 +1325,7 @@ module.exports = {
       cartPlus: [2, 3, 4, 5, 6, 7, 8, 9],
       gameBox: [7, 8]
     },
+    tags: ["Video Game", "Vectrex"],
     optionGroups: [
       'Buy In Contents Included',
       'Condition',

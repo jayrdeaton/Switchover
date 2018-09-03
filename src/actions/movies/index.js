@@ -5,7 +5,7 @@ var fs = require('fs'),
   parse = require('csv-parse'),
   util = require('util'),
   rimraf = require('rimraf'),
-  { Import } = require('@infinitetoken/cashierfu-api-kit').models,
+  { Import, Catalog } = require('@infinitetoken/cashierfu-api-kit').models,
   typos = require('./typos'),
   options = require('./options'),
   productsProcessor = require('./products'),
@@ -22,16 +22,23 @@ let catalogsChildren = {},
   catalogs = {},
   keys = [],
   i = 0,
-  result;
+  results = {};
 
 let games = 0;
 
+// let switchover = async () => {
+//   let alpha = new Catalog();
+//   let beta = new Catalog();
+//   alpha.color.alpha = 5;
+//   console.log(beta.color.alpha)
+// };
+
 var switchover = (options) => {
   return new Promise ((resolve, reject) => {
+
     let { file } = options;
-    result = new Import();
     catalogs = catalogsProcessor.create();
-    for (let key of Object.keys(catalogs)) result.catalogs.push(catalogs[key]);
+    for (let key of Object.keys(catalogs)) results[key] = new Import({ catalogs: [ catalogs[key] ] });
     fs.createReadStream(file)
       .pipe(parse({delimiter: ','}))
       .on('data', async (row) => {
@@ -45,14 +52,17 @@ var switchover = (options) => {
             return;
           };
 
-          await makeCashierFuObject(object, result);
+          await makeCashierFuObject(object);
         };
         i++;
       })
       .on('end', async () => {
         console.log(games, 'games skipped')
-        saveImportFiles('movies', result, { products: 250000 });
-        resolve(result);
+        for (let key of Object.keys(results)) {
+          console.log(key);
+          await saveImportFiles(key, results[key], { products: 250000 });
+        };
+        resolve(results);
       });
   });
 };
@@ -61,7 +71,7 @@ var makeObject = (row) => {
   for (let [index, key] of keys.entries()) object[key] = row[index];
   return object;
 };
-var makeCashierFuObject = (object, result) => {
+var makeCashierFuObject = (object) => {
   object = typos.title(object);
   object.name = object['dvd_title'];
   object.discs = 1;
@@ -88,22 +98,24 @@ var makeCashierFuObject = (object, result) => {
 
   let prices = pricesProcessor.create(object, product);
 
-  getCatalog(object, product);
-
-  result.products.push(product);
+  let catalog = getCatalog(object, product);
+  results[catalog].products.push(product);
   // result.tags.push(...tags);
   // result.properties.push(...properties);
-  result.prices.push(...prices);
+  results[catalog].prices.push(...prices);
 
-  return result;
+  return results;
 };
 let getCatalog = (object, product) => {
+  let catalog;
   if (object.type.includes('Blu-ray')) {
+    catalog = 'blurays';
     product.catalog = catalogs.blurays.uuid;
   } else if (object.type.includes('UMD')) {
+    catalog = 'umds';
     product.catalog = catalogs.umds.uuid;
   } else {
-    let catalog = object.name.charAt(0).toLowerCase();
+    catalog = object.name.charAt(0).toLowerCase();
     if (!catalog.match(/[a-z]/i)) catalog = 'num';
     product.catalog = catalogs[catalog].uuid;
   };
@@ -112,6 +124,7 @@ let getCatalog = (object, product) => {
 
   product.index = catalogsChildren[product.catalog];
   catalogsChildren[product.catalog]++;
+  return catalog;
 };
 var getDiscsFromType = (object) => {
   object.discs = object.type.length;

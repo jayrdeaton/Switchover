@@ -25,7 +25,7 @@ module.exports = [
   {original: 'N64', translation: 'Nintendo N64'},
   {original: 'NES', translation: 'Nintendo NES'},
   {original: 'SNES', translation: 'Nintendo SNES Super'},
-  {original: 'Nintendo Switch', translation: 'Nintendo Switch'},
+  {original: 'Switch', translation: 'Nintendo Switch'},
   {original: 'Virtual Boy', translation: 'Nintendo Virtual Boy'},
   {original: 'WIIU', translation: 'Nintendo Wii U'},
   {original: 'WII-U', translation: 'Nintendo Wii U'},
