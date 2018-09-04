@@ -115,13 +115,16 @@ var removeDiscs = (object) => {
   if (object.options.toLowerCase().includes('-disc)')) {
     var end = object.options.toLowerCase().indexOf('-disc');
     var start = end - 1;
-    while(object.options.toLowerCase().substring(start, start + 1) !== '(') {
+    while(object.options.substring(start, start + 1) !== '(') {
+      if (object.options.substring(start, start + 1) === ' ') object.discs = parseInt(object.options.substring(start, end));
       start--;
     };
-    object.discs = object.options.substring(start + 1, end);
-    let substring = '(' + object.discs + '-disc)';
+    if (!object.discs) object.discs = parseInt(object.options.substring(start + 1, end));
+    let substring = `(${object.options.substring(start + 1, end)}-disc)`;
     object.options = removeSubstring(object.options, substring);
+
   };
+  if (!object.discs) object.discs = 1;
   return object;
 };
 var removeKey = (object, string) => {

@@ -35,10 +35,10 @@ let games = 0;
 
 var switchover = (options) => {
   return new Promise ((resolve, reject) => {
-
     let { file } = options;
     catalogs = catalogsProcessor.create();
     for (let key of Object.keys(catalogs)) results[key] = new Import({ catalogs: [ catalogs[key] ] });
+    results.global = new Import();
     fs.createReadStream(file)
       .pipe(parse({delimiter: ','}))
       .on('data', async (row) => {
@@ -74,14 +74,14 @@ var makeObject = (row) => {
 var makeCashierFuObject = (object) => {
   object = typos.title(object);
   object.name = object['dvd_title'];
-  object.discs = 1;
-  object.edition = '';
+  // object.discs;
+  // object.edition = '';
   object.options = '';
-  object.format = '';
-  object.collection = '';
-  object.anniversary = '';
-  object.version = '';
-  object.steelbook = false;
+  // object.format = '';
+  // object.collection = '';
+  // object.anniversary = '';
+  // object.version = '';
+  // object.steelbook = false;
   object = options.removeFromName(object);
   if (object.options) {
     object = options.separate(object);
@@ -92,7 +92,7 @@ var makeCashierFuObject = (object) => {
   if (object.discs == 1) object = getDiscsFromType(object);
 
   var product = productsProcessor.create(object);
-  // let tags = tagsProcessor.create(object, product);
+  let product_tags = tagsProcessor.create(object, product, results.global);
   let properties = propertiesProcessor.create(object, product);
   product.info = JSON.stringify(properties, null, 2);
 
@@ -100,6 +100,7 @@ var makeCashierFuObject = (object) => {
 
   let catalog = getCatalog(object, product);
   results[catalog].products.push(product);
+  results[catalog].product_tags.push(...product_tags);
   // result.tags.push(...tags);
   // result.properties.push(...properties);
   results[catalog].prices.push(...prices);
