@@ -13,7 +13,7 @@
   "author": "Jay Deaton",
   "license": "ISC",
   "bin": {
-    "switchover": "./index.js"
+    "switchover": "./cli.js"
   },
   "bugs": {
     "url": "https://github.com/jayrdeaton/Switchover/issues"

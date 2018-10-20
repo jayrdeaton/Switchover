@@ -1,7 +1,7 @@
 var { MongoClient, ObjectId } = require('mongodb'),
   { join } = require('path'),
   assert = require('assert'),
-  url = 'mongodb://localhost:27017/swapzapp',
+  url = 'mongodb://heroku_app17482906:bdjnq4u1dssloe53epj0ggbiq0@candidate.15.mongolayer.com:10169/swapzapp',
   fs = require('fs'),
   chalk = require('chalk'),
   ProgressBar = require('progress'),

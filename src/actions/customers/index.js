@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient,
   assert = require('assert'),
-  url = 'mongodb://localhost:27017/swapzapp',
+  url = 'mongodb://heroku_app17482906:bdjnq4u1dssloe53epj0ggbiq0@candidate.15.mongolayer.com:10169/swapzapp',
   ObjectId = require('mongodb').ObjectId,
   fs = require('fs'),
   chalk = require('chalk'),
