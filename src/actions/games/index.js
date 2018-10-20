@@ -1,4 +1,5 @@
 var { MongoClient, ObjectId } = require('mongodb'),
+  { join } = require('path'),
   assert = require('assert'),
   url = 'mongodb://localhost:27017/swapzapp',
   fs = require('fs'),
@@ -16,12 +17,13 @@ let result;
 
 var switchover = (options) => {
   return new Promise ((resolve, reject) => {
+    let dir = options._parents.switchover.dir || './switchover';
     MongoClient.connect(url, (err, db) => {
       assert.equal(null, err);
       result = new Import();
       getResponse(db).then(() => {
         db.close();
-        saveImportFiles('games', result);
+        saveImportFiles(join(dir, 'games'), result);
         resolve(result);
       }).catch((err) => {
         db.close();

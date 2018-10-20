@@ -1,7 +1,7 @@
 let { command, option } = require('termkit'),
   { customers, games, movies, products } = require('../actions');
 
-let program = command('switchover')
+let program = command('switchover', '[dir]')
   .version(process.env.npm_package_version)
   .description('A switchover tool for Gameroom and CashierFu')
   // .options([

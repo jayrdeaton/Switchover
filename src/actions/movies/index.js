@@ -1,5 +1,5 @@
-var fs = require('fs'),
-  path = require('path'),
+var { createReadStream } = require('fs'),
+  { join } = require('path'),
   ProgressBar = require('progress'),
   chalk = require('chalk'),
   parse = require('csv-parse'),
@@ -36,10 +36,12 @@ let games = 0;
 var switchover = (options) => {
   return new Promise ((resolve, reject) => {
     let { file } = options;
+    let dir = options._parents.switchover.dir || './switchover';
+    dir = join(dir, 'movies');
     catalogs = catalogsProcessor.create();
     for (let key of Object.keys(catalogs)) results[key] = new Import({ catalogs: [ catalogs[key] ] });
     results.global = new Import();
-    fs.createReadStream(file)
+    createReadStream(file)
       .pipe(parse({delimiter: ','}))
       .on('data', async (row) => {
         if (keys.length === 0) {
@@ -57,10 +59,11 @@ var switchover = (options) => {
         i++;
       })
       .on('end', async () => {
-        console.log(games, 'games skipped')
+        console.log(games, 'games skipped');
         for (let key of Object.keys(results)) {
           console.log(key);
-          await saveImportFiles(key, results[key], { products: 250000 });
+          let keyDir = join(dir, key);
+          await saveImportFiles(keyDir, results[key], { products: 250000 });
         };
         resolve(results);
       });

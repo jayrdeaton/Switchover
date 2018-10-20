@@ -1,8 +1,7 @@
 var MongoClient = require('mongodb').MongoClient,
   assert = require('assert'),
   url = 'mongodb://localhost:27017/swapzapp',
-  ObjectId = require('mongodb').ObjectId,
-  fs = require('fs'),
+  { join } = require('path'),
   ProgressBar = require('progress'),
   convert = require('../games/convert'),
   { Catalog, Import, Price, Product } = require('@infinitetoken/cashierfu-api-kit').models,
@@ -11,14 +10,15 @@ var MongoClient = require('mongodb').MongoClient,
 
 let result;
 
-var switchover = (data) => {
+var switchover = (options) => {
   return new Promise((resolve, reject) => {
+    let dir = options._parents.switchover.dir || './switchover';
     MongoClient.connect(url, (err, db) => {
       assert.equal(null, err);
       result = new Import();
       getResponse(db).then(() => {
         db.close();
-        saveImportFiles('products', result);
+        saveImportFiles(join(dir, 'products'), result);
         resolve(result);
       }).catch((err) => {
         reject(err);

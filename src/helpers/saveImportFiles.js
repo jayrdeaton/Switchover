@@ -2,14 +2,13 @@ let { existsSync, mkdirSync, unlinkSync, writeFileSync } = require('fs'),
   { join, resolve } = require('path'),
   { promisify } = require('util'),
   rimraf = promisify(require('rimraf'))
-  fractureArray = require('./fractureArray');
+  fractureArray = require('./fractureArray'),
+  createDirectories = require('./createDirectories');
 
-module.exports = async (folderName, data, limits) => {
-  let dir = resolve('./switchover');
-  if (!existsSync(dir)) mkdirSync(dir);
-  dir = join(dir, folderName);
+module.exports = async (dir, data, limits) => {
+  dir = resolve(dir);
   if (existsSync(dir)) await rimraf(dir)
-  mkdirSync(dir);
+  createDirectories(dir);
   for (let key of Object.keys(data)) {
     if (data[key].length === 0) continue;
     let limit = 1000000;
