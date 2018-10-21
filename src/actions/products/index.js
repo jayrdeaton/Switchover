@@ -4,7 +4,7 @@ var MongoClient = require('mongodb').MongoClient,
   { join } = require('path'),
   ProgressBar = require('progress'),
   convert = require('../games/convert'),
-  { Catalog, Import, Price, Product } = require('@infinitetoken/cashierfu-api-kit').models,
+  { Catalog, Import, Price, Product } = require('@gameroom/gameroom-api-kit').models,
   { fractureArray, saveImportFiles } = require('../../helpers'),
   colors = require('../../colors');
 

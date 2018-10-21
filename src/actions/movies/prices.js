@@ -1,4 +1,4 @@
-var { Price } = require('@infinitetoken/cashierfu-api-kit').models,
+var { Price } = require('@gameroom/gameroom-api-kit').models,
   colors = require('../../colors');
 
 module.exports.create = (object, product) => {

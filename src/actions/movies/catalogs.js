@@ -1,4 +1,4 @@
-let { Catalog } = require('@infinitetoken/cashierfu-api-kit').models,
+let { Catalog } = require('@gameroom/gameroom-api-kit').models,
   colors = require('../../colors');
 
 module.exports.create = () => {

@@ -1,4 +1,4 @@
-var { Price, Price_Option_Group } = require('@infinitetoken/cashierfu-api-kit').models,
+var { Price, Price_Option_Group } = require('@gameroom/gameroom-api-kit').models,
   consoles = require('./consoles'),
   colors = require('../../colors');
 
