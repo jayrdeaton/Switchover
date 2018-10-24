@@ -1,4 +1,4 @@
-var { Price } = require('@gameroom/gameroom-api-kit').models,
+var { Price } = require('@gameroom/gameroom-kit').models,
   colors = require('../../colors');
 
 module.exports.create = (object, product) => {

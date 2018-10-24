@@ -3,7 +3,7 @@ var MongoClient = require('mongodb').MongoClient,
   url = 'mongodb://heroku_app17482906:bdjnq4u1dssloe53epj0ggbiq0@candidate.15.mongolayer.com:10169/swapzapp',
   ObjectId = require('mongodb').ObjectId,
   fs = require('fs'),
-  chalk = require('chalk'),
+  cosmetic = require('cosmetic'),
   uuid = require('uuid').v1;
   // Entity = require('../models').entity;
 
@@ -148,11 +148,11 @@ var switchover = function() {
     MongoClient.connect(url, function(err, db) {
       assert.equal(null, err);
         findCustomers(db).then(function(customers) {
-          console.log(chalk.green(customers.length + " customers found"));
+          console.log(cosmetic.green(customers.length + " customers found"));
           refactorCustomers(customers).then(function(data) {
-            console.log(chalk.green(data.length + " customers refactored"));
-            // console.log(chalk.green(data.adjustments.length + " total adjustments made"));
-            console.log(chalk.yellow(customers.length - data.length + " customers ignored"));
+            console.log(cosmetic.green(data.length + " customers refactored"));
+            // console.log(cosmetic.green(data.adjustments.length + " total adjustments made"));
+            console.log(cosmetic.yellow(customers.length - data.length + " customers ignored"));
             db.close();
             let object = {
               name: "Customers",

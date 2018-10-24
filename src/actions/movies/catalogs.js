@@ -1,9 +1,9 @@
-let { Catalog } = require('@gameroom/gameroom-api-kit').models,
+let { Catalog } = require('@gameroom/gameroom-kit').models,
   colors = require('../../colors');
 
 module.exports.create = () => {
   let catalogs = {};
-  
+
   catalogs.blurays = new Catalog({name: 'Blu-rays', color: colors.grey, index: 0});
   catalogs.num = new Catalog({name: 'DVD #', color: colors.grey, index: 1});
   catalogs.a = new Catalog({name: 'DVD A', color: colors.grey, index: 2});

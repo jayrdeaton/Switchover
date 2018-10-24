@@ -1,4 +1,4 @@
-let { Product_Tag, Tag } = require('@gameroom/gameroom-api-kit').models;
+let { Product_Tag, Tag } = require('@gameroom/gameroom-kit').models;
 
 let tags = {};
 let keys = [];
