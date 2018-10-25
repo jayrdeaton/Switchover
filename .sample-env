@@ -1,0 +1,2 @@
+SWAPZAPP_MONGO_URI="mongodb://localhost:27017/swapzapp"
+CASHIERFU_MONGO_URI="mongodb://localhost:27017/cashierfu"

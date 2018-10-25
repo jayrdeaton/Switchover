@@ -1,4 +1,4 @@
-module.exports.create = (object, product) => {
+module.exports = (object, product) => {
   properties = {};
 
   properties.original_title = object.dvd_title;

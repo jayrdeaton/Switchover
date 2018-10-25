@@ -1,6 +1,6 @@
 var typos = require('./typos');
 
-let removeFromName = (object) => {
+let removeOptionsFromName = (object) => {
   let start = object.name.lastIndexOf('(');
   let end = object.name.lastIndexOf(')');
   let a = [];
@@ -17,7 +17,7 @@ let removeFromName = (object) => {
   };
   return object;
 };
-let separate = (object) => {
+let separateOptions = (object) => {
   object = splitOptions(object);
   object = typos.options(object);
   object = removeType(object);
@@ -200,4 +200,4 @@ var removeSubstring = (string, substring) => {
   return string;
 };
 
-module.exports = { separate, removeFromName };
+module.exports = { separateOptions, removeOptionsFromName };

@@ -7,12 +7,12 @@ module.exports = {
       coverArtOnly: [4, 5]
     },
     optionGroups: [
-      'BuyIn Condition',
-      'Buyin Contents Included',
+      'Buy In Condition',
+      'Buy in Contents Included',
       'Disc Label Condition Details',
       'Disc Functional Status',
-      'Coverart Conition Details',
-      'Coverart Overall Condition',
+      'Cover Art Condition Details',
+      'Cover Art Overall Condition',
       'Contents Included'
     ]
   },
@@ -24,12 +24,12 @@ module.exports = {
       coverArtOnly: [4, 5]
     },
     optionGroups: [
-      'BuyIn Condition',
-      'Buyin Contents Included',
+      'Buy In Condition',
+      'Buy In Contents Included',
       'Disc Label Condition Details',
       'Disc Functional Status',
-      'Coverart Conition Details',
-      'Coverart Overall Condition',
+      'Cover Art Condition Details',
+      'Cover Art Overall Condition',
       'Contents Included'
     ]
   },

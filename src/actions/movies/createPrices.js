@@ -1,7 +1,7 @@
 var { Price } = require('@gameroom/gameroom-kit').models,
   colors = require('../../colors');
 
-module.exports.create = (object, product) => {
+module.exports = (object, product) => {
   var prices = [];
   var index = 0;
   var price = new Price({name: 'Buy In', index, color: colors.blue, product: product.uuid});

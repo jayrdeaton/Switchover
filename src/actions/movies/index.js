@@ -5,14 +5,16 @@ var { createReadStream } = require('fs'),
   parse = require('csv-parse'),
   util = require('util'),
   rimraf = require('rimraf'),
-  { Import, Catalog } = require('@gameroom/gameroom-kit').models,
+  { lib, models } = require('@gameroom/gameroom-kit'),
+  { Import } = lib,
+  // { Catalog } = models,
   typos = require('./typos'),
-  options = require('./options'),
-  productsProcessor = require('./products'),
-  catalogsProcessor = require('./catalogs'),
-  tagsProcessor = require('./tags'),
-  propertiesProcessor = require('./properties'),
-  pricesProcessor = require('./prices'),
+  { separateOptions, removeOptionsFromName } = require('./options'),
+  createProduct = require('./createProduct'),
+  createTags = require('./createTags'),
+  createProperties = require('./createProperties'),
+  createPrices = require('./createPrices'),
+  createOptionGroups = require('./createOptionGroups'),
   types = require('./types'),
   { pad, saveImportFiles } = require('../../helpers');
 
@@ -21,26 +23,49 @@ rimraf = util.promisify(rimraf);
 let catalogsChildren = {},
   catalogs = {},
   keys = [],
-  i = 0,
-  results = {};
+  i = 0;
+
+let results = {
+  blurays: {},
+  num: {},
+  a: {},
+  b: {},
+  c: {},
+  d: {},
+  e: {},
+  f: {},
+  g: {},
+  h: {},
+  i: {},
+  j: {},
+  k: {},
+  l: {},
+  m: {},
+  n: {},
+  o: {},
+  p: {},
+  q: {},
+  r: {},
+  s: {},
+  t: {},
+  u: {},
+  v: {},
+  w: {},
+  x: {},
+  y: {},
+  z: {},
+  umds: {},
+  global: {}
+};
 
 let games = 0;
-
-// let switchover = async () => {
-//   let alpha = new Catalog();
-//   let beta = new Catalog();
-//   alpha.color.alpha = 5;
-//   console.log(beta.color.alpha)
-// };
 
 var switchover = (options) => {
   return new Promise ((resolve, reject) => {
     let { file } = options;
     let dir = options._parents.switchover.dir || './switchover';
     dir = join(dir, 'movies');
-    catalogs = catalogsProcessor.create();
-    for (let key of Object.keys(catalogs)) results[key] = new Import({ catalogs: [ catalogs[key] ] });
-    results.global = new Import();
+    for (let key of Object.keys(results)) results[key] = new Import();
     createReadStream(file)
       .pipe(parse({delimiter: ','}))
       .on('data', async (row) => {
@@ -59,7 +84,7 @@ var switchover = (options) => {
         i++;
       })
       .on('end', async () => {
-        console.log(games, 'games skipped');
+        // console.log(games, 'games skipped');
         for (let key of Object.keys(results)) {
           console.log(key);
           let keyDir = join(dir, key);
@@ -85,51 +110,35 @@ var makeCashierFuObject = (object) => {
   // object.anniversary = '';
   // object.version = '';
   // object.steelbook = false;
-  object = options.removeFromName(object);
+  object = removeOptionsFromName(object);
   if (object.options) {
-    object = options.separate(object);
+    object = separateOptions(object);
   } else {
     object.type = ['DVD'];
   };
 
   if (object.discs == 1) object = getDiscsFromType(object);
 
-  var product = productsProcessor.create(object);
-  let product_tags = tagsProcessor.create(object, product, results.global);
-  let properties = propertiesProcessor.create(object, product);
-  product.info = JSON.stringify(properties, null, 2);
+  var product = createProduct(object);
 
-  let prices = pricesProcessor.create(object, product);
+  let { product_tags, tags } = createTags(object, product);
+  product.tags = product_tags;
+  results.global.push(...tags)
 
-  let catalog = getCatalog(object, product);
-  results[catalog].products.push(product);
-  results[catalog].product_tags.push(...product_tags);
-  // result.tags.push(...tags);
-  // result.properties.push(...properties);
+  product.properties = createProperties(object, product);
+
+  let prices = createPrices(object, product);
   results[catalog].prices.push(...prices);
+
+  let { optionGroups, priceOptionGroups } = createOptionGroups(object, product, prices);
+  results.global.option_groups.push(...optionGroups);
+  results[catalog].price_option_groups.push(...priceOptionGroups);
+
+  results[catalog].products.push(product);
 
   return results;
 };
-let getCatalog = (object, product) => {
-  let catalog;
-  if (object.type.includes('Blu-ray')) {
-    catalog = 'blurays';
-    product.catalog = catalogs.blurays.uuid;
-  } else if (object.type.includes('UMD')) {
-    catalog = 'umds';
-    product.catalog = catalogs.umds.uuid;
-  } else {
-    catalog = object.name.charAt(0).toLowerCase();
-    if (!catalog.match(/[a-z]/i)) catalog = 'num';
-    product.catalog = catalogs[catalog].uuid;
-  };
 
-  if (!catalogsChildren[product.catalog]) catalogsChildren[product.catalog] = 0;
-
-  product.index = catalogsChildren[product.catalog];
-  catalogsChildren[product.catalog]++;
-  return catalog;
-};
 var getDiscsFromType = (object) => {
   object.discs = object.type.length;
   if (object.type.includes('Book')) --object.discs;

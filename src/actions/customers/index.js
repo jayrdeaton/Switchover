@@ -1,6 +1,5 @@
 var MongoClient = require('mongodb').MongoClient,
   assert = require('assert'),
-  url = 'mongodb://heroku_app17482906:bdjnq4u1dssloe53epj0ggbiq0@candidate.15.mongolayer.com:10169/swapzapp',
   ObjectId = require('mongodb').ObjectId,
   fs = require('fs'),
   cosmetic = require('cosmetic'),
@@ -145,7 +144,7 @@ class Adjustment {
 };
 var switchover = function() {
   return new Promise((resolve, reject) => {
-    MongoClient.connect(url, function(err, db) {
+    MongoClient.connect(process.env.SWAPZAPP_MONGO_URI, function(err, db) {
       assert.equal(null, err);
         findCustomers(db).then(function(customers) {
           console.log(cosmetic.green(customers.length + " customers found"));

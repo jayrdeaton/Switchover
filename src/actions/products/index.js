@@ -1,6 +1,5 @@
 var MongoClient = require('mongodb').MongoClient,
   assert = require('assert'),
-  url = 'mongodb://heroku_app17482906:bdjnq4u1dssloe53epj0ggbiq0@candidate.15.mongolayer.com:10169/swapzapp',
   { join } = require('path'),
   ProgressBar = require('progress'),
   convert = require('../games/convert'),
@@ -13,7 +12,7 @@ let result;
 var switchover = (options) => {
   return new Promise((resolve, reject) => {
     let dir = options._parents.switchover.dir || './switchover';
-    MongoClient.connect(url, (err, db) => {
+    MongoClient.connect(process.env.SWAPZAPP_MONGO_URI, (err, db) => {
       assert.equal(null, err);
       result = new Import();
       getResponse(db).then(() => {

@@ -1,6 +1,7 @@
 switchover
 import
 dvd_csv.txt
+.env
 
 # Logs
 logs

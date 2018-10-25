@@ -1,9 +1,10 @@
 let { Option_Group } = require('@gameroom/gameroom-kit').models,
   colors = require('../../colors'),
-  types = require('./types');
+  types = require('./types'),
+  optionGroups = {};
 
-module.exports.create = (object, catalogs) => {
-  let optionGroups = [];
+module.exports = (object, product, prices) => {
+  let optionGroups = [], priceOptionGroups = [];
   if (object.type.includes('Blu-ray')) {
     for (let name of types['Blu-Ray'].optionGroups) {
       optionGroups.push(new Option_Group({name, index: optionGroups.length, color: colors.blue, catalog: catalogs.blurays.uuid }))
@@ -17,5 +18,5 @@ module.exports.create = (object, catalogs) => {
       optionGroups.push(new Option_Group({name, index: optionGroups.length, color: colors.blue, catalog: catalogs.dvds.uuid }))
     };
   };
-  return optionGroups;
+  return { optionGroups, priceOptionGroups };
 };
