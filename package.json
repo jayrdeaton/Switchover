@@ -32,10 +32,13 @@
     "dotenv": "^6.1.0",
     "emporium": "^2.2.6",
     "mongodb": "^2.2.36",
+    "mongoose": "^5.3.7",
+    "mongoose-hidden": "^1.6.0",
     "npm": "^6.4.1",
     "progress": "^2.0.1",
     "rimraf": "^2.6.2",
     "termkit": "^1.4.1",
     "uuid": "^3.3.2"
-  }
+  },
+  "devDependencies": {}
 }

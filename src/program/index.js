@@ -1,5 +1,5 @@
 let { command, option } = require('termkit'),
-  { customers, games, movies, products } = require('../actions');
+  { customers, games, movies, products, timecards, users } = require('../actions');
 
 let program = command('switchover', '[dir]')
   .version(process.env.npm_package_version)
@@ -9,20 +9,23 @@ let program = command('switchover', '[dir]')
   .action(async (options) => await deplace(options))
   .commands([
     command('customers')
-      .description('Switchover swapzapp customers')
+      .description('Extract customers from swapzapp')
       .action(async (options) => await add(options)),
     command('games')
       .description('Extract games from swapzapp')
       .action(async (options) => await games(options)),
-    command('products')
-      .description('Extract products from swapzapp items (excludes games)')
-      .action(async (options) => await products(options)),
     command('movies', '<file>')
       .description('Extract movies from mikes big list csv')
       .action(async (options) => await movies(options)),
-    command('timecards')
+    command('products')
+      .description('Extract products from swapzapp items (excludes games)')
+      .action(async (options) => await products(options)),
+    command('timecards', '<business_uuid>')
       .description('Extract timecards and corrections from cashierfu-legacy')
-      .action(async (options) => await movies(options))
+      .action(async (options) => await timecards(options)),
+    command('users')
+      .description('Extract users from swapzapp')
+      .action(async (options) => await users(options))
   ]);
 
 module.exports = program;
