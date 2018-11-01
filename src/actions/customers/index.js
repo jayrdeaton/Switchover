@@ -154,7 +154,6 @@ let findCustomers = async (db) => {
     customers.push(...batch);
     console.log(batch.length);
     skip += limit;
-    done = true;
     if (batch.length === 0) done = true;
   } while (!done);
   return customers;
