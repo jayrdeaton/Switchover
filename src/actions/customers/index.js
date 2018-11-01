@@ -152,7 +152,6 @@ let findCustomers = async (db) => {
   do {
     let batch = await findCustomerBatch(collection, skip, limit);
     customers.push(...batch);
-    console.log(batch.length);
     skip += limit;
     if (batch.length === 0) done = true;
   } while (!done);
@@ -178,7 +177,6 @@ let refactorCustomers = function(swapzappCustomers) {
           account: customer.uuid,
           info: `Swapzapp: ${JSON.stringify(c, null, 2)}`
         });
-        console.log(note.info);
         result.notes.push(note);
         if (trans.info) {
           let note = new Note({
