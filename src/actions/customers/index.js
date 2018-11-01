@@ -1,21 +1,26 @@
-var MongoClient = require('mongodb').MongoClient,
+let MongoClient = require('mongodb').MongoClient,
+  { join } = require('path'),
   assert = require('assert'),
   ObjectId = require('mongodb').ObjectId,
   fs = require('fs'),
   cosmetic = require('cosmetic'),
-  uuid = require('uuid').v1;
+  uuid = require('uuid').v1,
+  { lib, models } = require('@gameroom/gameroom-kit'),
+  { Address, Identification, Import } = lib,
+  { Credit, Customer, Note } = models,
+  { saveImportFiles } = require('../../helpers');
+
   // Entity = require('../models').entity;
 
-class Customer {
+class Transition {
   constructor(c) {
-    this.type = 'Customer';
-    this.uuid = uuid();
-    this.createdAt = c['created_at'];
-    var identifier = null;
+    this.created_at = c['created_at'].getTime() / 1000;
+    this.updated_at = c['updated_at'].getTime() / 1000;
+    let identifier = null;
     if (c['_id']) identifier = c['_id'];
     this.identifier = identifier;
-    var info = null;
-    var phone = null;
+    let info = null;
+    let phone = null;
     if (c.phones && c.phones[0]) {
       if (c.phones[0].number !== '555-555-5555' && c.phones[0].number !== 'New Phone') {
         phone = c.phones[0].number;
@@ -29,17 +34,8 @@ class Customer {
       };
     };
     if (c['date_of_birth']) {
-      var bday = new Date(c['date_of_birth']);
-      var month = bday.getMonth();
-      month++;
-      var date = bday.getDate();
-      var year = bday.getFullYear();
-      var dob = month + "/" + date + "/" + year;
-      if (info) {
-        info = info + " DOB: " + dob;
-      } else {
-        info = "DOB: " + dob;
-      };
+      let bday = new Date(c['date_of_birth']);
+      this.date_of_birth = bday.getTime() / 1000;
     };
     // console.log(c)
     if (c.notes) {
@@ -58,28 +54,24 @@ class Customer {
     // this.company = null;
     // this.email = c.email;
     this.name = c['first_name'] + ' ' + c['last_name']
-    this.firstName = c['first_name'];
-    this.lastName = c['last_name'];
+    this.first_name = c['first_name'];
+    this.last_name = c['last_name'];
     // this.middleName = null;
 
     // Street in info
-    var city = null;
-    var street = null;
-    var zip = null;
+    this.address = new Address();
+
+    let city = null;
+    let street = null;
+    let zip = null;
     if (c.addresses && c.addresses[0])  {
-      var address = c.addresses[0];
-      var street;
-      if (address['first_line'] && address['first_line'] !== 'New Address') {
-        street = address['first_line'];
-        city = address.city + " " + address.state;
-        zip = address.zip;
-      };
-      if (address['second_line']) {
-        street = street + " " + address['second_line'];
-      };
-      if (street) {
-        street = street;
-      };
+      let address = c.addresses[0];
+      if (address.city) this.address.city = address.city;
+      if (address.country) this.address.country = address.country;
+      if (address.state) this.address.state = address.state;
+      if (address.first_line) this.address.street = address.first_line;
+      if (address.second_line) this.address.street += ` ${address.second_line}`;
+      if (address.zip) this.address.zip = address.zip;
     };
 
     // this.city = city;
@@ -87,24 +79,10 @@ class Customer {
     // this.zip = zip;
     // this.state = null;
 
-    var licenseNumber = null;
-    if (c.identifier) {
-      licenseNumber = c.identifier;
-    };
-    if (c['identifier_type']) {
-      if (licenseNumber) {
-        licenseNumber = licenseNumber + " " + c['identifier_type'];
-      } else {
-        licenseNumber = c['identifier_type'];
-      };
-    };
-    if (c.organization) {
-      if (licenseNumber) {
-        licenseNumber = licenseNumber + " " + c.organization;
-      } else {
-        licenseNumber = c.organization;
-      };
-    };
+    this.identification = new Identification();
+    if (c.identifier) this.identification.identifier = c.identifier;
+    if (!c.identifier && c.organization) this.identification.identifier = c.organization;
+    if (c.identifier_type) this.identification.type = c.identifier_type;
 
     // if (this.info) {
       // this.info.replace('/\n/g', 'thishadone');
@@ -142,69 +120,88 @@ class Adjustment {
     this.destination = destination;
   };
 };
-var switchover = function() {
+
+let result;
+
+let switchover = function(options) {
   return new Promise((resolve, reject) => {
+    let dir = options._parents.switchover.dir || './switchover';
+    result = new Import();
     MongoClient.connect(process.env.SWAPZAPP_MONGO_URI, function(err, db) {
       assert.equal(null, err);
         findCustomers(db).then(function(customers) {
           console.log(cosmetic.green(customers.length + " customers found"));
           refactorCustomers(customers).then(function(data) {
             console.log(cosmetic.green(data.length + " customers refactored"));
-            // console.log(cosmetic.green(data.adjustments.length + " total adjustments made"));
             console.log(cosmetic.yellow(customers.length - data.length + " customers ignored"));
             db.close();
-            let object = {
-              name: "Customers",
-              objects: data
-            }
-            resolve(object);
+            saveImportFiles(join(dir, 'customers'), result);
+            resolve(result);
             // resolve(data);
           });
         });
     });
   })
 };
-var findCustomers = function(db) {
+let findCustomers = async (db) => {
+  let collection = db.collection('customers');
+  let limit = 1000;
+  let skip = 0;
+  let customers = [];
+  let done = false;
+  do {
+    let batch = await findCustomerBatch(collection, skip, limit);
+    customers.push(...batch);
+    console.log(batch.length);
+    skip += limit;
+    done = true;
+    // if (batch.length === 0) done = true;
+  } while (!done);
+  return customers;
+};
+findCustomerBatch = (collection, skip, limit) => {
   return new Promise(function(resolve, reject) {
-    var collection = db.collection('customers');
-    collection.find({}).sort({name: 1}).toArray(function(err, customers) {
+    collection.find({}).sort({name: 1}).skip(skip).limit(limit).toArray((err, customers) => {
       assert.equal(err, null);
       resolve(customers);
     });
   });
 };
-var refactorCustomers = function(swapzappCustomers) {
+let refactorCustomers = function(swapzappCustomers) {
   return new Promise(function(resolve, reject) {
-    var customers = [];
-    var adjustments = [];
+    let customers = [];
     swapzappCustomers.forEach((c, index) => {
       if (c.credit || c.notes) {
-        var customer = new Customer(c);
-        customer.index = index;
-        // let tempCustomer = {
-        //   name: customer.name,
-        //   index: customer.index,
-        //   createdAt: customer.createdAt,
-        //   hidden: false,
-        //   identifier: customer.identifier,
-        //   uuid: customer.uuid
-        // };
-        // let entity = new Entity({object: customer, type: 'Customer'});
-        // console.log(chunk)
-        // if (c.credit) adjustments.push(new Adjustment(customer.uuid, c.credit));
+        let trans = new Transition(c);
+        let customer = new Customer(trans);
+
+        let note = new Note({
+          account: customer.uuid,
+          info: `Swapzapp: ${JSON.stringify(c, null, 2)}`
+        });
+        console.log(note.info);
+        result.notes.push(note);
+        if (trans.info) {
+          let note = new Note({
+            account: customer.uuid,
+            info: trans.info
+          });
+          result.notes.push(note);
+        };
+        if (c.credit) {
+          let credit = new Credit({
+            amount: c.credit,
+            posted: true,
+            customer: customer.uuid
+          });
+          result.credits.push(credit);
+        };
+        result.customers.push(customer);
         customers.push(customer);
       };
     });
     resolve(customers);
   });
 };
-var guid = function() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  };
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-    s4() + '-' + s4() + s4() + s4();
-};
+
 module.exports = switchover;

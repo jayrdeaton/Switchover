@@ -16,9 +16,9 @@ let result;
 
 let switchover = async (options) => {
   let { business_uuid } = options
-  let dir = options._parents.switchover.dir || './switchover';
+  let connection, dir = options._parents.switchover.dir || './switchover';
 
-  let connection = await mongoose.createConnection(`${process.env.CASHIERFU_MONGO_URI}_${business_uuid.replace(/-/g, '_')}_schedule`, { useNewUrlParser: true });
+  connection = await mongoose.createConnection(`${process.env.CASHIERFU_MONGO_URI}_${business_uuid.replace(/-/g, '_')}_schedule`, { useNewUrlParser: true });
   let Timecard = connection.model('Timecard');
   let timecards = await Timecard.find();
   let Timecard_Correction = connection.model('Timecard_Correction');

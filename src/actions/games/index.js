@@ -105,6 +105,7 @@ let findItems = (db, inventory_id) => {
   return new Promise((resolve, reject) => {
     let collection = db.collection('items');
     collection.find({}).toArray((err, items) => {
+      console.log(items.length)
       assert.equal(err, null);
       resolve(items);
     });

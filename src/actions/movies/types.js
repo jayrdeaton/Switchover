@@ -1,10 +1,10 @@
 module.exports = {
   'Blu-Ray': {
     prices: {
-      buyIn: [0, 1],
-      discOnly: [2, 3],
-      discPlus: [2, 3, 4, 5, 6],
-      coverArtOnly: [4, 5]
+      'Buy In': [0, 1],
+      'Disc Only': [2, 3],
+      'Disc Plus': [2, 3, 4, 5, 6],
+      'Cover Art Only': [4, 5]
     },
     optionGroups: [
       'Buy In Condition',
@@ -18,10 +18,10 @@ module.exports = {
   },
   'DVD': {
     prices: {
-      buyIn: [0, 1],
-      discOnly: [2, 3],
-      discPlus: [2, 3, 4, 5, 6],
-      coverArtOnly: [4, 5]
+      'Buy In': [0, 1],
+      'Disc Only': [2, 3],
+      'Disc Plus': [2, 3, 4, 5, 6],
+      'Cover Art Only': [4, 5]
     },
     optionGroups: [
       'Buy In Condition',
@@ -35,11 +35,11 @@ module.exports = {
   },
   'UMD': {
     prices: {
-      buyIn: [0, 1],
-      instructionManual: [2, 3],
-      coverArt: [9, 10],
-      cartOnly: [4, 5],
-      cartPlus: [2, 3, 4, 5, 6, 7, 8, 9, 10]
+      'Buy In': [0, 1],
+      'Instruction Manual': [2, 3],
+      'Cover Art': [9, 10],
+      'Cart Only': [4, 5],
+      'Cart Plus': [2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     optionGroups: [
       'Buy In Contents Included',

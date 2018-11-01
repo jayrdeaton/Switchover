@@ -11,6 +11,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
   };
 
   for (let name of optionGroupNames) {
+    name = `${catalog} ${name}`;
     if (!option_groups[name]) {
       let option_group = new Option_Group({ name });
       result.option_groups.push(option_group);
@@ -27,7 +28,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.buyIn) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -39,7 +40,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.discOnly) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -48,7 +49,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.discPlus) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -60,7 +61,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.instructionManual) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -72,7 +73,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.coverArt) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -84,7 +85,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.cartOnly) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -93,7 +94,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.cartPlus) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -105,7 +106,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.gameBox) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -117,7 +118,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.rearArt) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -129,7 +130,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.jewel) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -141,7 +142,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.longbox) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -153,7 +154,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.retailBox) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -165,7 +166,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.huCardOnly) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -174,7 +175,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.huCardPlus) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -186,7 +187,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.rearInsert) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
@@ -197,7 +198,7 @@ module.exports = (game, catalog, product, optionGroupNames) => {
     index++;
     result.prices.push(price);
     for (let option_group of pricesToMake.gameOverlay) {
-      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[consoles[catalog].optionGroups[option_group]].uuid});
+      let price_option_group = new Price_Option_Group({price: price.uuid, option_group: option_groups[`${catalog} ${consoles[catalog].optionGroups[option_group]}`].uuid});
       result.price_option_groups.push(price_option_group);
     };
   };
