@@ -6,8 +6,8 @@ let MongoClient = require('mongodb').MongoClient,
   cosmetic = require('cosmetic'),
   uuid = require('uuid').v1,
   { lib, models } = require('@gameroom/gameroom-kit'),
-  { Address, Identification, Import } = lib,
-  { Credit, Customer, Note } = models,
+  { Import } = lib,
+  { Address, Charge, Customer, Note } = models,
   { saveImportFiles } = require('../../helpers');
 
   // Entity = require('../models').entity;
@@ -57,32 +57,15 @@ class Transition {
     this.first_name = c['first_name'];
     this.last_name = c['last_name'];
     // this.middleName = null;
-
-    // Street in info
-    this.address = new Address();
-
-    let city = null;
-    let street = null;
-    let zip = null;
-    if (c.addresses && c.addresses[0])  {
-      let address = c.addresses[0];
-      if (address.city) this.address.city = address.city;
-      if (address.country) this.address.country = address.country;
-      if (address.state) this.address.state = address.state;
-      if (address.first_line) this.address.street = address.first_line;
-      if (address.second_line) this.address.street += ` ${address.second_line}`;
-      if (address.zip) this.address.zip = address.zip;
-    };
-
     // this.city = city;
     // this.street = street;
     // this.zip = zip;
     // this.state = null;
 
-    this.identification = new Identification();
-    if (c.identifier) this.identification.identifier = c.identifier;
-    if (!c.identifier && c.organization) this.identification.identifier = c.organization;
-    if (c.identifier_type) this.identification.type = c.identifier_type;
+    // this.identification = new Identification();
+    // if (c.identifier) this.identification.identifier = c.identifier;
+    // if (!c.identifier && c.organization) this.identification.identifier = c.organization;
+    // if (c.identifier_type) this.identification.type = c.identifier_type;
 
     // if (this.info) {
       // this.info.replace('/\n/g', 'thishadone');
@@ -172,7 +155,8 @@ let refactorCustomers = function(swapzappCustomers) {
       if (c.credit || c.notes) {
         let trans = new Transition(c);
         let customer = new Customer(trans);
-
+        let addresses = generateAddresses(c, customer);
+        result.addresses.push(...addresses);
         let note = new Note({
           account: customer.uuid,
           info: `Swapzapp: ${JSON.stringify(c, null, 2)}`
@@ -186,12 +170,12 @@ let refactorCustomers = function(swapzappCustomers) {
           result.notes.push(note);
         };
         if (c.credit) {
-          let credit = new Credit({
+          let charge = new Charge({
             amount: c.credit,
             posted: true,
             customer: customer.uuid
           });
-          result.credits.push(credit);
+          result.charges.push(charge);
         };
         result.customers.push(customer);
         customers.push(customer);
@@ -199,6 +183,30 @@ let refactorCustomers = function(swapzappCustomers) {
     });
     resolve(customers);
   });
+};
+let generateAddresses = (c, customer) => {
+  let addresses = [];
+  if (c.addresses) for (let [index, a] of c.addresses.entries()) {
+    let city = a.city || '';
+    let country = a.country || '';
+    let state = a.state || '';
+    let street1 = a.first_line || '';
+    let street2 = a.second_line;
+    let zip = a.zip || '';
+    let address = new Address({
+      city,
+      country,
+      state,
+      street1,
+      street2,
+      zip,
+      name: `Address ${index}`,
+      addressable: customer.uuid,
+      addressable_type: 'Customer'
+    });
+    addresses.push(address);
+  };
+  return addresses;
 };
 
 module.exports = switchover;
