@@ -1,7 +1,7 @@
 let mongoose = require('mongoose'),
   Schema = mongoose.Schema,
   mongooseHidden = require('mongoose-hidden')(),
-  { models } = require('@gameroom/gameroom-kit'),
+  { models } = require('@infinitetoken/cashierfu-api-kit'),
   { attributes } = models.User_Schema;
 
 let schema = new Schema(attributes);

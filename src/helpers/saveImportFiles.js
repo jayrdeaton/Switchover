@@ -19,7 +19,7 @@ module.exports = async (dir, data, limits) => {
       if (array.length > 1) filename += `_${index}`;
       console.log(data.length, filename);
       let path = join(dir, `${filename}.json`);
-      writeFileSync(path, JSON.stringify({ [key]: data }));
+      writeFileSync(path, JSON.stringify(data));
     };
   };
 };
