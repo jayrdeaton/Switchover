@@ -16,6 +16,7 @@ mongoose.Promise = global.Promise;
 let result = new Import();
 
 const deletedUsers = [
+  '7d44a1c4-d86e-4b1c-9813-b03cb9754860', //mediaencyclopedia@gmail.com
   'e064cd23-8095-4557-ac08-0ab8c8066050', //example@example.com
   '7ddaf3d8-0ba4-4927-9ff9-7fe18084cfc7', //paul.ben.foster@gmail.com
   '55e59be1-20ef-4cf3-90b3-f23a7ceb4255', // cynthiasuehickman@gmail.com
