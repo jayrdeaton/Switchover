@@ -76,7 +76,6 @@ let extractInventoriesFromGamesList = async (games) => {
 
     if (game.name.startsWith('The ')) game.name = game.name.replace('The ', '') + ", The";
     game.created_at = game['created_at'];
-
     // Tags
     let tagNames = consoles[catalog].tags;
     let tags = createTags(tagNames);
@@ -84,10 +83,7 @@ let extractInventoriesFromGamesList = async (games) => {
     // Product
     let product = new Product(game);
     product.tags = tagNames;
-    product.index = result.products.length;
-    product.color = colors.purple;
     result.products.push(product);
-    // Prices and Option_Groups
     let optionGroupNames = consoles[catalog].optionGroups
     let { option_groups, prices, price_option_groups } = createPrices(game, catalog, product, optionGroupNames);
     result.option_groups.push(...option_groups);
