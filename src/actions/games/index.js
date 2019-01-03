@@ -66,10 +66,14 @@ let extractInventoriesFromGamesList = async (games) => {
         break;
       };
     };
+
     if (!catalog) {
       console.log(`${cosmetic.red('Error:')} finding game catalog for ${cosmetic.cyan(game.name)}`);
       continue;
+    } else {
+      game.subname = catalog;
     };
+
     if (game.name.startsWith('The ')) game.name = game.name.replace('The ', '') + ", The";
     game.created_at = game['created_at'];
 
