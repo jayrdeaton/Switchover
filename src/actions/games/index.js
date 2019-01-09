@@ -17,6 +17,9 @@ let { MongoClient, ObjectId } = require('mongodb'),
 
 let result;
 
+let skus = [];
+let dups = 0;
+
 let switchover = (options) => {
   return new Promise ((resolve, reject) => {
     let dir = options._parents.switchover.dir || './switchover';
@@ -25,6 +28,7 @@ let switchover = (options) => {
       result = new Import();
       getResponse(db).then(() => {
         db.close();
+        console.log(`${dups} Duplicates`);
         saveImportFiles(join(dir, 'games'), result);
         resolve(result);
       }).catch((err) => {
@@ -62,6 +66,8 @@ let extractInventoriesFromGamesList = async (games) => {
       let name = game.name.toLowerCase();
       if (name.startsWith(`${conversion.original.toLowerCase()} `)) {
         game.name = game.name.replace(new RegExp(`${conversion.original.toLowerCase()} `, 'i'), '');
+        if (skus.includes(game.sku)) dups++;
+        skus.push(game.sku);
         catalog = conversion.translation;
         break;
       };
@@ -76,6 +82,7 @@ let extractInventoriesFromGamesList = async (games) => {
 
     if (game.name.startsWith('The ')) game.name = game.name.replace('The ', '') + ", The";
     game.created_at = game['created_at'];
+    game.info = game.description;
     // Tags
     let tagNames = consoles[catalog].tags;
     let tags = createTags(tagNames);
@@ -104,7 +111,7 @@ let findInventories = (db) => {
 let findItems = (db, inventory_id) => {
   return new Promise((resolve, reject) => {
     let collection = db.collection('items');
-    collection.find({}).toArray((err, items) => {
+    collection.find({ account_id: ObjectId('520a524451f0c12d32000001') }).toArray((err, items) => {
       console.log(items.length)
       assert.equal(err, null);
       resolve(items);
