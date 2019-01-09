@@ -84,18 +84,23 @@ let extractInventoriesFromGamesList = async (games) => {
     game.created_at = game['created_at'];
     game.info = game.description;
     // Tags
-    let tagNames = consoles[catalog].tags;
-    let tags = createTags(tagNames);
+    game.tags = consoles[catalog].tags;
+    let tags = createTags(game.tags);
     result.tags.push(...tags);
-    // Product
-    let product = new Product(game);
-    product.tags = tagNames;
-    result.products.push(product);
-    let optionGroupNames = consoles[catalog].optionGroups
-    let { option_groups, prices, price_option_groups } = createPrices(game, catalog, product, optionGroupNames);
-    result.option_groups.push(...option_groups);
-    result.prices.push(...prices);
-    result.price_option_groups.push(...price_option_groups);
+    let identifiers = game.identifier.split(', ');
+
+    for (let identifier of identifiers) {
+      identifier = identifier.trim();
+      // Product
+      let product = new Product(game);
+      product.identifier = identifier;
+      result.products.push(product);
+      let optionGroupNames = consoles[catalog].optionGroups
+      let { option_groups, prices, price_option_groups } = createPrices(game, catalog, product, optionGroupNames);
+      result.option_groups.push(...option_groups);
+      result.prices.push(...prices);
+      result.price_option_groups.push(...price_option_groups);
+    };
   };
   return;
 };
