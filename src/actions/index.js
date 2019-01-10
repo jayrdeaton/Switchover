@@ -1,4 +1,5 @@
-let customers = require('./customers'),
+let clean = require('./clean'),
+  customers = require('./customers'),
   example = require('./example'),
   games = require('./games'),
   movies = require('./movies'),
@@ -6,4 +7,4 @@ let customers = require('./customers'),
   timecards = require('./timecards'),
   users = require('./users');
 
-module.exports = { customers, example, games, movies, products, timecards, users };
+module.exports = { clean, customers, example, games, movies, products, timecards, users };
