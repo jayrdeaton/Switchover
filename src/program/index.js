@@ -1,5 +1,5 @@
 let { command, option } = require('termkit'),
-  { clean, customers, example, games, giftcards, movies, products, timecards, users } = require('../actions');
+  { clean, customers, example, gamers_credit, gamers_giftcards, games, movies, products, timecards, users } = require('../actions');
 
 let program = command('switchover', '[dir]')
   .version(process.env.npm_package_version)
@@ -35,9 +35,12 @@ let program = command('switchover', '[dir]')
     command('gamers')
       .description('Group of Gamers importing tools')
       .commands([
+        command('credit', '<file>')
+          .description('Configure gamers customers store credit for import')
+          .action(async (options) => await gamers_credit(options)),
         command('giftcards', '<file>')
           .description('Configure gamers giftcards for import')
-          .action(async (options) => await giftcards(options))
+          .action(async (options) => await gamers_giftcards(options))
       ])
   ]);
 
