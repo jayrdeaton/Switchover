@@ -1,5 +1,5 @@
 let { command, option } = require('termkit'),
-  { clean, customers, example, games, movies, products, timecards, users } = require('../actions');
+  { clean, customers, example, games, giftcards, movies, products, timecards, users } = require('../actions');
 
 let program = command('switchover', '[dir]')
   .version(process.env.npm_package_version)
@@ -31,7 +31,14 @@ let program = command('switchover', '[dir]')
       .action(async (options) => await timecards(options)),
     command('users')
       .description('Extract users from swapzapp')
-      .action(async (options) => await users(options))
+      .action(async (options) => await users(options)),
+    command('gamers')
+      .description('Group of Gamers importing tools')
+      .commands([
+        command('giftcards', '<file>')
+          .description('Configure gamers giftcards for import')
+          .action(async (options) => await giftcards(options))
+      ])
   ]);
 
 module.exports = program;
