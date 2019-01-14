@@ -12,7 +12,7 @@ module.exports = async (options) => {
   let result = new Import();
 
   const items = JSON.parse(readFileSync(file));
-  console.log(items.length)
+
   for (const item of items) {
     const gift_certificate = new Gift_Certificate({
       pan: item.code
