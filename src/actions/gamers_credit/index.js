@@ -51,7 +51,7 @@ module.exports = async (options) => {
     result.notes.push(note);
 
     const charge = new Charge({
-      amount: Math.abs(item.balance) * 100,
+      amount: Math.round(Math.abs(item.balance) * 100),
       posted: true,
       chargeable: customer.uuid,
       chargeable_type: 'Customer'
