@@ -1,62 +1,85 @@
-var MongoClient = require('mongodb').MongoClient,
+const MongoClient = require('mongodb').MongoClient,
   assert = require('assert'),
   { join } = require('path'),
   ProgressBar = require('progress'),
   convert = require('../games/convert'),
   { Catalog, Import, Price, Product } = require('@gameroom/gameroom-kit').models,
   { fractureArray, saveImportFiles } = require('../../helpers'),
-  colors = require('../../colors');
+  colors = require('../../colors'),
+  { promisify } = require('util'),
+  tagList = require('./tagList'),
+  consoles = require('../games/consoles');
 
+const connect = promisify(MongoClient.connect);
 let result;
 
-var switchover = (options) => {
-  return new Promise((resolve, reject) => {
-    let dir = options._parents.switchover.dir || './switchover';
-    MongoClient.connect(process.env.SWAPZAPP_MONGO_URI, (err, db) => {
-      assert.equal(null, err);
-      result = new Import();
-      getResponse(db).then(() => {
-        db.close();
-        saveImportFiles(join(dir, 'products'), result);
-        resolve(result);
-      }).catch((err) => {
-        reject(err);
-      });
-    });
-  });
+const switchover = async (options) => {
+  const dir = options._parents.switchover.dir || './switchover';
+  const db = await MongoClient.connect(process.env.SWAPZAPP_MONGO_URI);
+  result = new Import();
+  await getResponse(db)
+  db.close();
+  // saveImportFiles(join(dir, 'products'), result);
+  return result;
 };
-let getResponse = async (db) => {
-  let items = await findItems(db);
-  let catalog = new Catalog({name: "Other", color: colors.grey, index: 0});
-  result.catalogs.push(catalog);
-  await extractGamesFromItemsList(items, catalog);
+const getResponse = async (db) => {
+  const items = await findItems(db);
+  console.log(items.length);
+  items = extractProductsFromItemsList(items);
+  console.log(items.length);
+  items = getTaggedItems(items);
+  console.log(items.length);
   return;
 }
-var extractGamesFromItemsList = (items, catalog) => {
-  return new Promise((resolve, reject) => {
-    items.forEach((item) => {
-      if (!item.name.startsWith("GAMES ") && !item.name.startsWith("XBOX 360 ")) {
-        item.created_at = item['created_at'];
-        var product = new Product(item);
-        product.color = colors.purple;
-        product.catalog = catalog.uuid;
-        createPriceEntities(item, product);
-        result.products.push(product);
-      };
-    });
-    resolve();
-  });
+const extractProductsFromItemsList = (items) => {
+  const products = []
+  for (const item of items) if (!item.name.toLowerCase().startsWith('games ')) products.push(item);
+  return products;
 };
-var createPriceEntities = (item, product) => {
+const getTaggedItems = (items) => {
+  const taggedItems = [];
+  for (const item of items) {
+    item.tags = [];
+    const words = item.name.split(' ');
+    for (const word of words) {
+      for (const tag of tagList) {
+        if (word === tag.input) {
+          item.name = item.name.replace(`${tag.input} `, '');
+          item.tags.push(tag.output);
+          break;
+        };
+      };
+    };
+    for (const key of Object.keys(consoles)) {
+      if (item.name.includes(`${key} `)) {
+        item.name = item.name.replace(`${key} `, '');
+        item.tags.push(...consoles[key].tags);
+      };
+    };
+    if (item.tags.length > 0) console.log('item.name:', item.name, 'item.tags', item.tags, '');
+    if (item.tags.length > 0) taggedItems.push(item);
+  };
+  return taggedItems;
+};
+const createPriceEntities = (item, product) => {
   result.prices.push(new Price({name: 'Buy In', amount: new String(-item['price_cash']), index: 0, color: colors.blue, product: product.uuid}));
   result.prices.push(new Price({name: 'Sale', amount: new String(item['price']), index: 1, color: colors.green, product: product.uuid, rank: 1000}));
 };
-var findItems = function(db, inventory_id) {
-  return new Promise(function(resolve, reject) {
-    var collection = db.collection('items');
-    collection.find({}).toArray(function(err, items) {
+const findItems = (db) => {
+  return new Promise((resolve, reject) => {
+    const collection = db.collection('items');
+    collection.find({ account_id: ObjectId('520a524451f0c12d32000001') }).toArray((err, items) => {
       assert.equal(err, null);
       resolve(items);
+    });
+  });
+};
+const findVariants = (db, item_id) => {
+  return new Promise((resolve, reject) => {
+    const collection = db.collection('variants');
+    collection.find({ item_id: ObjectId(item_id) }).toArray((err, variants) => {
+      assert.equal(err, null);
+      resolve(variants);
     });
   });
 };
