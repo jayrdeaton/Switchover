@@ -3,12 +3,13 @@ const { MongoClient, ObjectId } = require('mongodb'),
   { join } = require('path'),
   ProgressBar = require('progress'),
   convert = require('../games/convert'),
-  { Catalog, Import, Price, Product } = require('@gameroom/gameroom-kit').models,
+  { lib, models } = require('@gameroom/gameroom-kit'),
+  { Import } = lib,
+  { Price, Product } = models,
   { fractureArray, saveImportFiles } = require('../../helpers'),
   colors = require('../../colors'),
   { promisify } = require('util'),
-  tagList = require('./tagList'),
-  consoles = require('../games/consoles');
+  tagList = require('./tagList');
 
 const connect = promisify(MongoClient.connect);
 let result;
@@ -17,18 +18,69 @@ const switchover = async (options) => {
   const dir = options._parents.switchover.dir || './switchover';
   const db = await MongoClient.connect(process.env.SWAPZAPP_MONGO_URI);
   result = new Import();
-  await getResponse(db)
+  await getResponse(db);
+  saveImportFiles(join(dir, 'products'), result);
   db.close();
-  // saveImportFiles(join(dir, 'products'), result);
   return result;
 };
 const getResponse = async (db) => {
-  const items = await findItems(db);
-  console.log(items.length);
+  let items = await findItems(db);
+  console.log('all items: ', items.length);
   items = extractProductsFromItemsList(items);
-  console.log(items.length);
+  console.log('items minus games: ', items.length);
   items = getTaggedItems(items);
-  console.log(items.length);
+  console.log('tagged items: ', items.length);
+  for (const item of items) {
+    const variants = await findVariants(db, item._id);
+    if (variants.length > 0) {
+      for (const variant of variants) {
+        // Create product from item and variant
+        if (variant.adjustment_percentage || variant.adjustment_cash_percentage) console.log(item, variant, '\n\n');
+        const product = new Product({
+          info: `${item.description}\n${variant.description}`,
+          name: `${item.name} | ${variant.name}`,
+          subname: item.subname,
+          tags: item.tags
+        });
+        const buyInPrice = new Price({
+          amount: -(item.price_cash + variant.adjustment_cash * 100),
+          name: 'Buy In',
+          product: product.uuid
+        });
+        const salePrice = new Price({
+          amount: item.price + variant.adjustment * 100,
+          name: 'Sale',
+          rank: 1000,
+          product: product.uuid
+        });
+        result.products.push(product);
+        result.prices.push(buyInPrice);
+        result.prices.push(salePrice);
+      };
+    } else {
+      // Create product from item only;
+      const product = new Product({
+        info: item.description,
+        name: item.name,
+        subname: item.subname,
+        tags: item.tags
+      });
+      const buyInPrice = new Price({
+        amount: -(item.price_cash),
+        name: 'Buy In',
+        product: product.uuid
+      });
+      const salePrice = new Price({
+        amount: item.price,
+        name: 'Sale',
+        rank: 1000,
+        product: product.uuid
+      });
+      result.products.push(product);
+      result.prices.push(buyInPrice);
+      result.prices.push(salePrice);
+    };
+  };
   return;
 }
 const extractProductsFromItemsList = (items) => {
@@ -40,23 +92,20 @@ const getTaggedItems = (items) => {
   const taggedItems = [];
   for (const item of items) {
     item.tags = [];
-    const words = item.name.split(' ');
-    for (const tag of tagList) {
-      if (item.name.includes(tag.input)) {
-        item.name = item.name.replace(`${tag.input} `, '');
-        item.tags.push(tag.output);
-        break;
+    for (const tags of tagList) if (item.name.includes(`${tags.input} `)) {
+      item.subname = tags.subname;
+      item.name = item.name.replace(`${tags.input} `, '');
+      for (const tag of tags.output) if (!item.tags.includes(tag)) item.tags.push(tag);
+    };
+    if (item.tags.length > 0) {
+      taggedItems.push(item);
+    } else {
+      if (!item.name.includes('misc item')) {
+        item.subname = 'Other';
+        item.tags.push('Other');
+        taggedItems.push(item);
       };
     };
-    console.log(item.tags)
-    for (const key of Object.keys(consoles)) {
-      if (item.name.includes(`${key} `)) {
-        item.name = item.name.replace(`${key} `, '');
-        item.tags.push(...consoles[key].tags);
-      };
-    };
-    if (item.tags.length > 0) console.log('item.name:', item.name, 'item.tags', item.tags, '');
-    if (item.tags.length > 0) taggedItems.push(item);
   };
   return taggedItems;
 };
@@ -76,7 +125,7 @@ const findItems = (db) => {
 const findVariants = (db, item_id) => {
   return new Promise((resolve, reject) => {
     const collection = db.collection('variants');
-    collection.find({ item_id: ObjectId(item_id) }).toArray((err, variants) => {
+    collection.find({ account_id: ObjectId('520a524451f0c12d32000001'), item_id: ObjectId(item_id) }).toArray((err, variants) => {
       assert.equal(err, null);
       resolve(variants);
     });
