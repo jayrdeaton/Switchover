@@ -5,7 +5,7 @@ const { MongoClient, ObjectId } = require('mongodb'),
   convert = require('../games/convert'),
   { lib, models } = require('@gameroom/gameroom-kit'),
   { Import } = lib,
-  { Price, Product } = models,
+  { Price, Product, Tag } = models,
   { fractureArray, saveImportFiles } = require('../../helpers'),
   colors = require('../../colors'),
   { promisify } = require('util'),
@@ -24,6 +24,7 @@ const switchover = async (options) => {
   return result;
 };
 const getResponse = async (db) => {
+  generateTags();
   let items = await findItems(db);
   console.log('all items: ', items.length);
   items = extractProductsFromItemsList(items);
@@ -109,9 +110,12 @@ const getTaggedItems = (items) => {
   };
   return taggedItems;
 };
-const createPriceEntities = (item, product) => {
-  result.prices.push(new Price({name: 'Buy In', amount: new String(-item['price_cash']), index: 0, color: colors.blue, product: product.uuid}));
-  result.prices.push(new Price({name: 'Sale', amount: new String(item['price']), index: 1, color: colors.green, product: product.uuid, rank: 1000}));
+const generateTags = () => {
+  const existingTags = [];
+  for (const tags of tagList) for (const name of tags.output) if (!existingTags.includes(name)) {
+    result.tags.push(new Tag({ name }));
+    existingTags.push(name);
+  };
 };
 const findItems = (db) => {
   return new Promise((resolve, reject) => {
