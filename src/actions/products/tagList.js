@@ -11,5 +11,7 @@ module.exports = [
   { input: 'CORDS', output: 'Cord' },
   { input: 'CABLE', output: 'Cord' },
   { input: 'TABLETS', output: 'Tablet' },
-  { input: 'PHONE', output: 'Phone' }
+  { input: 'PHONE', output: 'Phone' },
+  { input: 'Official', output: 'Official' },
+  { input: '3rd Party', output: '3rd Party' }
 ]

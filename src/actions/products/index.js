@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient,
+const { MongoClient, ObjectId } = require('mongodb'),
   assert = require('assert'),
   { join } = require('path'),
   ProgressBar = require('progress'),
@@ -41,15 +41,14 @@ const getTaggedItems = (items) => {
   for (const item of items) {
     item.tags = [];
     const words = item.name.split(' ');
-    for (const word of words) {
-      for (const tag of tagList) {
-        if (word === tag.input) {
-          item.name = item.name.replace(`${tag.input} `, '');
-          item.tags.push(tag.output);
-          break;
-        };
+    for (const tag of tagList) {
+      if (item.name.includes(tag.input)) {
+        item.name = item.name.replace(`${tag.input} `, '');
+        item.tags.push(tag.output);
+        break;
       };
     };
+    console.log(item.tags)
     for (const key of Object.keys(consoles)) {
       if (item.name.includes(`${key} `)) {
         item.name = item.name.replace(`${key} `, '');
