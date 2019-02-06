@@ -1,7 +1,7 @@
 module.exports = [
   { input: 'HARDWARE', output: ['Hardware'], subname: 'Hardware' },
   { input: 'ELECTRONICS', output: ['Electronic'], subname: 'Electronic' },
-  { input: 'SYSTEM PACK', output: ['System Pack'], subname: 'System Pack' },
+  // { input: 'SYSTEM PACK', output: ['System Pack'], subname: 'System Pack' },
   { input: 'CONTROLLERS', output: ['Controller'], subname: 'Controller' },
   { input: 'CONTROLLER', output: ['Controller'], subname: 'Controller' },
   { input: 'ACCESSORY', output: ['Accessory'], subname: 'Accessory' },
@@ -44,6 +44,12 @@ module.exports = [
   { input: 'PS3', output: ['Sony', 'PS3', 'Playstation 3' ], subname: 'Sony PS3 Playstation 3' },
   { input: 'PS4', output: ['Sony', 'PS4', 'Playstation 4' ], subname: 'Sony PS4 Playstation 4' },
   { input: 'SATURN', output: ['Sega', 'Saturn' ], subname: 'Sega Saturn' },
-  { input: 'SATURN', output: ['Sega', 'Sega CD' ], subname: 'Sega CD' },
+  { input: 'SEGA CD', output: ['Sega', 'Sega CD' ], subname: 'Sega CD' },
   { input: 'SWITCH', output: ['Nintendo', 'Switch' ], subname: 'Nintendo Switch' }
+  // 2DS
+  // 3DS
+  // Atari 2600
+  // Atari 5200
+  // Atari 7800
+  // Atari Jaguar
 ]
