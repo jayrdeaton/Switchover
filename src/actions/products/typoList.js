@@ -1,0 +1,55 @@
+module.exports = [
+  { input: 'HARDWARE', output: ['Hardware'], subname: 'Hardware' },
+  { input: 'ELECTRONICS', output: ['Electronic'], subname: 'Electronic' },
+  { input: 'SYSTEM PACK', output: ['System Pack'], subname: 'System Pack' },
+  { input: 'CONTROLLERS', output: ['Controller'], subname: 'Controller' },
+  { input: 'CONTROLLER', output: ['Controller'], subname: 'Controller' },
+  { input: 'ACCESSORY', output: ['Accessory'], subname: 'Accessory' },
+  { input: 'MP3 PLAYERS', output: ['MP3 Player'], subname: 'MP3 Player' },
+  { input: 'UNIVERSAL', output: ['Universal'], subname: 'Universal' },
+  { input: 'CORD', output: ['Cord'], subname: 'Cord' },
+  { input: 'CORDS', output: ['Cord'], subname: 'Cord' },
+  { input: 'CABLE', output: ['Cord'], subname: 'Cord' },
+  { input: 'CABLES', output: ['Cord'], subname: 'Cord' },
+  { input: 'TABLETS', output: ['Tablet'], subname: 'Tablet' },
+  { input: 'PHONE', output: ['Phone'], subname: 'Phone' },
+  { input: 'Computer', output: ['Computer'], subname: 'Computer' },
+  // Consoles
+  { input: '3DS', output: ['Nintendo', '3DS'], subname: 'Nintendo 3DS' },
+  { input: 'WII/WII-U', output: ['Nintendo', 'Wii', 'Wii U'], subname: 'Nintendo Wii/Wii U' },
+  { input: 'WII', output: ['Nintendo', 'Wii'], subname: 'Nintendo Wii' },
+  { input: 'WII-U', output: ['Nintendo', 'Wii U'], subname: 'Nintendo Wii U' },
+  { input: 'WIIU', output: ['Nintendo', 'Wii U'], subname: 'Nintendo Wii U' },
+  { input: 'XBOX 360', output: ['Microsoft', 'Xbox 360'], subname: 'Microsoft Xbox 360' },
+  { input: 'XBOX ONE', output: ['Microsoft', 'Xbox One'], subname: 'Microsoft Xbox One' },
+  { input: 'XBOX One', output: ['Microsoft', 'Xbox One'], subname: 'Microsoft Xbox One' },
+  { input: 'XBOX', output: ['Microsoft', 'Xbox'], subname: 'Microsoft Xbox' },
+  { input: 'SNES', output: ['Nintendo', 'SNES', 'Super Nintendo'], subname: 'Nintendo SNES Super' },
+  { input: 'NES', output: ['Nintendo', 'NES'], subname: 'Nintendo NES' },
+  { input: 'N64', output: ['Nintendo', 'N64', 'Nintendo 64'], subname: 'Nintendo N64' },
+  { input: 'N64', output: ['Sega', 'Dreamcast'], subname: 'Sega Dreamcast' },
+  { input: 'GAME GEAR', output: ['Sega', 'Game Gear'], subname: 'Sega Game Gear' },
+  { input: 'GAMEBOY COLOR', output: ['Nintendo', 'Gameboy Color'], subname: 'Nintendo Gameboy Color' },
+  { input: 'GAMEBOY', output: ['Nintendo', 'Gameboy'], subname: 'Nintendo Gameboy' },
+  { input: 'GBA', output: ['Nintendo', 'GBA', 'Gameboy Advance'], subname: 'Nintendo GBA Gameboy Advance' },
+  { input: 'GAMECUBE', output: ['Nintendo', 'Gamecube'], subname: 'Nintendo Gamecube' },
+  { input: 'GENESIS', output: ['Sega', 'Genesis'], subname: 'Sega Genesis' },
+  { input: 'MASTER SYSTEM', output: ['Sega', 'Master System'], subname: 'Sega Master System' },
+  { input: 'PS VITA', output: ['Sony', 'PS Vita', 'Vita' ], subname: 'Sony PSP Vita' },
+  { input: 'PSP', output: ['Sony', 'PSP' ], subname: 'Sony PSP' },
+  { input: 'PS1/PS2/PS3', output: ['Sony', 'PS1', 'PS2', 'PS3', 'Playstation 1', 'Playstation 2', 'Playstation 3'], subname: 'Sony PS1/PS2/PS3' },
+  { input: 'PS2/PS3', output: ['Sony', 'PS2', 'PS3', 'Playstation 2', 'Playstation 3' ], subname: 'Sony PS2/PS3' },
+  { input: 'PS1', output: ['Sony', 'PS1', 'Playstation 1' ], subname: 'Sony PS1 Playstation 1' },
+  { input: 'PS2', output: ['Sony', 'PS2', 'Playstation 2' ], subname: 'Sony PS2 Playstation 2' },
+  { input: 'PS3', output: ['Sony', 'PS3', 'Playstation 3' ], subname: 'Sony PS3 Playstation 3' },
+  { input: 'PS4', output: ['Sony', 'PS4', 'Playstation 4' ], subname: 'Sony PS4 Playstation 4' },
+  { input: 'SATURN', output: ['Sega', 'Saturn' ], subname: 'Sega Saturn' },
+  { input: 'SEGA CD', output: ['Sega', 'Sega CD' ], subname: 'Sega CD' },
+  { input: 'SWITCH', output: ['Nintendo', 'Switch' ], subname: 'Nintendo Switch' }
+  // 2DS
+  // 3DS
+  // Atari 2600
+  // Atari 5200
+  // Atari 7800
+  // Atari Jaguar
+]
