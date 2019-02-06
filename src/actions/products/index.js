@@ -9,6 +9,7 @@ const { MongoClient, ObjectId } = require('mongodb'),
   { fractureArray, saveImportFiles } = require('../../helpers'),
   colors = require('../../colors'),
   { promisify } = require('util'),
+  typoList = require('./typoList'),
   tagList = require('./tagList');
 
 const connect = promisify(MongoClient.connect);
@@ -29,7 +30,9 @@ const getResponse = async (db) => {
   console.log('all items: ', items.length);
   items = extractProductsFromItemsList(items);
   console.log('items minus games: ', items.length);
+  fixTypos(items);
   items = getTaggedItems(items);
+  removeSpaces(items);
   console.log('tagged items: ', items.length);
   for (const item of items) {
     const variants = await findVariants(db, item._id);
@@ -83,7 +86,18 @@ const getResponse = async (db) => {
     };
   };
   return;
-}
+};
+const fixTypos(items) => {
+  for (const item of items) for (typo of typoList) if (item.name.includes(typo.input)) item.name.replace(new RegExp(typo.input, 'g'), typo.output);
+};
+const removeSpaces(items) => {
+  for (const item of items) {
+    item.name.trim();
+    do {
+      item.name.replace(/  /g, '');
+    } while (item.name.includes('  '));
+  };
+};
 const extractProductsFromItemsList = (items) => {
   const products = []
   for (const item of items) if (!item.name.toLowerCase().startsWith('games ')) products.push(item);
@@ -93,9 +107,9 @@ const getTaggedItems = (items) => {
   const taggedItems = [];
   for (const item of items) {
     item.tags = [];
-    for (const tags of tagList) if (item.name.includes(`${tags.input} `)) {
+    for (const tags of tagList) if (item.name.includes(tags.input)) {
       item.subname = tags.subname;
-      item.name = item.name.replace(`${tags.input} `, '');
+      item.name = item.name.replace(new RegExp(tags.input, 'g'), '');
       for (const tag of tags.output) if (!item.tags.includes(tag)) item.tags.push(tag);
     };
     if (item.tags.length > 0) {
