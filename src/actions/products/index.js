@@ -67,7 +67,10 @@ const getResponse = async (db) => {
         info: item.description,
         name: item.name,
         subname: item.subname,
-        tags: item.tags
+        tags: item.tags,
+        properties: {
+          swapzapp_name: item.swapzapp_name
+        }
       });
       const buyInPrice = new Price({
         amount: -(item.price_cash),
@@ -87,14 +90,14 @@ const getResponse = async (db) => {
   };
   return;
 };
-const fixTypos(items) => {
-  for (const item of items) for (typo of typoList) if (item.name.includes(typo.input)) item.name.replace(new RegExp(typo.input, 'g'), typo.output);
+const fixTypos = (items) => {
+  for (const item of items) for (typo of typoList) if (item.name.includes(typo.input)) item.name = item.name.replace(new RegExp(typo.input, 'g'), typo.output);
 };
-const removeSpaces(items) => {
+const removeSpaces = (items) => {
   for (const item of items) {
     item.name.trim();
     do {
-      item.name.replace(/  /g, '');
+      item.name = item.name.replace(/  /g, ' ');
     } while (item.name.includes('  '));
   };
 };
@@ -106,6 +109,7 @@ const extractProductsFromItemsList = (items) => {
 const getTaggedItems = (items) => {
   const taggedItems = [];
   for (const item of items) {
+    item.swapzapp_name = item.name;
     item.tags = [];
     for (const tags of tagList) if (item.name.includes(tags.input)) {
       item.subname = tags.subname;
