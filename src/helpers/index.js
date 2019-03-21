@@ -3,6 +3,15 @@ let createDirectories = require('./createDirectories'),
   pad = require('./pad'),
   printError = require('./printError'),
   saveFile = require('./saveFile'),
-  saveImportFiles = require('./saveImportFiles');
+  saveImportFiles = require('./saveImportFiles'),
+  saveImportFilesToCSV = require('./saveImportFilesToCSV');
 
-module.exports = { createDirectories, fractureArray, pad, printError, saveFile, saveImportFiles };
+module.exports = {
+  createDirectories,
+  fractureArray,
+  pad,
+  printError,
+  saveFile,
+  saveImportFiles,
+  saveImportFilesToCSV
+};

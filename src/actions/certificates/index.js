@@ -6,7 +6,7 @@ const { MongoClient, ObjectId } = require('mongodb'),
   { promisify } = require('util'),
   { Import } = lib,
   { Charge, Gift_Certificate } = models,
-  { saveImportFiles } = require('../../helpers');
+  { saveImportFilesToCSV } = require('../../helpers');
 
 module.exports = async (options) => {
   const dir = options._parents.switchover.dir || './switchover';
@@ -46,7 +46,7 @@ module.exports = async (options) => {
     };
   };
   db.close();
-  saveImportFiles(join(dir, 'gift_certificates'), result);
+  saveImportFilesToCSV(join(dir, 'gift_certificates'), result);
   return result;
 };
 const findCertificates = async (db) => {
