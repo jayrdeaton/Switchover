@@ -2,10 +2,11 @@ const { MongoClient, ObjectId } = require('mongodb'),
   { join } = require('path'),
   cosmetic = require('cosmetic'),
   assert = require('assert'),
-  { lib, models } = require('@gameroom/gameroom-kit'),
-  { promisify } = require('util'),
+  { helpers, lib, models } = require('@gameroom/gameroom-kit'),
+  { getSecondsFromDate } = helpers,
   { Import } = lib,
   { Charge, Gift_Certificate } = models,
+  { promisify } = require('util'),
   { saveImportFilesToCSV } = require('../../helpers');
 
 module.exports = async (options) => {
@@ -18,6 +19,7 @@ module.exports = async (options) => {
 
   for (const certificate of certificates) {
     const gift_certificate = new Gift_Certificate({
+      created_at: getSecondsFromDate(certificate.created_at),
       pan: certificate.sku
     });
     result.gift_certificates.push(gift_certificate);
@@ -34,6 +36,7 @@ module.exports = async (options) => {
         amount: - certificate.amount - certificate.balance,
         posted: true
       });
+
       result.charges.push(initial_charge, updated_charge);
     } else {
       const charge = new Charge({
@@ -42,6 +45,7 @@ module.exports = async (options) => {
         amount: certificate.balance,
         posted: true
       });
+
       result.charges.push(charge);
     };
   };

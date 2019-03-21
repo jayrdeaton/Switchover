@@ -4,9 +4,11 @@ const { createWriteStream, existsSync, mkdirSync, unlinkSync, writeFileSync } = 
   rimraf = promisify(require('rimraf')),
   fastcsv = require('fast-csv'),
   fractureArray = require('./fractureArray'),
-  createDirectories = require('./createDirectories');
+  createDirectories = require('./createDirectories'),
+  prepairForCsv = require('./prepairForCsv');
 
 module.exports = async (dir, data, limits) => {
+  prepairForCsv(data);
   dir = resolve(dir);
   if (existsSync(dir)) await rimraf(dir)
   createDirectories(dir);
