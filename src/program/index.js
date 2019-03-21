@@ -1,5 +1,5 @@
 let { command, option } = require('termkit'),
-  { clean, customers, example, gamers_credit, gamers_giftcards, games, movies, products, timecards, users } = require('../actions');
+  { certificates, clean, customers, example, gamers_credit, gamers_giftcards, games, movies, products, timecards, users } = require('../actions');
 
 let program = command('switchover', '[dir]')
   .version(process.env.npm_package_version)
@@ -8,6 +8,9 @@ let program = command('switchover', '[dir]')
   // ])
   .action(async (options) => await deplace(options))
   .commands([
+    command('certificates')
+      .description('Extract certificates from swapzapp')
+      .action(async (options) => await certificates(options)),
     command('clean')
       .description('Remove all items that dont belong to Gameroom account')
       .action(async (options) => await clean(options)),

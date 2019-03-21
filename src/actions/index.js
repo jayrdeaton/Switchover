@@ -1,4 +1,5 @@
-let clean = require('./clean'),
+const certificates = require('./certificates'),
+  clean = require('./clean'),
   customers = require('./customers'),
   example = require('./example'),
   gamers_credit = require('./gamers_credit'),
@@ -9,4 +10,16 @@ let clean = require('./clean'),
   timecards = require('./timecards'),
   users = require('./users');
 
-module.exports = { clean, customers, example, gamers_credit, gamers_giftcards, games, movies, products, timecards, users };
+module.exports = {
+  certificates,
+  clean,
+  customers,
+  example,
+  gamers_credit,
+  gamers_giftcards,
+  games,
+  movies,
+  products,
+  timecards,
+  users
+};
