@@ -8,7 +8,7 @@ const MongoClient = require('mongodb').MongoClient,
   { lib, models } = require('@gameroom/gameroom-kit'),
   { Import } = lib,
   { Address, Charge, Customer, Note } = models,
-  { saveImportFiles } = require('../../helpers'),
+  { saveImportFilesToCSV } = require('../../helpers'),
   Transition = require('./Transition'),
   { promisify } = require('util');
 
@@ -26,7 +26,7 @@ module.exports = async (options) => {
   console.log(cosmetic.green(data.length + " customers refactored"));
   console.log(cosmetic.yellow(customers.length - data.length + " customers ignored"));
   db.close();
-  saveImportFiles(join(dir, 'customers'), result);
+  saveImportFilesToCSV(join(dir, 'customers'), result);
   return result;
 };
 let findCustomers = async (db) => {
@@ -60,17 +60,19 @@ let refactorCustomers = function(swapzappCustomers) {
         let addresses = generateAddresses(c, customer);
         result.addresses.push(...addresses);
         result.notes.push(new Note({
-          account: customer.uuid,
+          noteable_id: customer.id,
+          noteable_type: 'Customer',
           info: `Swapzapp: ${JSON.stringify(c, null, 2)}`
         }));
         if (trans.info) result.notes.push(new Note({
-          account: customer.uuid,
+          noteable_id: customer.id,
+          noteable_type: 'Customer',
           info: trans.info
         }));
         if (c.credit) result.charges.push(new Charge({
           amount: c.credit,
           posted: true,
-          chargeable: customer.uuid,
+          chargeable_id: customer.id,
           chargeable_type: 'Customer'
         }));
         result.customers.push(customer);
@@ -96,7 +98,7 @@ let generateAddresses = (c, customer) => {
       street2,
       zip,
       name: `Address ${index}`,
-      addressable: customer.uuid,
+      addressable_id: customer.id,
       addressable_type: 'Customer'
     });
     addresses.push(address);

@@ -25,13 +25,13 @@ module.exports = async (options) => {
     result.gift_certificates.push(gift_certificate);
     if (certificate.amount !== certificate.balance) {
       const initial_charge = new Charge({
-        chargeable: gift_certificate.uuid,
+        chargeable_id: gift_certificate.id,
         chargeable_type: 'GiftCertificate',
         amount: certificate.amount,
         posted: true
       });
       const updated_charge = new Charge({
-        chargeable: gift_certificate.uuid,
+        chargeable_id: gift_certificate.id,
         chargeable_type: 'GiftCertificate',
         amount: - certificate.amount - certificate.balance,
         posted: true
@@ -40,7 +40,7 @@ module.exports = async (options) => {
       result.charges.push(initial_charge, updated_charge);
     } else {
       const charge = new Charge({
-        chargeable: gift_certificate.uuid,
+        chargeable_id: gift_certificate.id,
         chargeable_type: 'GiftCertificate',
         amount: certificate.balance,
         posted: true
