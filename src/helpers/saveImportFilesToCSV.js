@@ -23,6 +23,7 @@ module.exports = async (dir, data, limits) => {
       console.log(data.length, filename);
       const path = join(dir, `${filename}.csv`);
       const ws = createWriteStream(path);
+      console.log(data)
       fastcsv.write(data, { headers: true }).pipe(ws);
     };
   };

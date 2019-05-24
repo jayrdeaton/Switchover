@@ -1,4 +1,4 @@
-let { Tag } = require('@gameroom/gameroom-kit').models;
+let { Tag } = require('@gameroom/emporium').models;
 
 let existingTags = {};
 let keys = [];

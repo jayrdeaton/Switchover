@@ -1,4 +1,4 @@
-var { Tag } = require('@gameroom/gameroom-kit').models,
+var { Tag } = require('@gameroom/emporium').models,
   tags = [];
 
 module.exports = (names) => {

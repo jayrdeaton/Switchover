@@ -1,6 +1,6 @@
 let { Schema } = require('emporium'),
   store = require('../store'),
-  { models } = require('@gameroom/gameroom-kit'),
+  { models } = require('@gameroom/emporium'),
   { attributes } = models.Import_Schema;
 
 var schema = new Schema(attributes);

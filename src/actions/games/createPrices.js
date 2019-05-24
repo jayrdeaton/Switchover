@@ -1,4 +1,4 @@
-var { Option_Group, Price, Price_Option_Group } = require('@gameroom/gameroom-kit').models,
+var { Option_Group, Price, Price_Option_Group } = require('@gameroom/emporium').models,
   consoles = require('./consoles'),
   colors = require('../../colors'),
   option_groups = {};

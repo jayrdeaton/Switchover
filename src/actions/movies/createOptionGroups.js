@@ -1,4 +1,4 @@
-let { Option_Group } = require('@gameroom/gameroom-kit').models,
+let { Option_Group } = require('@gameroom/emporium').models,
   colors = require('../../colors'),
   types = require('./types'),
   optionGroups = {};

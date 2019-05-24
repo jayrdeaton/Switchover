@@ -1,13 +1,10 @@
-var { createReadStream } = require('fs'),
+const { createReadStream } = require('fs'),
   { join } = require('path'),
   ProgressBar = require('progress'),
   cosmetic = require('cosmetic'),
   parse = require('csv-parse'),
-  util = require('util'),
-  rimraf = require('rimraf'),
-  { lib, models } = require('@gameroom/gameroom-kit'),
+  { lib, models } = require('@gameroom/emporium'),
   { Import } = lib,
-  // { Catalog } = models,
   typos = require('./typos'),
   { separateOptions, removeOptionsFromName } = require('./options'),
   createProduct = require('./createProduct'),
@@ -18,14 +15,12 @@ var { createReadStream } = require('fs'),
   types = require('./types'),
   { pad, saveImportFiles } = require('../../helpers');
 
-rimraf = util.promisify(rimraf);
-
-let catalogsChildren = {},
+const catalogsChildren = {},
   catalogs = {},
   keys = [],
   i = 0;
 
-let results = {
+const results = {
   blurays: {},
   num: {},
   a: {},
@@ -60,9 +55,9 @@ let results = {
 
 let games = 0;
 
-var switchover = (options) => {
+const switchover = (options) => {
   return new Promise ((resolve, reject) => {
-    let { file } = options;
+    const { file } = options;
     let dir = options._parents.switchover.dir || './switchover';
     dir = join(dir, 'movies');
     for (let key of Object.keys(results)) results[key] = new Import();
@@ -70,36 +65,32 @@ var switchover = (options) => {
       .pipe(parse({delimiter: ','}))
       .on('data', async (row) => {
         if (keys.length === 0) {
-          for (let key of row) keys.push(key.toLowerCase());
+          for (const key of row) keys.push(key.toLowerCase());
         } else {
-          let object = makeObject(row, catalogs);
-
-          if (object.genre === 'Games') {
-            games++;
-            return;
-          };
-
-          await makeCashierFuObject(object);
+          const object = makeObject(row, catalogs);
+          if (object.genre === 'Games') return games++;
+          console.log(object)
+          // await makeCashierFuObject(object);
         };
         i++;
       })
       .on('end', async () => {
         // console.log(games, 'games skipped');
-        for (let key of Object.keys(results)) {
+        for (const key of Object.keys(results)) {
           console.log(key);
-          let keyDir = join(dir, key);
+          const keyDir = join(dir, key);
           await saveImportFiles(keyDir, results[key], { products: 250000 });
         };
         resolve(results);
       });
   });
 };
-var makeObject = (row) => {
-  var object = {};
-  for (let [index, key] of keys.entries()) object[key] = row[index];
+const makeObject = (row) => {
+  const object = {};
+  for (const [index, key] of keys.entries()) object[key] = row[index];
   return object;
 };
-var makeCashierFuObject = (object) => {
+const makeCashierFuObject = (object) => {
   object = typos.title(object);
   object.name = object['dvd_title'];
   // object.discs;
@@ -119,18 +110,18 @@ var makeCashierFuObject = (object) => {
 
   if (object.discs == 1) object = getDiscsFromType(object);
 
-  var product = createProduct(object);
+  const product = createProduct(object);
 
-  let { product_tags, tags } = createTags(object, product);
+  const { product_tags, tags } = createTags(object, product);
   product.tags = product_tags;
   results.global.push(...tags)
 
   product.properties = createProperties(object, product);
 
-  let prices = createPrices(object, product);
+  const prices = createPrices(object, product);
   results[catalog].prices.push(...prices);
 
-  let { optionGroups, priceOptionGroups } = createOptionGroups(object, product, prices);
+  const { optionGroups, priceOptionGroups } = createOptionGroups(object, product, prices);
   results.global.option_groups.push(...optionGroups);
   results[catalog].price_option_groups.push(...priceOptionGroups);
 
@@ -139,7 +130,7 @@ var makeCashierFuObject = (object) => {
   return results;
 };
 
-var getDiscsFromType = (object) => {
+const getDiscsFromType = (object) => {
   object.discs = object.type.length;
   if (object.type.includes('Book')) --object.discs;
   if (object.type.includes('Booklet')) --object.discs;
@@ -147,9 +138,9 @@ var getDiscsFromType = (object) => {
   if (object.type.includes('4k')) --object.discs;
   return object;
 };
-var getDiscsFromName = (object) => {
-  var name = object.name;
-  var count = 0;
+const getDiscsFromName = (object) => {
+  let name = object.name;
+  let count = 0;
   while (name.includes('/')) {
     name = name.replace('/', '');
     count++;

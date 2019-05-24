@@ -1,0 +1,31 @@
+module.exports = class Import {
+  constructor(data) {
+    if (!data) data = {};
+    this.addresses = data.addresses || [];
+    this.adjustments = data.adjustments || [];
+    this.charges = data.charges || [];
+    this.customers = data.customers || [];
+    this.gift_certificates = data.gift_certificates || [];
+    this.images = data.images || [];
+    this.line_taxes = data.line_taxes || [];
+    this.lines = data.lines || [];
+    this.notes = data.notes || [];
+    this.option_groups = data.option_groups || [];
+    this.options = data.options || [];
+    this.orders = data.orders || [];
+    this.payments = data.payments || [];
+    this.price_option_groups = data.price_option_groups || [];
+    this.prices = data.prices || [];
+    this.products = data.products || [];
+    this.purchases = data.purchases || [];
+    this.sales = data.sales || [];
+    this.stores = data.stores || [];
+    this.tags = data.tags || [];
+    this.taxes = data.taxes || [];
+    this.tills = data.tills || [];
+    this.timecards = data.timecards || [];
+    this.unit_options = data.unit_options || [];
+    this.units = data.units || [];
+    this.users = data.users || [];
+  };
+};

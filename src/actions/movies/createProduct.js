@@ -1,4 +1,4 @@
-let { Product } = require('@gameroom/gameroom-kit').models,
+let { Product } = require('@gameroom/emporium').models,
   colors = require('../../colors');
 
 module.exports = (object) => {

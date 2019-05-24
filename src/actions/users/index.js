@@ -3,7 +3,7 @@
 //   assert = require('assert'),
 //   cosmetic = require('cosmetic'),
 //   ProgressBar = require('progress'),
-//   { lib, models } = require('@gameroom/gameroom-kit'),
+//   { lib, models } = require('@gameroom/emporium'),
 //   { Import } = lib,
 //   { User } = models,
 //   i = 0,

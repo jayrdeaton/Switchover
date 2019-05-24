@@ -1,7 +1,7 @@
 let { join } = require('path'),
   faker = require('faker'),
   uuid = require('uuid'),
-  { lib, models } = require('@gameroom/gameroom-kit'),
+  { lib, models } = require('@gameroom/emporium'),
   { Import } = lib,
   { Customer, Credit, Note, Option_Group, Price_Option_Group, Price, Product, Tag, Timecard_Correction, Timecard, User } = models,
   { saveImportFiles } = require('../../helpers');

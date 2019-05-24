@@ -1,4 +1,4 @@
-var { Price } = require('@gameroom/gameroom-kit').models,
+var { Price } = require('@gameroom/emporium').models,
   types = require('./types'),
   { blue, green, mutedGreen } = require('../../colors');
 

@@ -5,7 +5,7 @@ const MongoClient = require('mongodb').MongoClient,
   fs = require('fs'),
   cosmetic = require('cosmetic'),
   uuid = require('uuid').v1,
-  { lib, models } = require('@gameroom/gameroom-kit'),
+  { lib, models } = require('@gameroom/emporium'),
   { Import } = lib,
   { Address, Charge, Customer, Note } = models,
   { saveImportFilesToCSV } = require('../../helpers'),
@@ -14,6 +14,7 @@ const MongoClient = require('mongodb').MongoClient,
 
 const connect = promisify(MongoClient.connect);
 
+// FIND AND KILL amoun === 1000000000000!!!
 let result;
 
 module.exports = async (options) => {
@@ -77,6 +78,7 @@ let refactorCustomers = function(swapzappCustomers) {
         }));
         result.customers.push(customer);
         customers.push(customer);
+        console.log(customer)
       };
     });
   return customers;
