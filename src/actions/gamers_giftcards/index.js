@@ -1,7 +1,7 @@
 const { readFileSync } = require('fs'),
   { join } = require('path'),
   { lib, models } = require('@gameroom/emporium'),
-  { Import } = lib,
+  { Import } = require('../../models'),
   { Charge, Gift_Certificate } = models,
   { saveImportFiles } = require('../../helpers');
 

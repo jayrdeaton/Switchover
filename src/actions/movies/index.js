@@ -4,7 +4,7 @@ const { createReadStream } = require('fs'),
   cosmetic = require('cosmetic'),
   parse = require('csv-parse'),
   { lib, models } = require('@gameroom/emporium'),
-  { Import } = lib,
+  { Import } = require('../../models'),
   typos = require('./typos'),
   { separateOptions, removeOptionsFromName } = require('./options'),
   createProduct = require('./createProduct'),
@@ -14,6 +14,8 @@ const { createReadStream } = require('fs'),
   createOptionGroups = require('./createOptionGroups'),
   types = require('./types'),
   { pad, saveImportFiles } = require('../../helpers');
+
+console.log(Import)
 
 const catalogsChildren = {},
   catalogs = {},

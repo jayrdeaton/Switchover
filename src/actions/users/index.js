@@ -4,7 +4,7 @@
 //   cosmetic = require('cosmetic'),
 //   ProgressBar = require('progress'),
 //   { lib, models } = require('@gameroom/emporium'),
-//   { Import } = lib,
+//   { Import } = require('../../models'),
 //   { User } = models,
 //   i = 0,
 //   colors = require('../../colors'),
