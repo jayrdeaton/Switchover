@@ -170,6 +170,9 @@ module.exports.options = (object) => {
   options = options.replace(' ()', '');
   options = options.replace('()', '');
 
+  while (options.includes('  ')) options = options.replace('  ', ' ');
+  options = options.trim();
+
   object.options = options;
 
   return object;
