@@ -30,6 +30,11 @@ module.exports.title = (object) => {
   object.dvd_title = dvd_title;
   return object;
 };
+module.exports.genre = (object) => {
+  let { genre } = object;
+  genre = genre.replace('ANime', 'Anime');
+  return object;
+};
 module.exports.options = (object) => {
   let { options } = object;
 

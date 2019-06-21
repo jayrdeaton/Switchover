@@ -166,6 +166,7 @@ const parseRow = (row) => {
 };
 const makeObject = (object) => {
   object = typos.title(object);
+  object = typos.genre(object);
   object.name = object['dvd_title'];
   // object.discs;
   // object.edition = '';
