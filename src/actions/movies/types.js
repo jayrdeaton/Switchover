@@ -4,7 +4,7 @@ module.exports = {
       'Buy In',
       'Disc Only',
       'Disc Plus',
-      'Cover Artwork'
+      // 'Cover Artwork'
     ],
     // prices: {
     //   'Buy In': [0, 1],
@@ -27,7 +27,7 @@ module.exports = {
       'Buy In',
       'Disc Only',
       'Disc Plus',
-      'Cover Artwork'
+      // 'Cover Artwork'
     ],
     // prices: {
     //   'Buy In': [0, 1],

@@ -8,7 +8,7 @@ module.exports = (object, product) => {
   if (object.type.includes('Blu-ray')) {
     for (const name of types['Blu-Ray'].prices) {
       const price = new Price({ name, product_id: product.id });
-      if (name === 'Buy In') price.amount = -100;
+      if (name === 'Buy In') price.amount = -75;
       prices.push(price);
       const option_group_name = `Blu-Ray Template ${name.toUpperCase()}`;
       if (!master.bluray[option_group_name]) {
@@ -36,7 +36,7 @@ module.exports = (object, product) => {
   } else {
     for (const name of types['DVD'].prices) {
       const price = new Price({ name, product_id: product.id });
-      if (name === 'DVD') price.amount = -100;
+      if (name === 'Buy In') price.amount = -25;
       prices.push(price);
       const option_group_name = `DVD Template ${name.toUpperCase()}`;
       if (!master.dvd[option_group_name]) {

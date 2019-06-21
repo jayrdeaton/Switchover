@@ -21,6 +21,8 @@ module.exports = (tables) => {
         };
         object.properties = `"${properties}"`;
       };
+      if (object.name) object.name = `"${object.name}"`;
+      if (object.subname) object.subname = `"${object.subname}"`;
     };
   };
 };

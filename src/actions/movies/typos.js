@@ -20,7 +20,14 @@ module.exports.title = (object) => {
   dvd_title = dvd_title.replace('Thumbelina 1994/ Fox)', 'Thumbelina (1994/ Fox)')
   dvd_title = dvd_title.replace('Wolf Children (DVD & Blu-ray Combo/ The Hosoda Collection', 'Wolf Children (DVD & Blu-ray Combo/ The Hosoda Collection)')
   dvd_title = dvd_title.replace('(Blu-ray 3D/ Blu-ray w/ Digital Copy: Iron Man 3 ', '(Blu-ray 3D/ Blu-ray w/ Digital Copy) Iron Man 3 ');
-  dvd_title = dvd_title;
+  dvd_title = dvd_title.replace('Kino Lorber Studio Classics Blu-ray', 'Kino Lorber Studio Classics) (Blu-ray');
+  dvd_title = dvd_title.replace('Fox. Blu-ray', 'Fox) (Blu-ray');
+  dvd_title = dvd_title.replace('Mondo X Steelbook', 'Mondo X) (Steelbook');
+  dvd_title = dvd_title.replace('Cohen Media Group Blu-ray', 'Cohen Media Group) (Blu-ray');
+  dvd_title = dvd_title.replace('Apprehensive Films/', 'Apprehensive Films');
+  dvd_title = dvd_title.replace('Lions Gate Blu-ray', 'Lions Gate) (Blu-ray');
+  dvd_title = dvd_title.replace('(DreamWorks Dolby Digita)', '(DreamWorks) (Dolby Digital)');
+  object.dvd_title = dvd_title;
   return object;
 };
 module.exports.options = (object) => {
@@ -168,6 +175,12 @@ module.exports.options = (object) => {
   options = options.replace('(Audio-Only DVD)', '(Audio-Only) (DVD)');
   options = options.replace('(Blu-ray Audio Only)', '(Blu-ray) (Audio Only)');
   options = options.replace('CollectionBlu-ray', 'Collection) (Blu-ray');
+
+  options = options.replace('Apprehensive Films On Demand DVD-R', 'Apprehensive Films) (On Demand DVD-R');
+  options = options.replace('(MGM/UA/)', '(MGM/UA)');
+  options = options.replace('(DreamWorks Dolby Digital)', '(DreamWorks) (Dolby Digital)');
+  options = options.replace('(Paramountc)', '(Paramount)');
+  options = options.replace('Trinity Home Entertainment)', '(Trinity Home Entertainment)');
 
   options = options.replace('() ', '');
   options = options.replace(' ()', '');
