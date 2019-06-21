@@ -198,3 +198,11 @@ module.exports.options = (object) => {
 
   return object;
 };
+module.exports.rating = (object) => {
+  let { rating } = object;
+  rating = rating.replace('PG*13', 'PG-13');
+  rating = rating.replace('[NR]', 'NR');
+  rating = rating.replace('special interest', 'Special Interest');
+  rating = rating.replace('horror', 'Horror');
+  return object;
+};

@@ -14,7 +14,7 @@ module.exports = (object, product) => {
   for (let genre of object.genre.split('/')) product_tags.push(genre);
 
   if (object.discs > 1) product_tags.push('Multidisc');
-  if (object.year && object.year !== "VAR" && object.year != "UNK") product_tags.push(object.year);
+  // if (object.year && object.year !== "VAR" && object.year != "UNK") product_tags.push(object.year);
 
   for (let name of product_tags) {
     if (!existingTags[name]) {

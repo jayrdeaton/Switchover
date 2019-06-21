@@ -1,14 +1,14 @@
 module.exports = (object, product) => {
   properties = {};
 
-  properties.original_title = object.dvd_title;
-  properties.type = object.type;
+  // properties.original_title = object.dvd_title;
+  // properties.type = object.type;
 
   properties.studio = object.studio;
-  properties.status = object.status;
+  // properties.status = object.status;
   properties.sound = object.sound;
   properties.versions = object.versions;
-  properties.price = object.price;
+  // properties.price = object.price;
   properties.rating = object.rating;
   properties.year = object.year;
   properties.genre = object.genre;
