@@ -54,7 +54,7 @@ const catalogsChildren = {},
 //   global: {}
 // };
 
-const results = new Import();
+// const results = new Import();
 
 let games = 0, i = 0;
 
@@ -149,7 +149,7 @@ const makeObject = (object) => {
   const { product_tags, tags } = createTags(object, product);
   product.tags = product_tags;
   // results.global.tags.push(...tags)
-  results.tags.push(...tags);
+  // results.tags.push(...tags);
 
   product.properties = createProperties(object, product);
 
@@ -168,10 +168,10 @@ const makeObject = (object) => {
   // results[catalog].price_option_groups.push(...priceOptionGroups);
   // results[catalog].products.push(product);
 
-  results.option_groups.push(...optionGroups);
-  results.prices.push(...prices);
-  results.price_option_groups.push(...priceOptionGroups);
-  results.products.push(product);
+  // results.option_groups.push(...optionGroups);
+  // results.prices.push(...prices);
+  // results.price_option_groups.push(...priceOptionGroups);
+  // results.products.push(product);
 
   return {
     option_groups: optionGroups,
