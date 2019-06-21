@@ -14,7 +14,7 @@ module.exports = (object, product) => {
   properties.genre = object.genre;
   properties.aspect = object.aspect;
   properties.release_date = object.dvd_releasedate;
-  properties.id = object.id;
+  // properties.id = object.id;
 
   if (object.discs > 1) properties.discs = object.discs;
   if (object.format) properties.format = object.format;
