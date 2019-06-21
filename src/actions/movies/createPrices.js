@@ -7,7 +7,7 @@ module.exports = (object, product) => {
   const optionGroups = [], priceOptionGroups = [], prices = [];
   if (object.type.includes('Blu-ray')) {
     for (const name of types['Blu-Ray'].prices) {
-      const price = new Price({ name });
+      const price = new Price({ name, product_id: product.id });
       if (name === 'Buy In') price.amount = -100;
       prices.push(price);
       const option_group_name = `Blu-Ray Template ${name.toUpperCase()}`;
@@ -21,7 +21,7 @@ module.exports = (object, product) => {
     };
   } else if (object.type.includes('UMD')) {
     for (const name of types['UMD'].prices) {
-      const price = new Price({ name });
+      const price = new Price({ name, product_id: product.id });
       if (name === 'Buy In') price.amount = -25;
       prices.push(price);
       const option_group_name = `UMD Template ${name.toUpperCase()}`;
@@ -35,7 +35,7 @@ module.exports = (object, product) => {
     };
   } else {
     for (const name of types['DVD'].prices) {
-      const price = new Price({ name });
+      const price = new Price({ name, product_id: product.id });
       if (name === 'DVD') price.amount = -100;
       prices.push(price);
       const option_group_name = `DVD Template ${name.toUpperCase()}`;
