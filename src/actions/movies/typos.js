@@ -1,28 +1,31 @@
 module.exports.title = (object) => {
-  object.dvd_title = object.dvd_title.replace('Jimmy Eat World (Limited )Edition', 'Jimmy Eat World (Limited Edition)')
-  object.dvd_title = object.dvd_title.replace('Accountant (2016/ DVD/CD Combo w/ Digital Copy', 'Accountant (2016/ DVD/CD Combo w/ Digital Copy)');
-  object.dvd_title = object.dvd_title.replace('Al Green: Gospel According To Al Green (Acacia0', 'Al Green: Gospel According To Al Green (Acacia)');
-  object.dvd_title = object.dvd_title.replace('Collateral Beauty (Blu-ray w/ Digital Copy', 'Collateral Beauty (Blu-ray w/ Digital Copy)');
-  object.dvd_title = object.dvd_title.replace('Dr. Seuss Triple Feature: Green Eggs And Ham And Other Stories / The Lorax (1972) / The Cat In The Hat (1971)(', 'Dr. Seuss Triple Feature: Green Eggs And Ham And Other Stories / The Lorax (1972) / The Cat In The Hat (1971)');
-  object.dvd_title = object.dvd_title.replace('Dreaming Out Loud (Alpha Video0', 'Dreaming Out Loud (Alpha Video)')
-  object.dvd_title = object.dvd_title.replace('Get Along Monsters Series (DVD/CD Combo', 'Get Along Monsters Series (DVD/CD Combo)')
-  object.dvd_title = object.dvd_title.replace('Handel: Admeto: Tim Mead / Marie Arnet / William Berger (Blu-ray', 'Handel: Admeto: Tim Mead / Marie Arnet / William Berger (Blu-ray)')
-  object.dvd_title = object.dvd_title.replace('Hollywood Chaos (Breaking Glass Pictures0', 'Hollywood Chaos (Breaking Glass Pictures)')
-  object.dvd_title = object.dvd_title.replace('House Of The Witchdoctor (Breaking Glass Pictures0', 'House Of The Witchdoctor (Breaking Glass Pictures)')
-  object.dvd_title = object.dvd_title.replace('I Want To Get Married (Breaking Glass Pictures0', 'I Want To Get Married (Breaking Glass Pictures)')
-  object.dvd_title = object.dvd_title.replace('In The Beginning 2000/ Mill Creek Entertainment)', 'In The Beginning (2000/ Mill Creek Entertainment)')
-  object.dvd_title = object.dvd_title.replace('Kung Fu Panda (Fox) / Kung Fu Panda 2 (w/ Digital Copy)(', 'Kung Fu Panda (Fox) / Kung Fu Panda 2 (w/ Digital Copy)')
-  object.dvd_title = object.dvd_title.replace('Long Road To The Hall Of Fame: From The NFL To Hollywood To Hip Hop)', 'Long Road To The Hall Of Fame: From The NFL To Hollywood To Hip Hop')
-  object.dvd_title = object.dvd_title.replace('Raiders Of Old California (Alpha Video0', 'Raiders Of Old California (Alpha Video)')
-  object.dvd_title = object.dvd_title.replace('Sakura Wars: The Movie (FUNimation/ DVD & Blu-ray Combo/ Super Amazing Value Edition', 'Sakura Wars: The Movie (FUNimation/ DVD & Blu-ray Combo/ Super Amazing Value Edition)')
-  object.dvd_title = object.dvd_title.replace('Stewardesses (Jezebel/ 3D', 'Stewardesses (Jezebel/ 3D)')
-  object.dvd_title = object.dvd_title.replace('Thumbelina 1994/ Fox)', 'Thumbelina (1994/ Fox)')
-  object.dvd_title = object.dvd_title.replace('Wolf Children (DVD & Blu-ray Combo/ The Hosoda Collection', 'Wolf Children (DVD & Blu-ray Combo/ The Hosoda Collection)')
-  object.dvd_title = object.dvd_title.replace('(Blu-ray 3D/ Blu-ray w/ Digital Copy: Iron Man 3 ', '(Blu-ray 3D/ Blu-ray w/ Digital Copy) Iron Man 3 ');
+  let { dvd_title } = object;
+  dvd_title = dvd_title.replace('Jimmy Eat World (Limited )Edition', 'Jimmy Eat World (Limited Edition)')
+  dvd_title = dvd_title.replace('Accountant (2016/ DVD/CD Combo w/ Digital Copy', 'Accountant (2016/ DVD/CD Combo w/ Digital Copy)');
+  dvd_title = dvd_title.replace('Al Green: Gospel According To Al Green (Acacia0', 'Al Green: Gospel According To Al Green (Acacia)');
+  dvd_title = dvd_title.replace('Collateral Beauty (Blu-ray w/ Digital Copy', 'Collateral Beauty (Blu-ray w/ Digital Copy)');
+  dvd_title = dvd_title.replace('Dr. Seuss Triple Feature: Green Eggs And Ham And Other Stories / The Lorax (1972) / The Cat In The Hat (1971)(', 'Dr. Seuss Triple Feature: Green Eggs And Ham And Other Stories / The Lorax (1972) / The Cat In The Hat (1971)');
+  dvd_title = dvd_title.replace('Dreaming Out Loud (Alpha Video0', 'Dreaming Out Loud (Alpha Video)')
+  dvd_title = dvd_title.replace('Get Along Monsters Series (DVD/CD Combo', 'Get Along Monsters Series (DVD/CD Combo)')
+  dvd_title = dvd_title.replace('Handel: Admeto: Tim Mead / Marie Arnet / William Berger (Blu-ray', 'Handel: Admeto: Tim Mead / Marie Arnet / William Berger (Blu-ray)')
+  dvd_title = dvd_title.replace('Hollywood Chaos (Breaking Glass Pictures0', 'Hollywood Chaos (Breaking Glass Pictures)')
+  dvd_title = dvd_title.replace('House Of The Witchdoctor (Breaking Glass Pictures0', 'House Of The Witchdoctor (Breaking Glass Pictures)')
+  dvd_title = dvd_title.replace('I Want To Get Married (Breaking Glass Pictures0', 'I Want To Get Married (Breaking Glass Pictures)')
+  dvd_title = dvd_title.replace('In The Beginning 2000/ Mill Creek Entertainment)', 'In The Beginning (2000/ Mill Creek Entertainment)')
+  dvd_title = dvd_title.replace('Kung Fu Panda (Fox) / Kung Fu Panda 2 (w/ Digital Copy)(', 'Kung Fu Panda (Fox) / Kung Fu Panda 2 (w/ Digital Copy)')
+  dvd_title = dvd_title.replace('Long Road To The Hall Of Fame: From The NFL To Hollywood To Hip Hop)', 'Long Road To The Hall Of Fame: From The NFL To Hollywood To Hip Hop')
+  dvd_title = dvd_title.replace('Raiders Of Old California (Alpha Video0', 'Raiders Of Old California (Alpha Video)')
+  dvd_title = dvd_title.replace('Sakura Wars: The Movie (FUNimation/ DVD & Blu-ray Combo/ Super Amazing Value Edition', 'Sakura Wars: The Movie (FUNimation/ DVD & Blu-ray Combo/ Super Amazing Value Edition)')
+  dvd_title = dvd_title.replace('Stewardesses (Jezebel/ 3D', 'Stewardesses (Jezebel/ 3D)')
+  dvd_title = dvd_title.replace('Thumbelina 1994/ Fox)', 'Thumbelina (1994/ Fox)')
+  dvd_title = dvd_title.replace('Wolf Children (DVD & Blu-ray Combo/ The Hosoda Collection', 'Wolf Children (DVD & Blu-ray Combo/ The Hosoda Collection)')
+  dvd_title = dvd_title.replace('(Blu-ray 3D/ Blu-ray w/ Digital Copy: Iron Man 3 ', '(Blu-ray 3D/ Blu-ray w/ Digital Copy) Iron Man 3 ');
+  dvd_title = dvd_title;
   return object;
 };
 module.exports.options = (object) => {
-  let options = object.options;
+  let { options } = object;
+
   options = options.replace(`(${object.year})`, '');
 
   options = options.replace('(w) ', '');
