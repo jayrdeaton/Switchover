@@ -10,6 +10,17 @@ module.exports = (tables) => {
       if (object.ended_at) object.ended_at = getDatabaseTimestamp(object.ended_at);
       if (object.started_correction) object.started_correction = getDatabaseTimestamp(object.started_correction);
       if (object.ended_correction) object.ended_correction = getDatabaseTimestamp(object.ended_correction);
+
+      if (object.tags) object.tags = `"{${object.tags.join()}}"`;
+      if (object.properties) {
+        let properties = '';
+        const keys = Object.keys(object.properties);
+        for (const [index, key] of keys.entries()) {
+          properties += `""${key}""=>""${object.properties[key]}""`;
+          if (index !== keys.length - 1) properties += ', ';
+        };
+        object.properties = `"${properties}"`;
+      };
     };
   };
 };

@@ -58,6 +58,18 @@ const catalogsChildren = {},
 
 let games = 0, i = 0;
 
+let option_group_stream,
+  product_stream,
+  price_stream,
+  price_option_group_stream,
+  tag_stream;
+
+const option_group_keys = Object.keys(new Option_Group()),
+  product_keys = Object.keys(new Product()),
+  price_keys = Object.keys(new Price()),
+  price_option_group_keys = Object.keys(new Price_Option_Group()),
+  tag_keys = Object.keys(new Tag());
+
 const switchover = (options) => {
   return new Promise ((resolve, reject) => {
 
@@ -66,16 +78,16 @@ const switchover = (options) => {
     dir = join(dir, 'movies');
     // if (existsSync(dir)) rimraf(dir);
     // createDirectories(dir);
-    const optionGroupStream = createWriteStream(join(dir, 'option_groups.csv'));
-    optionGroupStream.write(`${Object.keys(new Option_Group()).join()}\n`);
-    const productStream = createWriteStream(join(dir, 'products.csv'));
-    productStream.write(`${Object.keys(new Product()).join()}\n`);
-    const priceStream = createWriteStream(join(dir, 'prices.csv'));
-    priceStream.write(`${Object.keys(new Price()).join()}\n`);
-    const priceOptionGroupStream = createWriteStream(join(dir, 'price_option_groups.csv'));
-    priceOptionGroupStream.write(`${Object.keys(new Price_Option_Group()).join()}\n`);
-    const tagStream = createWriteStream(join(dir, 'tags.csv'));
-    tagStream.write(`${Object.keys(new Tag()).join()}\n`);
+    option_group_stream = createWriteStream(join(dir, 'option_groups.csv'));
+    option_group_stream.write(`${option_group_keys.join()}\n`);
+    product_stream = createWriteStream(join(dir, 'products.csv'));
+    product_stream.write(`${product_keys.join()}\n`);
+    price_stream = createWriteStream(join(dir, 'prices.csv'));
+    price_stream.write(`${price_keys.join()}\n`);
+    price_option_group_stream = createWriteStream(join(dir, 'price_option_groups.csv'));
+    price_option_group_stream.write(`${price_option_group_keys.join()}\n`);
+    tag_stream = createWriteStream(join(dir, 'tags.csv'));
+    tag_stream.write(`${tag_keys.join()}\n`);
     // for (let key of Object.keys(results)) results[key] = new Import();
     createReadStream(file)
       .pipe(parse({delimiter: ','}))
@@ -87,21 +99,7 @@ const switchover = (options) => {
           const object = parseRow(row);
           if (object.genre === 'Games') return games++;
           const data = await makeObject(object);
-          prepairForCsv(data);
-          const {
-            option_groups,
-            prices,
-            price_option_groups,
-            products,
-            tags
-          } = data;
-          for (const row of option_groups) optionGroupStream.write(`${Object.values(row).join()}\n`);
-          for (const row of prices) priceStream.write(`${Object.values(row).join()}\n`);
-          for (const row of price_option_groups) priceOptionGroupStream.write(`${Object.values(row).join()}\n`);
-          for (const row of products) productStream.write(`${Object.values(row).join()}\n`);
-          for (const row of tags) tagStream.write(`${Object.values(row).join()}\n`);
-          // fastcsv.writeToStream(tagStream, tags, { headers: true });
-          // fastcsv.write(tags).pipe(tagStream);
+          pipeToFile(data);
         };
         i++;
 
@@ -118,6 +116,48 @@ const switchover = (options) => {
         // resolve(results);
       });
   });
+};
+const pipeToFile = (data) => {
+  prepairForCsv(data);
+  const {
+    option_groups,
+    prices,
+    price_option_groups,
+    products,
+    tags
+  } = data;
+  for (const row of option_groups) {
+    const values = [];
+    for (const key of option_group_keys) values.push(row[key]);
+    option_group_stream.write(`${values.join()}\n`);
+  };
+  for (const row of prices) {
+    const values = [];
+    for (const key of price_keys) values.push(row[key]);
+    price_stream.write(`${values.join()}\n`);
+  };
+  for (const row of price_option_groups) {
+    const values = [];
+    for (const key of price_option_group_keys) values.push(row[key]);
+    price_option_group_stream.write(`${values.join()}\n`);
+  };
+  for (const row of products) {
+    const values = [];
+    for (const key of product_keys) values.push(row[key]);
+    product_stream.write(`${values.join()}\n`);
+    // for (const [index, key] of product_keys.entries()) {
+    //   product_stream.write(row[key] ? row[key] : '');
+    //   if (index !== product_keys.length - 1) product_stream.write(',');
+    // };
+    // product_stream.write('\n');
+    // values.push(row[key]);
+    // product_stream.write(`${values.join()}\n`);
+  };
+  for (const row of tags) {
+    const values = [];
+    for (const key of tag_keys) values.push(row[key]);
+    tag_stream.write(`${values.join()}\n`);
+  };
 };
 const parseRow = (row) => {
   const object = {};
