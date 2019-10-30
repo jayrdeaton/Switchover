@@ -29,7 +29,7 @@
     "emporium": "^2.7.2",
     "fast-csv": "^2.5.0",
     "mongodb": "^2.2.36",
-    "mongoose": "^5.5.11",
+    "mongoose": "^5.7.5",
     "mongoose-hidden": "^1.6.1",
     "progress": "^2.0.3",
     "rimraf": "^2.6.3",
