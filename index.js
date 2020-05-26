@@ -1,7 +1,7 @@
-let dotenv = require('dotenv'),
+let dotenv = require('dotenv').config({path: `${__dirname}/.env`}),
   { program } = require('./src');
 
-dotenv.config({path: `${__dirname}/.env`});
-dotenv.load();
+// dotenv.config({path: `${__dirname}/.env`});
+// dotenv.load();
 
 module.export = program.parse;

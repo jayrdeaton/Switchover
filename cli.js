@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-let dotenv = require('dotenv'),
+let dotenv = require('dotenv').config({path: `${__dirname}/.env`}),
   { program, helpers } = require('./src'),
   { printError } = helpers;
 
-dotenv.config({path: `${__dirname}/.env`});
-dotenv.load();
+// dotenv.config({path: `${__dirname}/.env`});
+// dotenv.load();
 
 let run = async(args) => {
   if (args.length === 2) args.push('help');
